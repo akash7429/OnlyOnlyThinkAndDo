@@ -44,11 +44,11 @@
             android:inputType="textPassword"
             android:hint="Password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/register_btn"
         android:text="Register"
         android:layout_below="@+id/passwordTIL"
         android:layout_centerHorizontal="true"

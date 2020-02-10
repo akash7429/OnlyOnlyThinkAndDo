@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/think_and_do_logo"
+        android:src="@drawable/wolf_pic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 
