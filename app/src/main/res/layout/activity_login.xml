@@ -60,15 +60,33 @@
         android:drawablePadding="5dp"
         android:text="Login" />
 
+    <TextView
+        android:id="@+id/recoverPassTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Forgot Password? Recover"
+        android:layout_below="@id/login_btn"
+        android:textColor="@color/colorBlack"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleLoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/recoverPassTv">
+    </com.google.android.gms.common.SignInButton>
+
 
     <TextView
         android:id="@+id/nothave_accountTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Not have an account? Register"
+        android:layout_alignParentBottom="true"
         android:textAlignment="center"
-        android:layout_below="@+id/register_btn"
         android:layout_marginTop="30dp"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorBlack"
+        android:layout_marginBottom="20dp"/>
 
 </RelativeLayout>
