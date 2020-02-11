@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="Register"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
         android:textSize="25sp"/>
 
     <android.support.design.widget.TextInputLayout
@@ -49,11 +51,24 @@
 
     <Button
         android:id="@+id/register_btn"
-        android:text="Register"
-        android:layout_below="@+id/passwordTIL"
-        android:layout_centerHorizontal="true"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordTIL"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+        android:drawablePadding="5dp"
+        android:text="Register" />
+
+
+    <TextView
+        android:id="@+id/have_accountTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? Login"
+        android:textAlignment="center"
+        android:layout_below="@+id/register_btn"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorBlack"/>
 
 </RelativeLayout>
