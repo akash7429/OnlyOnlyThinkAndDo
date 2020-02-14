@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
+//Changes for github
 public class ProfileFragment extends Fragment {
 
 
