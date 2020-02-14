@@ -57,7 +57,7 @@ TextView nameTv, emailTv , phoneTv;
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+int x= 2;
             }
 
             @Override
