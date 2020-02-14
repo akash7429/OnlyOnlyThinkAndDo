@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "209415931823",
+    "firebase_url": "https://thinkanddo-dcfab.firebaseio.com",
+    "project_id": "thinkanddo-dcfab",
+    "storage_bucket": "thinkanddo-dcfab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209415931823:android:056c919644c490be6bd15a",
+        "android_client_info": {
+          "package_name": "com.example.thinkanddo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209415931823-dos9gb6h6rktlaofical647d9nq87g9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thinkanddo",
+            "certificate_hash": "3174400d466ed5be3d282a449cefe10e8635b2fb"
+          }
+        },
+        {
+          "client_id": "209415931823-gmp7arrreks1dsfk4d52gblur78h3384.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thinkanddo",
+            "certificate_hash": "52e3b8ddfc1b5a594bdbfae81548879508d53c2a"
+          }
+        },
+        {
+          "client_id": "209415931823-4e5maf7q310tgod95bf0c04j9dl6movg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdO6WlW5Gnrh4mfg6Cnu_7Wmp1ridOZC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209415931823-4e5maf7q310tgod95bf0c04j9dl6movg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

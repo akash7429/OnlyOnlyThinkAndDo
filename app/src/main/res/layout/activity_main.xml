@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/think_and_do_logo"
+        android:src="@drawable/wolf_pic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 
@@ -19,8 +19,10 @@
         android:id="@+id/register_btn"
         android:text="Register"
         style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minWidth="230dp"
         android:layout_above="@id/login_btn"/>
 
     <Button
@@ -28,6 +30,8 @@
         android:text="Login"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
+        android:minWidth="230dp"
+        android:layout_centerHorizontal="true"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
