@@ -1,4 +1,4 @@
-package com.example.thinkanddo;
+package com.example.thinkanddo.models;
 
 public class ModelUsers {
 
