@@ -1,10 +1,15 @@
 package com.example.thinkanddo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -67,6 +72,41 @@ int x= 2;
             }
         });
         return view;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_logout){
+            firebaseAuth.signOut();
+            checkUserStatus();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void checkUserStatus(){
+        FirebaseUser user =firebaseAuth.getCurrentUser();
+        if(user!=null){
+            //mprofileTv.setText(user.getEmail());
+
+        }else{
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        }
     }
 
 }
