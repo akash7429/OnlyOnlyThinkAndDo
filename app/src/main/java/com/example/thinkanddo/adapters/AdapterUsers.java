@@ -1,6 +1,7 @@
-package com.example.thinkanddo;
+package com.example.thinkanddo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thinkanddo.ChatActivity;
+import com.example.thinkanddo.R;
+import com.example.thinkanddo.models.ModelUsers;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,6 +43,8 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
 
+        final String hisUID = userList.get(i).getUid();
+
         // fetching data.
         String userImage = userList.get(i).getImage();
         String userName = userList.get(i).getName();
@@ -62,7 +68,14 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, ""+userEmail, Toast.LENGTH_SHORT).show();
+
+                /*Click user to start chatting
+                  Start activity by putting UID of receiver
+                  we will use the uid to identify the user we are gonna chat
+                 */
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("hisUid",hisUID);
+                context.startActivity(intent);
             }
         });
     }
