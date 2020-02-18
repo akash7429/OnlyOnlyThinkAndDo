@@ -274,6 +274,7 @@ public class ChatActivity extends AppCompatActivity {
 
         menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
+        //x+y=1;
     }
 
     @Override
