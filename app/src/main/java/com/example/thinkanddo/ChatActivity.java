@@ -243,15 +243,28 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
+    private void checkOnlineStatus(String status){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(myUid);
+        HashMap<String, Object> hashMap =new HashMap<>();
+        hashMap.put("onlineStatus", status);
+        dbRef.updateChildren(hashMap);
+    }
+
     @Override
     protected void onStart() {
         checkUserStatus();
+        checkOnlineStatus("online");
         super.onStart();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
+
+        checkOnlineStatus(timestamp);
+
         userRefForSeen.removeEventListener(seenListener);
     }
 
