@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +33,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Queue;
 
 public class ChatActivity extends AppCompatActivity {
@@ -106,6 +109,18 @@ public class ChatActivity extends AppCompatActivity {
                     //get data
                     String name ="" + ds.child("name").getValue();
                     hisImage ="" + ds.child("image").getValue();
+                    String onineStatus = "" + ds.child("onlineStatus").getValue();
+                    if(onineStatus.equals("online")){
+                        userStatusTv.setText(onineStatus);
+                    }
+                    else{
+                        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+
+                        cal.setTimeInMillis(Long.parseLong(onineStatus));
+
+                        String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa",cal).toString();
+                        userStatusTv.setText("Last seen at: "+ dateTime);
+                    }
 
                     //set data
                     nameTv.setText(name);
@@ -244,7 +259,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void checkOnlineStatus(String status){
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(myUid);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
         HashMap<String, Object> hashMap =new HashMap<>();
         hashMap.put("onlineStatus", status);
         dbRef.updateChildren(hashMap);
@@ -266,6 +281,12 @@ public class ChatActivity extends AppCompatActivity {
         checkOnlineStatus(timestamp);
 
         userRefForSeen.removeEventListener(seenListener);
+    }
+
+    @Override
+    protected void onResume() {
+        checkOnlineStatus("online");
+        super.onResume();
     }
 
     @Override
