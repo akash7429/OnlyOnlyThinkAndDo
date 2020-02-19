@@ -260,12 +260,15 @@ public class LoginActivity extends AppCompatActivity {
                                 String email = user.getEmail();
                                 String uid = user.getUid();
 
-                                HashMap<Object, String> hashMap =new HashMap<>();
-                                hashMap.put("email", email);
-                                hashMap.put("uid", uid);
-                                hashMap.put("name", "");
-                                hashMap.put("phone", "");
-                                hashMap.put("image", "");
+
+                            HashMap<Object, String> hashMap =new HashMap<>();
+                            hashMap.put("email", email);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", "");
+                            hashMap.put("onlineStatus", "online");
+                            hashMap.put("phone", "");
+                            hashMap.put("image", "");
+
 
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
 
