@@ -1,17 +1,17 @@
 package com.example.thinkanddo.notifications;
 
 public class Data {
-    private String user,body, titile, sent;
+    private String user,body, title, sent;
     private Integer icon;
 
     public Data(){
 
     }
 
-    public Data(String user, String body, String titile, String sent, Integer icon) {
+    public Data(String user, String body, String title, String sent, Integer icon) {
         this.user = user;
         this.body = body;
-        this.titile = titile;
+        this.title = title;
         this.sent = sent;
         this.icon = icon;
     }
@@ -32,12 +32,12 @@ public class Data {
         this.body = body;
     }
 
-    public String getTitile() {
-        return titile;
+    public String getTitle() {
+        return title;         // titile
     }
 
-    public void setTitile(String titile) {
-        this.titile = titile;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSent() {

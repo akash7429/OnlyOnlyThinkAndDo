@@ -237,8 +237,9 @@ public class ChatActivity extends AppCompatActivity {
         message: the actual message
          */
 
-        String timestamp = String.valueOf(System.currentTimeMillis());
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
 
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("sender",myUid);
@@ -248,6 +249,9 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen",false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
+       // messageEt.setText("");
+
+        //String msg=message;
 
        final DatabaseReference database=FirebaseDatabase.getInstance().getReference("User").child(myUid);
         database.addValueEventListener(new ValueEventListener() {
@@ -278,7 +282,7 @@ public class ChatActivity extends AppCompatActivity {
            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
                for(DataSnapshot ds: dataSnapshot.getChildren()){
                    Token token=ds.getValue(Token.class);
-                   Data data= new Data(myUid, name+":"+message,"New Message",hisUid, R.drawable.ic_default_img_background);
+                   Data data= new Data(myUid, name+":"+message,"New Message",hisUid, R.drawable.ic_default);  //R.drawable.ic_default_img;
                    Sender sender=new Sender(data,token.getToken());
                    apiService.sendNotification(sender)
                            .enqueue(new Callback<Response>() {

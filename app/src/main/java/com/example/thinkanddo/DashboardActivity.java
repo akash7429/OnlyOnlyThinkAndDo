@@ -111,10 +111,12 @@ public class DashboardActivity extends AppCompatActivity {
             //mprofileTv.setText(user.getEmail());
         mUID= user.getUid();
 
+        //save Uid of currently signed in user in Shared preferences
         SharedPreferences sp=getSharedPreferences("SP_USER",MODE_PRIVATE);
         SharedPreferences.Editor editor=sp.edit();
         editor.putString("Current_USERID",mUID);
         editor.apply();
+
         }else{
             startActivity(new Intent(DashboardActivity.this, MainActivity.class));
             finish();
