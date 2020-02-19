@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "209415931823-nqba5e0bk416g08iv3rsrmerafjt7md0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thinkanddo",
+            "certificate_hash": "597cb191a87aa6d3646e5ad34d3e6365f9e39a81"
+          }
+        },
+        {
           "client_id": "209415931823-dos9gb6h6rktlaofical647d9nq87g9p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
