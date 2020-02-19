@@ -256,8 +256,10 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            String email = user.getEmail();
-                            String uid = user.getUid();
+                            if(task.getResult().getAdditionalUserInfo().isNewUser()){
+                                String email = user.getEmail();
+                                String uid = user.getUid();
+
 
                             HashMap<Object, String> hashMap =new HashMap<>();
                             hashMap.put("email", email);
@@ -267,11 +269,14 @@ public class LoginActivity extends AppCompatActivity {
                             hashMap.put("phone", "");
                             hashMap.put("image", "");
 
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                            DatabaseReference reference = database.getReference("Users");
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                            reference.child(uid).setValue(hashMap);
+                                DatabaseReference reference = database.getReference("Users");
+
+                                reference.child(uid).setValue(hashMap);
+                            }
+
 
                             Toast.makeText(LoginActivity.this,""+user.getEmail(), Toast.LENGTH_SHORT);
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
