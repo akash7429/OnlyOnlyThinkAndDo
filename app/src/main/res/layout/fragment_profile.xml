@@ -18,7 +18,8 @@
                 android:id="@+id/coverIv"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:background="@color/colorPrimaryDark">
+                android:background="@color/colorPrimaryDark"
+                android:scaleType="fitXY">
 
 
             </ImageView>
@@ -44,7 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="#BE2F2F">
 
                     <TextView
                         android:id="@+id/nameTv"
