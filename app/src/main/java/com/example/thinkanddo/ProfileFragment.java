@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -65,7 +66,25 @@ TextView nameTv, emailTv , phoneTv;
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-int x= 2;
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    String name = ""+ds.child("name").getValue();
+                    String email = ""+ds.child("email").getValue();
+                    String phone = ""+ds.child("phone").getValue();
+                    String image = ""+ds.child("image").getValue();
+
+                    nameTv.setText(name);
+                    emailTv.setText(email);
+                    phoneTv.setText(phone);
+                    try{
+
+                        Picasso.get().load(image).into(avatarIv);
+
+                    }catch (Exception e){
+
+                        Picasso.get().load(R.drawable.ic_image_photo).into(avatarIv);
+                    }
+                }
             }
 
             @Override
