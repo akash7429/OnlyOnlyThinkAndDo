@@ -34,3 +34,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+/* in this part(17)
+* Publish Post to firebase.
+* Post will contain user name, email, uid, dp, time of publish, title description, image
+* user can publish post with or without image
+* create AddPostActivity
+* images can we imported from gallery or taken from camera
+* */
