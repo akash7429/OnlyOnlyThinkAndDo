@@ -24,6 +24,13 @@ import android.widget.Toast;
 
 import com.example.thinkanddo.adapters.AdapterChat;
 import com.example.thinkanddo.models.ModelChat;
+import com.example.thinkanddo.models.ModelUsers;
+import com.example.thinkanddo.notifications.APIService;
+import com.example.thinkanddo.notifications.Client;
+import com.example.thinkanddo.notifications.Data;
+import com.example.thinkanddo.notifications.Response;
+import com.example.thinkanddo.notifications.Sender;
+import com.example.thinkanddo.notifications.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +48,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Queue;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class ChatActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -55,6 +65,10 @@ public class ChatActivity extends AppCompatActivity {
     String hisUid;
     String myUid;
     String hisImage;
+
+
+    APIService apiService;
+    boolean notify= false;
 
     //for checking if the uer has seen message or not.
 
@@ -85,6 +99,9 @@ public class ChatActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        //create api service
+        apiService= Client.getRetrofit("https://fcm.googleapis.com/").create(APIService.class);
 
         /*on Clicking user from users list we have passed that uid using intent
         So get the uid here to get user image, name and start chat with that user.
@@ -153,8 +170,10 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                 notify=true;
                 // get text from edittext
 
                 String message = messageEt.getText().toString().trim();
@@ -167,7 +186,10 @@ public class ChatActivity extends AppCompatActivity {
 
                     sendMessage(message);
                 }
+                //reset edittext after sending message
+                messageEt.setText("");
             }
+
         });
 
         messageEt.addTextChangedListener(new TextWatcher() {
@@ -254,7 +276,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private void sendMessage(String message) {
+    private void sendMessage(final String message) {
         /* "Chats" node will be created that will contains all chats
         Whenever user sends message it will create new child in "Chats" node and that child will contain
         sender: UID of sender
@@ -262,8 +284,9 @@ public class ChatActivity extends AppCompatActivity {
         message: the actual message
          */
 
-        String timestamp = String.valueOf(System.currentTimeMillis());
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
 
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("sender",myUid);
@@ -273,9 +296,61 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen",false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
+       // messageEt.setText("");
 
-        //reset edittext after sending message
-        messageEt.setText("");
+        //String msg=message;
+
+       final DatabaseReference database=FirebaseDatabase.getInstance().getReference("User").child(myUid);
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ModelUsers user= dataSnapshot.getValue(ModelUsers.class);
+
+                if(notify){
+                    sentNotification(hisUid,user.getName(), message);
+                }
+                notify=false;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void sentNotification(final String hisUid, final String name, final String message) {
+        DatabaseReference allTokens= FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query=allTokens.orderByKey().equalTo(hisUid);
+        query.addValueEventListener(new ValueEventListener(){
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot){
+               for(DataSnapshot ds: dataSnapshot.getChildren()){
+                   Token token=ds.getValue(Token.class);
+                   Data data= new Data(myUid, name+":"+message,"New Message",hisUid, R.drawable.ic_default);  //R.drawable.ic_default_img;
+                   Sender sender=new Sender(data,token.getToken());
+                   apiService.sendNotification(sender)
+                           .enqueue(new Callback<Response>() {
+                               @Override
+                               public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                                 Toast.makeText(ChatActivity.this,""+response.message(),Toast.LENGTH_SHORT).show();
+                               }
+
+                               @Override
+                               public void onFailure(Call<Response> call, Throwable t) {
+
+                               }
+                           });
+               }
+           }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void checkUserStatus(){

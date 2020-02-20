@@ -2,6 +2,7 @@ package com.example.thinkanddo;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -113,6 +115,9 @@ TextView nameTv, emailTv , phoneTv;
             firebaseAuth.signOut();
             checkUserStatus();
         }
+        if(id == R.id.action_add_post){
+            startActivity(new Intent(getActivity(),AddPostActivity.class));
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -127,5 +132,45 @@ TextView nameTv, emailTv , phoneTv;
             getActivity().finish();
         }
     }
+  /*  @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch(requestCode){
+            case CAMERA_REQUEST_CODE:{
+                if(grantResults.length>0) {
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if (cameraAccepted && storageAccepted) {
+                        pickFromCamera();
+                    } else {
+                        Toast.makeText(this, "Camera & Storage Both permissions are necessary", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+
+                }
+            }
+            break;
+            case STORAGE_REQUEST_CODE:{
+                if(grantResults.length>0) {
+                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if (storageAccepted) {
+                        pickFromGallery();
+                    } else {
+                        Toast.makeText(this, " Storage  permissions are necessary", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+
+                }
+
+            }
+            break;
+        }
+
+    }
+} */
+
 
 }
