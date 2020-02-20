@@ -59,7 +59,7 @@ public class UsersFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        firebaseAuth = firebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         // init user list
 
@@ -115,6 +115,9 @@ public class UsersFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //inflating menu.
         inflater.inflate(R.menu.menu, menu);
+
+        //hide addpost icon from this fragment
+        menu.findItem(R.id.action_add_post).setVisible(false);
 
         //searchview
         MenuItem item = menu.findItem(R.id.action_search);
@@ -226,4 +229,6 @@ public class UsersFragment extends Fragment {
             getActivity().finish();
         }
     }
+
 }
+
