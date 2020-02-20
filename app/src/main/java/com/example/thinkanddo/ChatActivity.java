@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +35,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Queue;
 
 public class ChatActivity extends AppCompatActivity {
@@ -106,6 +111,25 @@ public class ChatActivity extends AppCompatActivity {
                     //get data
                     String name ="" + ds.child("name").getValue();
                     hisImage ="" + ds.child("image").getValue();
+                    String typingStatus ="" + ds.child("typingTo").getValue();
+
+                    if (typingStatus.equals(myUid)){
+                        userStatusTv.setText("typing...");
+                    }
+                    else{
+                        String onineStatus = "" + ds.child("onlineStatus").getValue();
+                        if(onineStatus.equals("online")){
+                            userStatusTv.setText(onineStatus);
+                        }
+                        else{
+                            Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+
+                            cal.setTimeInMillis(Long.parseLong(onineStatus));
+
+                            String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa",cal).toString();
+                            userStatusTv.setText("Last seen at: "+ dateTime);
+                        }
+                    }
 
                     //set data
                     nameTv.setText(name);
@@ -145,6 +169,29 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        messageEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().trim().length() == 0){
+                    checkTypingStatus("noOne");
+                }
+                else {
+                    checkTypingStatus(hisUid);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         readMessages();
         seenMessage();
     }
@@ -243,16 +290,43 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
+    private void checkOnlineStatus(String status){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+        HashMap<String, Object> hashMap =new HashMap<>();
+        hashMap.put("onlineStatus", status);
+        dbRef.updateChildren(hashMap);
+    }
+
+    private void checkTypingStatus(String typing){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+        HashMap<String, Object> hashMap =new HashMap<>();
+        hashMap.put("typingTo", typing);
+        dbRef.updateChildren(hashMap);
+    }
+
     @Override
     protected void onStart() {
         checkUserStatus();
+        checkOnlineStatus("online");
+        checkTypingStatus("noOne");
         super.onStart();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
+
+        checkOnlineStatus(timestamp);
+
         userRefForSeen.removeEventListener(seenListener);
+    }
+
+    @Override
+    protected void onResume() {
+        checkOnlineStatus("online");
+        super.onResume();
     }
 
     @Override
@@ -261,6 +335,7 @@ public class ChatActivity extends AppCompatActivity {
 
         menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);
+        //x+y=1;
     }
 
     @Override
