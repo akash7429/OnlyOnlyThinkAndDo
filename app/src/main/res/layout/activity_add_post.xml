@@ -13,14 +13,13 @@
         android:orientation="vertical">
         <!--  Edit text inout post title -->
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@id/pTitleEt"
             android:background="@drawable/editextstyle"
             android:padding="10dp"
             android:hint="@string/enter_title"
             android:singleLine="true"
-             />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/pImageIv"
@@ -31,25 +30,25 @@
             android:contentDescription="TODO" />
 
         <EditText
-            android:id="@+id/pdescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/pDescriptionEt"
             android:background="@drawable/editextstyle"
             android:hint="Enter description"
             android:padding="10dp"
             android:singleLine="true"
             android:inputType="textCapSentences|textMultiLine"
             android:minHeight="120dp"
-            android:gravity="start" />
+            android:gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <!--  button publish Post to firebase  -->
         <Button
             android:id="@+id/pUploadBtn"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:text="Upload"
             android:layout_gravity="end"
-            android:text="Upload" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
