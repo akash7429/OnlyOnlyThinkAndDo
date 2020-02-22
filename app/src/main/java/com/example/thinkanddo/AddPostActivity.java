@@ -87,8 +87,6 @@ public class AddPostActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        actionBar.setSubtitle(email);
-
         cameraPermissions=new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions=new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -96,6 +94,8 @@ public class AddPostActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         checkUserStatus();
+        
+        actionBar.setSubtitle(email);
 
         //get some info of current user to include in post
         userDbRef= FirebaseDatabase.getInstance().getReference("Users");
@@ -177,9 +177,9 @@ public class AddPostActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Task<Uri> uriTask=taskSnapshot.getStorage().getDownloadUrl();
                             while (! uriTask.isSuccessful());
-                            String downloaduri=uriTask.getResult().toString();
+                            String downloadUri = uriTask.getResult().toString();
                             if(uriTask.isSuccessful()){
-                                HashMap<Object, String> hashMap=new HashMap<>();
+                                HashMap<Object, String> hashMap = new HashMap<>();
                                 hashMap.put("uid",uid);
                                 hashMap.put("uName",name);
                                 hashMap.put("uEmail",email);
@@ -191,7 +191,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
 
                                 //path to store post data
-                                DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Posts");
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
                                 //
                                 ref.child(timeStamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
