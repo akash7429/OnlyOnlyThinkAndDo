@@ -317,11 +317,8 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen",false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
-       // messageEt.setText("");
 
-        //String msg=message;
-
-       final DatabaseReference database=FirebaseDatabase.getInstance().getReference("User").child(myUid);
+       final DatabaseReference database=FirebaseDatabase.getInstance().getReference("Users").child(myUid);
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
