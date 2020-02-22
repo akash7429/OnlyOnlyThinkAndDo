@@ -110,7 +110,7 @@
                 android:layout_weight="1"
                 android:text="LIKE"
                 android:drawableLeft="@drawable/ic_like_black"
-                android:background="@null"
+                android:background="@color/colorWhite"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_like_black"/>
             
