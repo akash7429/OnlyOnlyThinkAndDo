@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +45,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Queue;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -424,7 +422,7 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
 
         menu.findItem(R.id.action_search).setVisible(false);
         return super.onCreateOptionsMenu(menu);

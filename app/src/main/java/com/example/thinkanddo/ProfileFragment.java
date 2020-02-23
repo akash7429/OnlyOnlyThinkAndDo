@@ -8,14 +8,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -46,7 +44,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.security.Key;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -163,6 +160,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
                 showEditProfileDialog();
             }
         });
+
         return view;
     }
 
@@ -171,6 +169,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
                 == (PackageManager.PERMISSION_GRANTED);
         return result;
     }
+
     private void requestStoragePermission(){
         requestPermissions(storagePermission,STORAGE_REQUEST_CODE);
     }
@@ -182,9 +181,11 @@ private static final int CAMERA_REQUEST_CODE = 100;
                 == (PackageManager.PERMISSION_GRANTED);
         return result && result1;
     }
+
     private void requestCameraPermission(){
         requestPermissions(cameraPermission,CAMERA_REQUEST_CODE);
     }
+
     private void showEditProfileDialog() {
         String options[] = {"Edit Profile Picture","Edit Cover Photo","Edit Name","Edit Phone"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -299,6 +300,41 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case CAMERA_REQUEST_CODE:{
+
+                if(grantResults.length>0){
+
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if(cameraAccepted && writeStorageAccepted){
+                        pickFromCamera();
+                    }else{
+                        Toast.makeText(getActivity(),"Please enable camera & storage permission", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            break;
+            case STORAGE_REQUEST_CODE:{
+                if(grantResults.length>0){
+
+                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if(writeStorageAccepted){
+                        pickFromGallery();
+                    }else{
+                        Toast.makeText(getActivity(),"Please enable  storage permission", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+            break;
+        }
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -308,7 +344,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -336,81 +372,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
             getActivity().finish();
         }
     }
-  /*  @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch(requestCode){
-            case CAMERA_REQUEST_CODE:{
-                if(grantResults.length>0) {
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted && storageAccepted) {
-                        pickFromCamera();
-                    } else {
-                        Toast.makeText(this, "Camera & Storage Both permissions are necessary", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-
-                }
-            }
-            break;
-            case STORAGE_REQUEST_CODE:{
-                if(grantResults.length>0) {
-                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (storageAccepted) {
-                        pickFromGallery();
-                    } else {
-                        Toast.makeText(this, " Storage  permissions are necessary", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-
-                }
-
-            }
-            break;
-        }
-
-    }
-} */
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
-
-                if(grantResults.length>0){
-
-                    boolean cameraAcepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if(cameraAcepted && writeStorageAccepted){
-                        pickFromCamera();
-                    }else{
-                        Toast.makeText(getActivity(),"Please enable camera & storage permission", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-            break;
-            case STORAGE_REQUEST_CODE:{
-                if(grantResults.length>0){
-
-                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if(writeStorageAccepted){
-                        pickFromGallery();
-                    }else{
-                        Toast.makeText(getActivity(),"Please enable  storage permission", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-            }
-            break;
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
