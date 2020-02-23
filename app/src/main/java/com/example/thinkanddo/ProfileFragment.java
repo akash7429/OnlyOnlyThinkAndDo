@@ -16,7 +16,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,9 +30,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thinkanddo.adapters.AdapterPost;
+import com.example.thinkanddo.models.ModelChat;
+import com.example.thinkanddo.models.ModelPost;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +52,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
@@ -66,6 +76,7 @@ String storagePath = "User_Profile_Cover_Imgs/";
 ImageView avatarIv, coverIv;
 TextView nameTv, emailTv , phoneTv;
 FloatingActionButton fab;
+RecyclerView postsRecyclerView;
 
 ProgressDialog pd;
 
@@ -78,6 +89,10 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
     String cameraPermission[];
     String storagePermission[];
+
+    List<ModelPost> postList;
+    AdapterPost adapterPost;
+    String uid;
 
     Uri image_uri;
 
@@ -109,6 +124,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
         fab= view.findViewById(R.id.fab);
+        postsRecyclerView= view.findViewById(R.id.recyclerview_posts);
 
         pd= new ProgressDialog(getActivity());
 
@@ -161,7 +177,80 @@ private static final int CAMERA_REQUEST_CODE = 100;
             }
         });
 
+        postList= new ArrayList<>();
+
+        checkUserStatus();
+        loadMyPosts();
+
         return view;
+    }
+
+    private void loadMyPosts() {
+        LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        postsRecyclerView.setLayoutManager(layoutManager);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+        Query query= ref.orderByChild("uid").equalTo(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                postList.clear();
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+
+                    ModelPost myPosts = ds.getValue(ModelPost.class);
+
+                    postList.add(myPosts);
+
+                    adapterPost = new AdapterPost(getActivity(),postList);
+
+                    postsRecyclerView.setAdapter(adapterPost);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getActivity(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void searchMyPosts(final String searchQuery) {
+        LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        postsRecyclerView.setLayoutManager(layoutManager);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+        Query query= ref.orderByChild("uid").equalTo(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                postList.clear();
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+
+                    ModelPost myPosts = ds.getValue(ModelPost.class);
+
+                    if(myPosts.getpTitle().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                    myPosts.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())){
+                        postList.add(myPosts);
+                    }
+
+                    adapterPost = new AdapterPost(getActivity(),postList);
+
+                    postsRecyclerView.setAdapter(adapterPost);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getActivity(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private boolean checkStoragePermission(){
@@ -230,7 +319,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String value = editText.getText().toString().trim();
+                final String value = editText.getText().toString().trim();
 
                 if(!TextUtils.isEmpty(value)){
 
@@ -255,6 +344,26 @@ private static final int CAMERA_REQUEST_CODE = 100;
                                     Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
+
+                    if(key.equals("name")){
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                        Query query = ref.orderByChild("uid").equalTo(uid);
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                                    String child = ds.getKey();
+                                    dataSnapshot.getRef().child(child).child("uName").setValue(value);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }else{
                     Toast.makeText(getActivity(), "Please enter"+key, Toast.LENGTH_SHORT).show();
                 }
@@ -345,6 +454,31 @@ private static final int CAMERA_REQUEST_CODE = 100;
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if(!TextUtils.isEmpty(s)){
+                    searchMyPosts(s);
+                }else {
+                    loadMyPosts();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if(!TextUtils.isEmpty(s)){
+                    searchMyPosts(s);
+                }else {
+                    loadMyPosts();
+                }
+                return false;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -366,6 +500,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
         FirebaseUser user =firebaseAuth.getCurrentUser();
         if(user!=null){
             //mprofileTv.setText(user.getEmail());
+            uid = user.getUid();
 
         }else{
             startActivity(new Intent(getActivity(), MainActivity.class));
@@ -402,7 +537,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
                         Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                         while (!uriTask.isSuccessful());
-                        Uri downloadUri = uriTask.getResult();
+                        final Uri downloadUri = uriTask.getResult();
                         if(uriTask.isSuccessful()){
                             HashMap<String ,Object> results = new HashMap<>();
                             results.put(profileCoverPhoto, downloadUri.toString());
@@ -422,6 +557,26 @@ private static final int CAMERA_REQUEST_CODE = 100;
                                             Toast.makeText(getActivity(),"Error Updating Image ...",Toast.LENGTH_SHORT).show();
                                         }
                                     });
+
+                            if(profileCoverPhoto.equals("image")){
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                                Query query = ref.orderByChild("uid").equalTo(uid);
+                                query.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                                            String child = ds.getKey();
+                                            dataSnapshot.getRef().child(child).child("uDp").setValue(downloadUri.toString());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
 
                         }else{
                             pd.dismiss();

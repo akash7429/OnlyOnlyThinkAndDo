@@ -187,7 +187,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pId",timeStamp);
                                 hashMap.put("pTitle",title);
                                 hashMap.put("pDescr",description);
-                                hashMap.put("pImage",downloaduri);
+                                hashMap.put("pImage",downloadUri);
                                 hashMap.put("pTime",timeStamp);
 
                                 //path to store post data

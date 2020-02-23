@@ -1,6 +1,8 @@
 package com.example.thinkanddo.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.thinkanddo.ChatActivity;
 import com.example.thinkanddo.R;
+import com.example.thinkanddo.TheirProfileActivity;
 import com.example.thinkanddo.models.ModelUsers;
 import com.squareup.picasso.Picasso;
 
@@ -69,13 +72,27 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
             @Override
             public void onClick(View v) {
 
-                /*Click user to start chatting
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setItems(new String[]{"Profile", "Chat"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which ==0){
+                            Intent intent = new Intent(context , TheirProfileActivity.class);
+                            intent.putExtra("uId",hisUID);
+                            context.startActivity(intent);
+                        }
+                        if(which == 1){
+
+                              /*Click user to start chatting
                   Start activity by putting UID of receiver
                   we will use the uid to identify the user we are gonna chat
                  */
-                Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("hisUid",hisUID);
-                context.startActivity(intent);
+                            Intent intent = new Intent(context, ChatActivity.class);
+                            intent.putExtra("hisUid",hisUID);
+                            context.startActivity(intent);
+                        }
+                    }
+                });
             }
         });
     }
