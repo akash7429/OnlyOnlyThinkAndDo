@@ -104,6 +104,59 @@ public class UsersFragment extends Fragment {
 
     }
 
+    private void searchUsers(final String query) {
+
+        // get current user
+        final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        // get path of database named "Users" containing users info
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usersList.clear();
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    ModelUsers modelUsers = ds.getValue(ModelUsers.class);
+
+                    // get all searched users except currently signed in user
+                    if(!modelUsers.getUid().equals(fUser.getUid())){
+
+                        if(modelUsers.getName().toLowerCase().contains(query.toLowerCase()) ||
+                                modelUsers.getEmail().toLowerCase().contains(query.toLowerCase()))
+                        {
+
+                            usersList.add(modelUsers);
+                        }
+
+                    }
+                    //adapter
+                    adapterUsers = new AdapterUsers(getActivity(), usersList);
+                    // set adapter to recyclerview
+
+                    adapterUsers.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapterUsers);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void checkUserStatus(){
+        FirebaseUser user =firebaseAuth.getCurrentUser();
+        if(user!=null){
+            //mprofileTv.setText(user.getEmail());
+
+        }else{
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        }
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,8 +166,8 @@ public class UsersFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //inflating menu.
-        inflater.inflate(R.menu.menu, menu);
+        //inflating menu_main.
+        inflater.inflate(R.menu.menu_main, menu);
 
         //hide addpost icon from this fragment
         menu.findItem(R.id.action_add_post).setVisible(false);
@@ -166,48 +219,6 @@ public class UsersFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void searchUsers(final String query) {
-
-        // get current user
-        final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
-        // get path of database named "Users" containing users info
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                usersList.clear();
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    ModelUsers modelUsers = ds.getValue(ModelUsers.class);
-
-                    // get all searched users except currently signed in user
-                    if(!modelUsers.getUid().equals(fUser.getUid())){
-
-                        if(modelUsers.getName().toLowerCase().contains(query.toLowerCase()) ||
-                                modelUsers.getEmail().toLowerCase().contains(query.toLowerCase()))
-                        {
-
-                            usersList.add(modelUsers);
-                        }
-
-                    }
-                    //adapter
-                    adapterUsers = new AdapterUsers(getActivity(), usersList);
-                    // set adapter to recyclerview
-
-                    adapterUsers.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapterUsers);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -217,17 +228,6 @@ public class UsersFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void checkUserStatus(){
-        FirebaseUser user =firebaseAuth.getCurrentUser();
-        if(user!=null){
-            //mprofileTv.setText(user.getEmail());
-
-        }else{
-            startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().finish();
-        }
     }
 
 }
