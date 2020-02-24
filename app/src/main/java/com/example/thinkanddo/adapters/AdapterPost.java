@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thinkanddo.AddPostActivity;
 import com.example.thinkanddo.R;
 import com.example.thinkanddo.TheirProfileActivity;
 import com.example.thinkanddo.models.ModelPost;
@@ -183,6 +184,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         if(uid.equals(myUid)) {
             //add items in menu
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "Delete");
+            popupMenu.getMenu().add(Menu.NONE, 1, 0, "Edit");
         }
 
         // item click listner
@@ -193,6 +195,15 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                 if(id==0){
                     // delete is clicked
                     beginDelete(pId,pImage);
+                }
+                else if(id==1){
+                    // edit is clicked
+                    // start AddPostActivity with key "editpost" and the id of the post clicked
+
+                    Intent intent = new Intent(context, AddPostActivity.class);
+                    intent.putExtra("key","editPost");
+                    intent.putExtra("editPostId", pId);
+                    context.startActivity(intent);
                 }
                 return false;
             }
