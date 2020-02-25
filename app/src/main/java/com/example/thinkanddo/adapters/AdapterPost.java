@@ -88,6 +88,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final String pImage = postList.get(i).getpImage();
         String pTimeStamp = postList.get(i).getpTime();
         String pLikes = postList.get(i).getpLikes(); // Contains total number of likes for post
+        String pComments = postList.get(i).getpComments();
 
         setLikes(myHolder,pId);
 
@@ -104,6 +105,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         myHolder.pTitleTv.setText(pTitle);
         myHolder.pDescriptionTv.setText(pDescription);
         myHolder.pLikesTv.setText(pLikes+" Likes");
+        myHolder.pCommentsTv.setText(pComments+" Comments");
 
 
 
@@ -408,7 +410,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         // views from rowPost.xml
 
         ImageView uPictureIv, pImageIv;
-        TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv;
+        TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv,pCommentsTv;
         ImageButton moreBtn;
         Button likeBtn, shareBtn, commentBtn;
         LinearLayout profileLayout;
@@ -423,6 +425,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             pTitleTv = itemView.findViewById(R.id.pTitleTv);
             pDescriptionTv = itemView.findViewById(R.id.pDescriptionTv);
             pLikesTv = itemView.findViewById(R.id.pLikesTv);
+            pCommentsTv = itemView.findViewById(R.id.pCommentsTv);
             moreBtn = itemView.findViewById(R.id.moreBtn);
             likeBtn = itemView.findViewById(R.id.likeBtn);
             shareBtn = itemView.findViewById(R.id.shareBtn);
