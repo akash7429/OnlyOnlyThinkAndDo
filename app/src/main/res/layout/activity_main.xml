@@ -42,16 +42,17 @@
 
     <Button
         android:id="@+id/register_btn"
-        android:text="Register"
-        android:background="@drawable/shape_round"
-        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minWidth="230dp"
-        android:layout_marginBottom="20dp"
         android:layout_above="@id/login_btn"
-        android:textColor="#ffffff"/>
-    />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_round"
+        android:fontFamily="@font/montserrat"
+        android:minWidth="230dp"
+        android:text="Register"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/login_btn"
@@ -60,9 +61,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="70dp"
         android:background="@drawable/shape_round"
+        android:fontFamily="@font/montserrat"
         android:minWidth="230dp"
         android:text="Login"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>
