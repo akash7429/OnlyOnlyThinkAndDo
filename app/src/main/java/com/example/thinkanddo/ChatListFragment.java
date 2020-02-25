@@ -43,6 +43,7 @@ public class ChatListFragment extends Fragment {
     AdapterChatlist adapterChatlist;
 
 
+
     public ChatListFragment() {
         // Required empty public constructor
     }
@@ -101,9 +102,9 @@ public class ChatListFragment extends Fragment {
                     //set adapter
                     recyclerView.setAdapter(adapterChatlist);
                     // set last message
-                    int i;
-                    for (i = 0; i < usersList.size(); i++) ;
-                    lastMessage(usersList.get(i).getUid());
+                    for (int i = 0; i < usersList.size(); i++) {
+                           lastMessage(usersList.get(i).getUid());
+                    }
 
                 }
             }
