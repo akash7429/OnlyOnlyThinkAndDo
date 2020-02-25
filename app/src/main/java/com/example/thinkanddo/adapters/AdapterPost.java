@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thinkanddo.AddPostActivity;
+import com.example.thinkanddo.PostDetailActivity;
 import com.example.thinkanddo.R;
 import com.example.thinkanddo.TheirProfileActivity;
 import com.example.thinkanddo.models.ModelPost;
@@ -200,7 +201,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         myHolder.commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"comment",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PostDetailActivity.class);
+                intent.putExtra("postId", pId);
+                context.startActivity(intent);
             }
         });
 
@@ -266,6 +269,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             popupMenu.getMenu().add(Menu.NONE, 1, 0, "Edit");
         }
 
+        popupMenu.getMenu().add(Menu.NONE, 2, 0, "View Detail");
+
         // item click listner
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -282,6 +287,11 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                     Intent intent = new Intent(context, AddPostActivity.class);
                     intent.putExtra("key","editPost");
                     intent.putExtra("editPostId", pId);
+                    context.startActivity(intent);
+                }
+                else if(id==2){
+                    Intent intent = new Intent(context, PostDetailActivity.class);
+                    intent.putExtra("postId", pId);
                     context.startActivity(intent);
                 }
                 return false;
