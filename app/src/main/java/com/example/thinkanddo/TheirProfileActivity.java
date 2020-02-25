@@ -62,6 +62,7 @@ public class TheirProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("uId");
+
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("uid").equalTo(uid);
         query.addValueEventListener(new ValueEventListener() {
             @Override

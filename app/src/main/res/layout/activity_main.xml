@@ -5,36 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/cover">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="218dp"
+        android:layout_height="94dp"
+        android:layout_above="@+id/register_btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="254dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="157dp"
+        android:fontFamily="@font/aladin"
+        android:text="Think and Do"
+        android:textColor="#F8F5F5"
+        android:textColorHighlight="#00BEA251"
+        android:textSize="45sp" />
+    <!--Button Register-->
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/wolf_pic"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_width="85dp"
+        android:layout_height="79dp"
+        android:layout_above="@+id/register_btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="198dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="238dp"
+        android:src="@drawable/gool"/>
 
-    <!--Button Register-->
     <Button
         android:id="@+id/register_btn"
         android:text="Register"
-        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:background="@drawable/shape_round"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minWidth="230dp"
-        android:layout_above="@id/login_btn"/>
+        android:layout_marginBottom="20dp"
+        android:layout_above="@id/login_btn"
+        android:textColor="#ffffff"/>
+    />
 
     <Button
         android:id="@+id/login_btn"
-        android:text="Login"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:minWidth="230dp"
-        android:layout_centerHorizontal="true"
-        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/shape_round"
+        android:minWidth="230dp"
+        android:text="Login"
+        android:textColor="#ffffff"/>
 
 
 </RelativeLayout>
