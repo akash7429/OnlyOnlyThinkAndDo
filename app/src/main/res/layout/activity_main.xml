@@ -8,37 +8,7 @@
     tools:context=".MainActivity"
     android:background="@drawable/cover">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="218dp"
-        android:layout_height="94dp"
-        android:layout_above="@+id/register_btn"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="254dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="157dp"
-        android:fontFamily="@font/aladin"
-        android:text="Think and Do"
-        android:textColor="#F8F5F5"
-        android:textColorHighlight="#00BEA251"
-        android:textSize="45sp" />
     <!--Button Register-->
-
-    <ImageView
-        android:layout_width="85dp"
-        android:layout_height="79dp"
-        android:layout_above="@+id/register_btn"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="198dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="238dp"
-        android:src="@drawable/gool"/>
 
     <Button
         android:id="@+id/register_btn"
