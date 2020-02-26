@@ -49,6 +49,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -512,6 +513,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pVideo","noVideo");
                                 hashMap.put("pLikes","0");
 
+
                                 //path to store post data
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
                                 //
@@ -554,7 +556,7 @@ public class AddPostActivity extends AppCompatActivity {
         }
         else if(video_rui!=null)
         {
-            // post with image
+            // post with video
             StorageReference ref= FirebaseStorage.getInstance().getReference().child(filePathAndName);
             UploadTask uploadTask = ref.putFile(video_rui);
 
@@ -579,6 +581,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
 
+
                                 //path to store post data
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
                                 //
@@ -591,6 +594,8 @@ public class AddPostActivity extends AppCompatActivity {
                                         descriptionEt.setText("");
                                         imageIv.setImageURI(null);
                                         image_rui=null;
+                                        pVideoVv.setVideoURI(null);
+                                        video_rui=null;
 
 
                                     }
@@ -611,7 +616,7 @@ public class AddPostActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     pd.dismiss();
-                    Toast.makeText(AddPostActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPostActivity.this,"Hey"+e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -631,6 +636,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
 
+
             //path to store post data
             DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Posts");
             //
@@ -643,6 +649,8 @@ public class AddPostActivity extends AppCompatActivity {
                     descriptionEt.setText("");
                     imageIv.setImageURI(null);
                     image_rui=null;
+                    video_rui=null;
+                    pVideoVv.setVideoURI(null);
 
                 }
             })
@@ -676,6 +684,7 @@ public class AddPostActivity extends AppCompatActivity {
                     //camera clicked
                     if(!checkCameraPermission()){
                         requestCameraPermission();
+                        requestStoragePermission();
                     }
                     else{
                         pickFromImage();
@@ -692,7 +701,8 @@ public class AddPostActivity extends AppCompatActivity {
                 }
                 if(which==2){
                     // Video clicked
-                    if(!checkStoragePermission()){
+                    if(!checkCameraPermission()){
+                        requestCameraPermission();
                         requestStoragePermission();
                     }
                     else{
@@ -726,7 +736,7 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void pickFromVideo() {
-        //INTENT TO PICK AN IMAG EFROM CAMERA
+        //INTENT TO PICK AN VIDEO FROM CAMERA
         ContentValues cv=new ContentValues();
         cv.put(MediaStore.Images.Media.TITLE,"Temp Pick");
         cv.put(MediaStore.Images.Media.DESCRIPTION,"Temp Descr");
@@ -862,6 +872,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             if(requestCode==IMAGE_PICK_GALLERY_CODE){
                 image_rui=data.getData();
+
+                video_rui=data.getData();
 
                 if(image_rui.toString().contains("image"))
                 {
