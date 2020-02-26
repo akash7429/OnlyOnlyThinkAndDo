@@ -1,22 +1,31 @@
 package com.example.thinkanddo.models;
 
 public class ModelPost {
-    String pId, pTitle, pDescr,pLikes, pImage ,pTime, uid, uEmail, uDp, uName;
+    String pId, pTitle, pDescr,pLikes,pVideo, pImage ,pTime, uid, uEmail, uDp, uName;
 
     public ModelPost() {
     }
 
-    public ModelPost(String pId, String pTitle, String pDescr, String pLikes, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
+    public ModelPost(String pId, String pTitle, String pDescr, String pLikes, String pVideo, String pImage, String pTime, String uid, String uEmail, String uDp, String uName) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescr = pDescr;
         this.pLikes = pLikes;
+        this.pVideo = pVideo;
         this.pImage = pImage;
         this.pTime = pTime;
         this.uid = uid;
         this.uEmail = uEmail;
         this.uDp = uDp;
         this.uName = uName;
+    }
+
+    public String getpVideo() {
+        return pVideo;
+    }
+
+    public void setpVideo(String pVideo) {
+        this.pVideo = pVideo;
     }
 
     public String getpLikes() {

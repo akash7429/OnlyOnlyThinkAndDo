@@ -3,6 +3,7 @@ package com.example.thinkanddo.adapters;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -16,10 +17,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.thinkanddo.AddPostActivity;
 import com.example.thinkanddo.R;
@@ -39,6 +42,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.net.URI;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -49,9 +53,11 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
     List<ModelPost> postList;
 
     String myUid;
+    Uri uri;
 
     private DatabaseReference likesRef;
     private DatabaseReference postsRef;
+    private DatabaseReference videoRef;
 
     Boolean mProcessLike = false;
 
@@ -85,6 +91,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         String pTitle = postList.get(i).getpTitle();
         String pDescription = postList.get(i).getpDescr();
         final String pImage = postList.get(i).getpImage();
+        final String pVideo = postList.get(i).getpVideo();
         String pTimeStamp = postList.get(i).getpTime();
         String pLikes = postList.get(i).getpLikes(); // Contains total number of likes for post
 
@@ -123,12 +130,14 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             // hide imageview
 
             myHolder.pImageIv.setVisibility(View.GONE);
+            myHolder.pVideovv.setVisibility(View.GONE);
         }
-        else{
+
+        else if(!pImage.equals("noImage") && pVideo.equals("noVideo")){
             // show imageview
 
             myHolder.pImageIv.setVisibility(View.VISIBLE);
-
+            myHolder.pVideovv.setVisibility(View.GONE);
             try
             {
                 Picasso.get().load(pImage).into(myHolder.pImageIv);
@@ -136,8 +145,14 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             }
             catch (Exception ex){
 
-
             }
+
+        }
+        else{
+
+            myHolder.pImageIv.setVisibility(View.GONE);
+            myHolder.pVideovv.setVisibility(View.VISIBLE);
+            myHolder.pVideovv.setVideoURI(Uri.parse(pVideo));
 
         }
 
@@ -398,6 +413,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         // views from rowPost.xml
 
         ImageView uPictureIv, pImageIv;
+        VideoView pVideovv;
         TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv;
         ImageButton moreBtn;
         Button likeBtn, shareBtn, commentBtn;
@@ -411,6 +427,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             uNameTv = itemView.findViewById(R.id.uNameTv);
             pTimeTv = itemView.findViewById(R.id.pTimeTv);
             pTitleTv = itemView.findViewById(R.id.pTitleTv);
+            pVideovv = itemView.findViewById(R.id.pVideoVv);
             pDescriptionTv = itemView.findViewById(R.id.pDescriptionTv);
             pLikesTv = itemView.findViewById(R.id.pLikesTv);
             moreBtn = itemView.findViewById(R.id.moreBtn);

@@ -84,7 +84,16 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/ic_face_black_img"
+            android:visibility="visible"
             android:background="@color/colorWhite"/>
+
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="bottom|center"
+            android:padding="5dp"
+            android:id="@+id/pVideoVv"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/pLikesTv"
@@ -110,9 +119,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="LIKE"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
                 android:drawableLeft="@drawable/ic_like_black"
                 android:background="@color/colorWhite"
-                android:drawablePadding="5dp"
+
                 android:drawableStart="@drawable/ic_like_black"/>
             
             <Button
@@ -121,9 +132,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="COMMENT"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
                 android:drawableLeft="@drawable/ic_comment_black"
                 android:background="@color/colorWhite"
-                android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_comment_black"/>
 
             <Button
@@ -133,7 +145,8 @@
                 android:layout_weight="1"
                 android:text="SHARE"
                 android:drawableLeft="@drawable/ic_share_black"
-                android:drawablePadding="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
                 android:background="@color/colorWhite"
                 android:drawableStart="@drawable/ic_share_black"/>
         </LinearLayout>
