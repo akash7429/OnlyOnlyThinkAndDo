@@ -127,13 +127,14 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         // set post image
         // if there is no image i.e. pImage.equals("noImage" )then hide imageview
 
-        if (pImage.equals("noImage") && !pVideo.equals("noVideo")) {
+        if (pImage.equals("noImage") && pVideo.equals("noVideo")) {
 
             // hide imageview
 
             myHolder.pImageIv.setVisibility(View.GONE);
             myHolder.pVideovv.setVisibility(View.GONE);
-        } else if (!pImage.equals("noImage") && pVideo.equals("noVideo")) {
+        }
+        else if (!pImage.equals("noImage") && pVideo.equals("noVideo")) {
             // show imageview
 
             myHolder.pImageIv.setVisibility(View.VISIBLE);
@@ -145,14 +146,18 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
 
             }
 
-        } else {
+        } else if (pImage.equals("noImage") && !pVideo.equals("noVideo")){
 
             myHolder.pImageIv.setVisibility(View.GONE);
             myHolder.pVideovv.setVisibility(View.VISIBLE);
             myHolder.pVideovv.setVideoURI(Uri.parse(pVideo));
-
-            myHolder.pTitleTv.setText("Video Not Working");
             myHolder.pVideovv.start();
+
+
+            MediaController mediaController = new MediaController(this.context);
+            myHolder.pVideovv.setMediaController(mediaController);
+            mediaController.setAnchorView(myHolder.pVideovv);
+
 
         }
 

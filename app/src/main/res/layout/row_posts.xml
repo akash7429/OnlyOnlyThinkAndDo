@@ -79,6 +79,9 @@
             android:layout_height="wrap_content"
             android:autoLink="all"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
@@ -95,6 +98,7 @@
             android:id="@+id/pVideoVv"
             android:visibility="gone"/>
 
+        </FrameLayout>
 
         <LinearLayout
 
