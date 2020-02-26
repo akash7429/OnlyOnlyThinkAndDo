@@ -95,6 +95,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
                 });
                 builder.create().show();
             }
+
         });
     }
 
