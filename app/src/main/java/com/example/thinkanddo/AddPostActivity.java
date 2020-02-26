@@ -27,7 +27,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,12 +55,14 @@ public class AddPostActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference userDbRef;
     ActionBar actionBar;
+    RuntimePermission runtimePermission;
 
     //permission constants
     private static final int CAMERA_REQUEST_CODE=100;
     private static final int STORAGE_REQUEST_CODE=200;
 
     //image pick constant
+    private static final int VIDEO_PICK_CAMERA_CODE=350;
     private static final int IMAGE_PICK_CAMERA_CODE=300;
     private static final int IMAGE_PICK_GALLERY_CODE=400;
 
@@ -71,6 +75,7 @@ public class AddPostActivity extends AppCompatActivity {
 
     EditText titleEt, descriptionEt;
     ImageView imageIv;
+    VideoView pVideoVv;
     Button  uploadBtn;
 
     //user info
@@ -80,7 +85,7 @@ public class AddPostActivity extends AppCompatActivity {
     String editTitle, editDescription, editImage;
 
     Uri image_rui=null;
-
+    Uri video_rui=null;
     //progress bsr
     ProgressDialog pd;
 
@@ -104,10 +109,15 @@ public class AddPostActivity extends AppCompatActivity {
         checkUserStatus();
 
 
+
+
+
+
         //init views
         titleEt=findViewById(R.id.pTitleEt);
         descriptionEt=findViewById(R.id.pDescriptionEt);
         imageIv=findViewById(R.id.pImageIv);
+        pVideoVv = findViewById(R.id.pVideoVv);
         uploadBtn=findViewById(R.id.pUploadBtn);
 
         // get data through intent from adapterPost .
@@ -499,6 +509,74 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pDescr",description);
                                 hashMap.put("pImage",downloadUri);
                                 hashMap.put("pTime",timeStamp);
+                                hashMap.put("pVideo","noVideo");
+                                hashMap.put("pLikes","0");
+
+                                //path to store post data
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                                //
+                                ref.child(timeStamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        pd.dismiss();
+                                        Toast.makeText(AddPostActivity.this,"Post Published",Toast.LENGTH_SHORT).show();
+                                        titleEt.setText("");
+                                        descriptionEt.setText("");
+                                        imageIv.setImageURI(null);
+                                        pVideoVv.setVideoURI(null);
+                                        image_rui=null;
+                                        video_rui=null;
+
+
+                                    }
+                                })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                pd.dismiss();
+                                                Toast.makeText(AddPostActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+                            }
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    pd.dismiss();
+                    Toast.makeText(AddPostActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        }
+        else if(video_rui!=null)
+        {
+            // post with image
+            StorageReference ref= FirebaseStorage.getInstance().getReference().child(filePathAndName);
+            UploadTask uploadTask = ref.putFile(video_rui);
+
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uriTask=taskSnapshot.getStorage().getDownloadUrl();
+                            while (! uriTask.isSuccessful());
+                            String downloadUri = uriTask.getResult().toString();
+                            if(uriTask.isSuccessful()){
+                                HashMap<Object, String> hashMap = new HashMap<>();
+                                hashMap.put("uid",uid);
+                                hashMap.put("uName",name);
+                                hashMap.put("uEmail",email);
+                                hashMap.put("uDp",dp);
+                                hashMap.put("pId",timeStamp);
+                                hashMap.put("pTitle",title);
+                                hashMap.put("pDescr",description);
+                                hashMap.put("pImage","noImage");
+                                hashMap.put("pTime",timeStamp);
+                                hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
 
                                 //path to store post data
@@ -537,7 +615,6 @@ public class AddPostActivity extends AppCompatActivity {
                 }
             });
 
-
         }
         else{
             //post without image
@@ -551,6 +628,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pDescr",description);
             hashMap.put("pImage","noImage");
             hashMap.put("pTime",timeStamp);
+            hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
 
             //path to store post data
@@ -585,7 +663,7 @@ public class AddPostActivity extends AppCompatActivity {
 
 
     private void showImagePickDialog() {
-        String[] options={"Camera","Gallery"};
+        String[] options={"Image","Gallery","Video"};
 
         //dialog
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -600,7 +678,7 @@ public class AddPostActivity extends AppCompatActivity {
                         requestCameraPermission();
                     }
                     else{
-                        pickFromCamera();
+                        pickFromImage();
                     }
                 }
                 if(which==1){
@@ -610,6 +688,15 @@ public class AddPostActivity extends AppCompatActivity {
                     }
                     else{
                         pickFromGallery();
+                    }
+                }
+                if(which==2){
+                    // Video clicked
+                    if(!checkStoragePermission()){
+                        requestStoragePermission();
+                    }
+                    else{
+                        pickFromVideo();
                     }
                 }
 
@@ -622,11 +709,11 @@ public class AddPostActivity extends AppCompatActivity {
     private void pickFromGallery() {
 
         Intent intent= new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
+        intent.setType("image/* video/*");
         startActivityForResult(intent,IMAGE_PICK_GALLERY_CODE);
     }
 
-    private void pickFromCamera() {
+    private void pickFromImage() {
         //INTENT TO PICK AN IMAG EFROM CAMERA
         ContentValues cv=new ContentValues();
         cv.put(MediaStore.Images.Media.TITLE,"Temp Pick");
@@ -636,6 +723,18 @@ public class AddPostActivity extends AppCompatActivity {
         Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, image_rui);
         startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
+    }
+
+    private void pickFromVideo() {
+        //INTENT TO PICK AN IMAG EFROM CAMERA
+        ContentValues cv=new ContentValues();
+        cv.put(MediaStore.Images.Media.TITLE,"Temp Pick");
+        cv.put(MediaStore.Images.Media.DESCRIPTION,"Temp Descr");
+        video_rui=getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,cv);
+
+        Intent intent=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, video_rui);
+        startActivityForResult(intent, VIDEO_PICK_CAMERA_CODE);
     }
 
     private boolean checkStoragePermission(){
@@ -725,7 +824,8 @@ public class AddPostActivity extends AppCompatActivity {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     if (cameraAccepted && storageAccepted) {
-                        pickFromCamera();
+                        pickFromImage();
+                        pickFromVideo();
                     }
                     else {
                         Toast.makeText(this, "Camera & Storage Both permissions are necessary...", Toast.LENGTH_SHORT).show();
@@ -762,14 +862,45 @@ public class AddPostActivity extends AppCompatActivity {
 
             if(requestCode==IMAGE_PICK_GALLERY_CODE){
                 image_rui=data.getData();
-                imageIv.setImageURI(image_rui);
+
+                if(image_rui.toString().contains("image"))
+                {
+
+                    imageIv.setImageURI(image_rui);
+                }
+                else if(video_rui.toString().contains("video"))
+                {
+
+                    VideoDisplay(video_rui);
+
+
+                }
             }
             else if(requestCode==IMAGE_PICK_CAMERA_CODE){
+
                 imageIv.setImageURI(image_rui);
             }
+            else if(requestCode==VIDEO_PICK_CAMERA_CODE){
+
+                VideoDisplay(video_rui);
+            }
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void VideoDisplay(Uri x){
+
+        pVideoVv.setVideoURI(x);
+
+        // Gives option to preview video.
+        MediaController mediaController = new MediaController(this);
+        pVideoVv.setMediaController(mediaController);
+        mediaController.setAnchorView(pVideoVv);
+
+        pVideoVv.setVisibility(View.VISIBLE);
+        imageIv.setVisibility(View.GONE);
     }
 }
 
