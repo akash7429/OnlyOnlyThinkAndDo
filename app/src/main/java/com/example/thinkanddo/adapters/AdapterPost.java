@@ -335,7 +335,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
         StorageReference picRef = FirebaseStorage.getInstance().getReferenceFromUrl(pImage);
 
-        picRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        picRef.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
@@ -349,7 +350,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                             ds.getRef().removeValue();  // remove values from firebase where pid matches
                         }
                         // deleted
-                        Toast.makeText(context,"Deleted Succesfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Deleted Successfully",Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
 
