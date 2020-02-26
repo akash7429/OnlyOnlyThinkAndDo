@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordTIL"
         android:layout_centerHorizontal="true"
-        android:background="#B053D3"
+        android:background="#AF52D3"
         android:drawableLeft="@android:drawable/ic_menu_my_calendar"
         android:drawablePadding="5dp"
         android:text="Register"
