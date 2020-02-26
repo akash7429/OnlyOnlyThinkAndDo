@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:id="@+id/text1"
         android:layout_width="363dp"
         android:layout_height="54dp"
         android:layout_alignParentStart="false"
@@ -24,7 +25,24 @@
         android:gravity="center"
         android:text="What you want to do?"
         android:textColor="#F1EADA"
-        android:textSize="33sp" />
+        android:textSize="33sp"/>
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="368dp"
+        android:layout_height="55dp"
+        android:layout_alignTop="@+id/text1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="-76dp"
+        android:layout_marginEnd="22dp"
+        android:fontFamily="@font/aladin"
+        android:gravity="center"
+        android:text="Let's talk about your plan"
+        android:textColor="#473E2B"
+        android:textSize="38sp" />
 
     <TextView
         android:id="@+id/textView3"
