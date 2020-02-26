@@ -143,7 +143,7 @@ public class ChatActivity extends AppCompatActivity {
 
                             cal.setTimeInMillis(Long.parseLong(onlineStatus));
 
-                            String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa",cal).toString();
+                            String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa",cal).toString();
                             userStatusTv.setText("Last seen at: "+ dateTime);
                         }
                     }

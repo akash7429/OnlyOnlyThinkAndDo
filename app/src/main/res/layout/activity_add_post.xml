@@ -21,13 +21,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/pImageIv"
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="200dp"
+            android:visibility="visible"
             android:contentDescription="TODO" />
+
+        <VideoView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="bottom|center"
+            android:padding="5dp"
+            android:id="@+id/pVideoVv"
+            android:visibility="gone"/>
+        </FrameLayout>
 
         <EditText
             android:id="@+id/pDescriptionEt"
@@ -41,14 +54,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!--  button publish Post to firebase  -->
-        <Button
-            android:id="@+id/pUploadBtn"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Upload"
-            android:layout_gravity="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+
+
+            <!--  button publish Post to firebase  -->
+            <Button
+                android:id="@+id/pUploadBtn"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="Upload" />
+
 
 
     </LinearLayout>
