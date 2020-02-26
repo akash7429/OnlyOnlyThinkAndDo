@@ -77,7 +77,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
 
         cal.setTimeInMillis(Long.parseLong(timeStamp));
 
-        String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa",cal).toString();
+        String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa",cal).toString();
 
         // set data
         myHolder.messageTv.setText(message);

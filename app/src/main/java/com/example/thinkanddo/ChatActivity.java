@@ -132,16 +132,16 @@ public class ChatActivity extends AppCompatActivity {
                         userStatusTv.setText("typing...");
                     }
                     else{
-                        String onineStatus = "" + ds.child("onlineStatus").getValue();
-                        if(onineStatus.equals("online")){
-                            userStatusTv.setText(onineStatus);
+                        String onlineStatus = "" + ds.child("onlineStatus").getValue();
+                        if(onlineStatus.equals("online")){
+                            userStatusTv.setText(onlineStatus);
                         }
                         else{
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
 
-                            cal.setTimeInMillis(Long.parseLong(onineStatus));
+                            cal.setTimeInMillis(Long.parseLong(onlineStatus));
 
-                            String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa",cal).toString();
+                            String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa",cal).toString();
                             userStatusTv.setText("Last seen at: "+ dateTime);
                         }
                     }
