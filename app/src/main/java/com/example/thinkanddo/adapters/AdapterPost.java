@@ -25,6 +25,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.thinkanddo.AddPostActivity;
+import com.example.thinkanddo.PostDetailActivity;
 import com.example.thinkanddo.R;
 import com.example.thinkanddo.TheirProfileActivity;
 import com.example.thinkanddo.models.ModelPost;
@@ -94,6 +95,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         final String pVideo = postList.get(i).getpVideo();
         String pTimeStamp = postList.get(i).getpTime();
         String pLikes = postList.get(i).getpLikes(); // Contains total number of likes for post
+        String pComments = postList.get(i).getpComments();
 
         setLikes(myHolder,pId);
 
@@ -110,6 +112,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         myHolder.pTitleTv.setText(pTitle);
         myHolder.pDescriptionTv.setText(pDescription);
         myHolder.pLikesTv.setText(pLikes+" Likes");
+        myHolder.pCommentsTv.setText(pComments+" Comments");
 
 
 
@@ -215,7 +218,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         myHolder.commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"comment",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PostDetailActivity.class);
+                intent.putExtra("postId", pId);
+                context.startActivity(intent);
             }
         });
 
@@ -281,6 +286,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             popupMenu.getMenu().add(Menu.NONE, 1, 0, "Edit");
         }
 
+        popupMenu.getMenu().add(Menu.NONE, 2, 0, "View Detail");
+
         // item click listner
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -297,6 +304,11 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                     Intent intent = new Intent(context, AddPostActivity.class);
                     intent.putExtra("key","editPost");
                     intent.putExtra("editPostId", pId);
+                    context.startActivity(intent);
+                }
+                else if(id==2){
+                    Intent intent = new Intent(context, PostDetailActivity.class);
+                    intent.putExtra("postId", pId);
                     context.startActivity(intent);
                 }
                 return false;
@@ -338,7 +350,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
 
         StorageReference picRef = FirebaseStorage.getInstance().getReferenceFromUrl(pImage);
 
-        picRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        picRef.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
@@ -352,7 +365,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
                             ds.getRef().removeValue();  // remove values from firebase where pid matches
                         }
                         // deleted
-                        Toast.makeText(context,"Deleted Succesfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Deleted Successfully",Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
 
@@ -413,8 +426,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
         // views from rowPost.xml
 
         ImageView uPictureIv, pImageIv;
+
         VideoView pVideovv;
-        TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv;
+        TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv,pCommentsTv;
         ImageButton moreBtn;
         Button likeBtn, shareBtn, commentBtn;
         LinearLayout profileLayout;
@@ -430,6 +444,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder>{
             pVideovv = itemView.findViewById(R.id.pVideoVv);
             pDescriptionTv = itemView.findViewById(R.id.pDescriptionTv);
             pLikesTv = itemView.findViewById(R.id.pLikesTv);
+            pCommentsTv = itemView.findViewById(R.id.pCommentsTv);
             moreBtn = itemView.findViewById(R.id.moreBtn);
             likeBtn = itemView.findViewById(R.id.likeBtn);
             shareBtn = itemView.findViewById(R.id.shareBtn);
