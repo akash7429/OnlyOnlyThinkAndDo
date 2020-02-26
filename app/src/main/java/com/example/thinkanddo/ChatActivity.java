@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Queue;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -132,14 +134,14 @@ public class ChatActivity extends AppCompatActivity {
                         userStatusTv.setText("typing...");
                     }
                     else{
-                        String onineStatus = "" + ds.child("onlineStatus").getValue();
-                        if(onineStatus.equals("online")){
-                            userStatusTv.setText(onineStatus);
+                        String onlineStatus = "" + ds.child("onlineStatus").getValue();
+                        if(onlineStatus.equals("online")){
+                            userStatusTv.setText(onlineStatus);
                         }
                         else{
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
 
-                            cal.setTimeInMillis(Long.parseLong(onineStatus));
+                            cal.setTimeInMillis(Long.parseLong(onlineStatus));
 
                             String dateTime = DateFormat.format("dd/mm/yyyy hh:mm aa",cal).toString();
                             userStatusTv.setText("Last seen at: "+ dateTime);
@@ -315,6 +317,7 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen",false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
+       // messageEt.setText("");
 
        final DatabaseReference database=FirebaseDatabase.getInstance().getReference("Users").child(myUid);
         database.addValueEventListener(new ValueEventListener() {
@@ -333,6 +336,44 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+        // create ChatList node/child in firebase database.
+        final DatabaseReference chatRef1=FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(myUid)
+                .child(hisUid);
+
+        chatRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    chatRef1.child("id").setValue(hisUid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        final DatabaseReference chatRef2=FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(hisUid)
+                .child(myUid);
+
+        chatRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    chatRef2.child("id").setValue(myUid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
     }
