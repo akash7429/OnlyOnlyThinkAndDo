@@ -66,6 +66,7 @@ public class AddPostActivity extends AppCompatActivity {
     private static final int VIDEO_PICK_CAMERA_CODE=350;
     private static final int IMAGE_PICK_CAMERA_CODE=300;
     private static final int IMAGE_PICK_GALLERY_CODE=400;
+    /////
 
     //PERMISSION ARRAY
 

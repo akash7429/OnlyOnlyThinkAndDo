@@ -3,8 +3,11 @@ package com.example.thinkanddo.adapters;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -43,6 +46,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URI;
 import java.util.Calendar;
 import java.util.List;
@@ -89,13 +94,13 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         String uName = postList.get(i).getuName();
         final String pId = postList.get(i).getpId();
         String uDp = postList.get(i).getuDp();
-        String pTitle = postList.get(i).getpTitle();
-        String pDescription = postList.get(i).getpDescr();
+        final String pTitle = postList.get(i).getpTitle();
+        final String pDescription = postList.get(i).getpDescr();
         final String pImage = postList.get(i).getpImage();
         final String pVideo = postList.get(i).getpVideo();
         String pTimeStamp = postList.get(i).getpTime();
         String pLikes = postList.get(i).getpLikes(); // Contains total number of likes for post
-        String pComments = postList.get(i).getpComments();
+        final String pComments = postList.get(i).getpComments();
 
         setLikes(myHolder, pId);
 
@@ -229,7 +234,18 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         myHolder.shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "share", Toast.LENGTH_SHORT).show();
+                /*Some post contain only text some contain texts so we will handle them both*/
+                BitmapDrawable bitmapDrawable =(BitmapDrawable)myHolder.pImageIv.getDrawable();
+                if(bitmapDrawable==null){
+                    //post without image
+                    shareTextOnly(pTitle, pDescription);
+                }
+                else{
+                    //post with image
+                    // convert image to bitmap
+                    Bitmap bitmap =bitmapDrawable.getBitmap();
+                    shareImageAndText(pTitle,pDescription,bitmap);
+                }
             }
         });
         myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
@@ -242,6 +258,56 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         });
 
     }
+    private void shareTextOnly(String pTitle,String pDescription) {
+        //concatenate title and description to share
+        String shareBody= pTitle+"\n"+pDescription;
+        //share intent
+        Intent sIntent=new Intent(Intent.ACTION_SEND);
+        sIntent.setType("text/plain");
+        sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here"); // in case you share via email
+        sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);//text to share
+        context.startActivity(Intent.createChooser(sIntent,"Share Via")); // message to show in share dialogue
+    }
+
+    private void shareImageAndText(String pTitle,String pDescription,Bitmap bitmap) {
+        //concatenate title description to share
+        String shareBody= pTitle+"\n"+pDescription;
+
+        //first we will save this image in cache, get the saved image in uri
+        Uri uri= saveImageToShare(bitmap);
+
+        //share intent
+        Intent sIntent = new Intent(Intent.ACTION_SEND);
+        sIntent.putExtra(Intent.EXTRA_STREAM,uri);
+        sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+        sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
+        sIntent.setType("images/png");
+        context.startActivity(Intent.createChooser(sIntent,"Share Via"));
+
+    }
+
+    private Uri saveImageToShare(Bitmap bitmap) {
+        File imageFolder= new File(context.getCacheDir(),"images");
+        Uri uri=null;
+        try{
+            imageFolder.mkdirs(); //create if not exists
+            File file = new File(imageFolder,"shared_image.png");
+
+            FileOutputStream stream =new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG,90,stream);
+            stream.flush();
+            stream.close();
+            uri= FileProvider.getUriForFile(context,"com.example.thinkanddo.fileprovider",file);
+
+        }
+        catch (Exception e){
+            Toast.makeText(context,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+        }
+        return uri;
+    }
+
+
 
     private void setLikes(final MyHolder myHolder, final String postKey) {
 

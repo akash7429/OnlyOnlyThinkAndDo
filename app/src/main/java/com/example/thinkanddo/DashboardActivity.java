@@ -51,7 +51,6 @@ public class DashboardActivity extends AppCompatActivity {
         checkUserStatus();
 
 
-        updateToken(FirebaseInstanceId.getInstance().getToken());
 
 
     }
