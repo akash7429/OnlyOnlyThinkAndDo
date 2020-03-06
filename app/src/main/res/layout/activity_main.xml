@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     tools:context=".MainActivity"
-    android:background="@drawable/cover">
+    android:background="@drawable/cover"
+    >
+
+
+
 
     <!--Button Register-->
 
@@ -19,6 +23,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/shape_round"
         android:fontFamily="@font/montserrat"
+        android:padding="20dp"
         android:minWidth="230dp"
         android:text="Register"
         android:textColor="#ffffff"
@@ -34,6 +39,7 @@
         android:fontFamily="@font/montserrat"
         android:minWidth="230dp"
         android:text="Login"
+        android:padding="20dp"
         android:textColor="#ffffff"
         android:textSize="18sp" />
 
