@@ -10,41 +10,84 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:padding="10dp"
         android:orientation="vertical">
         <!--  Edit text inout post title -->
         <EditText
             android:id="@id/pTitleEt"
-            android:background="@drawable/editextstyle"
-            android:padding="10dp"
+            android:background="@drawable/edittextdesign"
+            android:padding="20dp"
+            android:layout_marginBottom="10dp"
             android:hint="@string/enter_title"
             android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/pImageIv"
-            android:background="@color/colorPrimary"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="200dp"
-            android:visibility="visible"
-            android:contentDescription="TODO" />
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-        <VideoView
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_gravity="bottom|center"
-            android:padding="5dp"
-            android:id="@+id/pVideoVv"
-            android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/pImageIvbtn"
+                android:src="@drawable/ic_camera"
+                android:layout_width="50dp"
+                android:layout_weight="1.5"
+                android:layout_height="50dp"
+                android:visibility="visible"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:id="@+id/pVideoIv"
+                android:src="@drawable/ic_videocam"
+                android:layout_width="50dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="50dp"
+                android:minHeight="50dp"
+                android:visibility="visible"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:id="@+id/pFilesIv"
+                android:src="@drawable/ic_folder_black_24dp"
+                android:layout_width="50dp"
+                android:layout_weight="1.5"
+                android:layout_height="50dp"
+                android:minHeight="50dp"
+                android:visibility="visible"
+                android:contentDescription="TODO" />
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pImageIv"
+                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:contentDescription="TODO" />
+
+
+            <VideoView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom|center"
+                android:padding="5dp"
+                android:id="@+id/pVideoVv"
+                android:visibility="gone"/>
         </FrameLayout>
 
         <EditText
             android:id="@+id/pDescriptionEt"
-            android:background="@drawable/editextstyle"
+            android:background="@drawable/edittextdesign"
             android:hint="Enter description"
             android:padding="10dp"
             android:singleLine="true"
@@ -62,8 +105,11 @@
                 android:id="@+id/pUploadBtn"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
+                android:padding="20dp"
+                android:layout_margin="10dp"
+
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="center"
                 android:text="Upload" />
 
 
