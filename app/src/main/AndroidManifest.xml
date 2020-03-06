@@ -47,6 +47,19 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <!--Here you can define file provider -->
+        <!-- Set the android: exported attribute to false-->
+
+        <provider
+            android:authorities="com.example.thinkanddo.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths"
+                />
+        </provider>
 
         <meta-data
             android:name="preloaded_fonts"
