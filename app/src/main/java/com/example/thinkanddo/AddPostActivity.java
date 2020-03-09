@@ -3,21 +3,19 @@ package com.example.thinkanddo;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.support.v7.widget.ActivityChooserModel;
 import android.text.TextUtils;
@@ -49,7 +47,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -548,6 +545,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo","noVideo");
                                 hashMap.put("pLikes","0");
+                                hashMap.put("pComments", "0");
 
 
                                 //path to store post data
@@ -616,6 +614,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
+                                hashMap.put("pComments", "0");
 
 
                                 //path to store post data
@@ -671,6 +670,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pTime",timeStamp);
             hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
+            hashMap.put("pComments", "0");
 
 
             //path to store post data

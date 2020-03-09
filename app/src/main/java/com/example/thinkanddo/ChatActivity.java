@@ -2,16 +2,17 @@ package com.example.thinkanddo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,13 +22,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.thinkanddo.adapters.AdapterChat;
 import com.example.thinkanddo.models.ModelChat;
 import com.example.thinkanddo.models.ModelUsers;
-import com.example.thinkanddo.notifications.APIService;
-import com.example.thinkanddo.notifications.Client;
 import com.example.thinkanddo.notifications.Data;
-import com.example.thinkanddo.notifications.Response;
 import com.example.thinkanddo.notifications.Sender;
 import com.example.thinkanddo.notifications.Token;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,16 +42,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -65,8 +72,8 @@ public class ChatActivity extends AppCompatActivity {
     String hisImage;
 
 
-    APIService apiService;
-    boolean notify= false;
+    private RequestQueue requestQueue;
+    private boolean notify= false;
 
     //for checking if the uer has seen message or not.
 
@@ -91,6 +98,9 @@ public class ChatActivity extends AppCompatActivity {
         userStatusTv = findViewById(R.id.userStatusTv);
         messageEt = findViewById(R.id.messageEt);
         firebaseAuth=firebaseAuth.getInstance();
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
         Context context;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -99,7 +109,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         //create api service
-        apiService= Client.getRetrofit("https://fcm.googleapis.com/").create(APIService.class);
 
         /*on Clicking user from users list we have passed that uid using intent
         So get the uid here to get user image, name and start chat with that user.
@@ -383,20 +392,40 @@ public class ChatActivity extends AppCompatActivity {
            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
                for(DataSnapshot ds: dataSnapshot.getChildren()){
                    Token token=ds.getValue(Token.class);
-                   Data data= new Data(myUid, name+":"+message,"New Message",hisUid, R.drawable.ic_default);  //R.drawable.ic_default_img;
+                   Data data= new Data(myUid, name+": "+message,"New Message",hisUid, R.drawable.ic_default);  //R.drawable.ic_default_img;
                    Sender sender=new Sender(data,token.getToken());
-                   apiService.sendNotification(sender)
-                           .enqueue(new Callback<Response>() {
-                               @Override
-                               public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                                 Toast.makeText(ChatActivity.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                               }
+                   try{
+                       JSONObject senderJsonObj = new JSONObject(new Gson().toJson(sender));
+                       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", senderJsonObj,
+                               new Response.Listener<JSONObject>() {
+                                   @Override
+                                   public void onResponse(JSONObject response) {
+                                       Log.d("JSON_RESPONSE", "onResponse: "+response.toString());
 
-                               @Override
-                               public void onFailure(Call<Response> call, Throwable t) {
+                                   }
+                               }, new Response.ErrorListener() {
+                           @Override
+                           public void onErrorResponse(VolleyError error) {
+                               Log.d("JSON_RESPONSE", "onResponse: "+error.toString());
 
-                               }
-                           });
+                           }
+                       }){
+                           @Override
+                           public Map<String, String> getHeaders() throws AuthFailureError {
+
+                               Map<String, String> headers = new HashMap<>();
+                               headers.put("Content-Type", "application/json");
+                               headers.put("Authorization", "key=AAAAMMIph68:APA91bFJrgbfCwd6gELs7d0ffLALkdvST16p3u4xEpQBQ0J0hmlCdDR6u5GQCu9V1hdL8CPsL5HiyH_pD9Zua7_ZKsFPOrLG-HqAvkbWv_-UIviIAIb7U6XsmLN4iJl9Acq6eo9Px757");
+
+                               return headers;
+                           }
+                       };
+
+                       requestQueue.add(jsonObjectRequest);
+
+                   } catch (JSONException e){
+                       e.printStackTrace();
+                   }
                }
            }
 

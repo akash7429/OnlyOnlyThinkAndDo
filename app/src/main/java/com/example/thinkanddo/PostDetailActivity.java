@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.PointerIconCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
+import androidx.core.view.PointerIconCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -57,7 +57,7 @@ public class PostDetailActivity extends AppCompatActivity {
     String myUid, hisUid, myEmail, myName, myDp, pImage,
     postId, pLikes, hisDp, hisName;
 
-    boolean mProcessComment = false;
+    boolean mProcessComment = true;
 
     boolean mProcessLike=false;
     ProgressDialog pd;
@@ -492,6 +492,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
     private void updateCommentCount() {
+       // mProcessComment = true;
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
