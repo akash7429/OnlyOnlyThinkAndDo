@@ -2,8 +2,11 @@ package com.example.thinkanddo.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+<<<<<<< Updated upstream
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+>>>>>>> Stashed changes
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 //import com.google.firebase.database.core.view.View;
 
 public class AdapterChatlist extends RecyclerView.Adapter<AdapterChatlist.MyHolder> {

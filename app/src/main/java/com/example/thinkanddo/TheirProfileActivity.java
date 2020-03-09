@@ -1,6 +1,7 @@
 package com.example.thinkanddo;
 
 import android.content.Intent;
+<<<<<<< Updated upstream
 import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.ActionBar;
@@ -8,11 +9,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+import android.os.Bundle;
+>>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+<<<<<<< Updated upstream
 import androidx.appcompat.widget.SearchView;
+=======
+>>>>>>> Stashed changes
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +37,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TheirProfileActivity extends AppCompatActivity {
 

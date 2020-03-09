@@ -2,15 +2,16 @@ package com.example.thinkanddo;
 
 
 import android.Manifest;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+<<<<<<< Updated upstream
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +20,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+>>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +32,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+<<<<<<< Updated upstream
 import androidx.appcompat.widget.SearchView;
+=======
+>>>>>>> Stashed changes
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +44,7 @@ import com.example.thinkanddo.models.ModelPost;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +60,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.app.Activity.RESULT_OK;
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
@@ -521,8 +537,12 @@ private static final int CAMERA_REQUEST_CODE = 100;
             firebaseAuth.signOut();
             checkUserStatus();
         }
-        if(id == R.id.action_add_post){
+        else if(id == R.id.action_add_post){
             startActivity(new Intent(getActivity(),AddPostActivity.class));
+        }
+        else if(id == R.id.action_settings){
+
+            startActivity(new Intent(getActivity(),SettingsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

@@ -3,12 +3,15 @@ package com.example.thinkanddo;
 
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< Updated upstream
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+>>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +19,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< Updated upstream
 import androidx.appcompat.widget.SearchView;
+=======
+>>>>>>> Stashed changes
 
 import com.example.thinkanddo.adapters.AdapterUsers;
 import com.example.thinkanddo.models.ModelUsers;
@@ -30,6 +36,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -225,6 +239,11 @@ public class UsersFragment extends Fragment {
         if(id == R.id.action_logout){
             firebaseAuth.signOut();
             checkUserStatus();
+        }
+
+        else if(id == R.id.action_settings){
+
+            startActivity(new Intent(getActivity(),SettingsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

@@ -6,12 +6,13 @@ public class ModelUsers {
 
     String name, email, search, phone, image, cover,uid, onlineStatus, typingTo; // adding to more fields
 
+    boolean isBlocked = true;
 
     public ModelUsers(){
 
     }
 
-    public ModelUsers(String name,String email,String search,String phone,String image,String cover,String uid,String onlineStatus,String typingTo) {
+    public ModelUsers(String name, String email, String search, String phone, String image, String cover, String uid, String onlineStatus, String typingTo, boolean isBlocked) {
         this.name = name;
         this.email = email;
         this.search = search;
@@ -21,6 +22,15 @@ public class ModelUsers {
         this.uid = uid;
         this.onlineStatus = onlineStatus;
         this.typingTo = typingTo;
+        this.isBlocked = isBlocked;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 
     public String getName() {

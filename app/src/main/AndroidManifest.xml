@@ -14,12 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PostDetailActivity"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".PostDetailActivity" />
         <activity android:name=".TheirProfileActivity" />
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppThemeNo" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".AddPostActivity" />
         <activity android:name=".DashboardActivity">
             <intent-filter>
@@ -28,8 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <service
             android:name=".notifications.FirebaseService"
@@ -46,19 +51,20 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-        <!--Here you can define file provider -->
-        <!-- Set the android: exported attribute to false-->
-
+        </service> <!-- Here you can define file provider -->
+        <!-- Set the android: exported attribute to false -->
         <provider
-            android:authorities="com.example.thinkanddo.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.thinkanddo.fileprovider"
+<<<<<<< Updated upstream
+            android:name="androidx.core.content.FileProvider"
+=======
+>>>>>>> Stashed changes
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths"
-                />
+                android:resource="@xml/paths" />
         </provider>
 
         <meta-data

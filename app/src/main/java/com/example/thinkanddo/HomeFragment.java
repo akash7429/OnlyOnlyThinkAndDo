@@ -1,6 +1,7 @@
 package com.example.thinkanddo;
 
 
+<<<<<<< Updated upstream
 import androidx.appcompat.widget.SearchView;
 
 import android.content.Context;
@@ -12,6 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+>>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,7 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-//import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.thinkanddo.adapters.AdapterPost;
@@ -34,6 +39,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+//import android.widget.SearchView;
 
 
 /**
@@ -205,8 +220,12 @@ public class HomeFragment extends Fragment {
             firebaseAuth.signOut();
             checkUserStatus();
         }
-        if(id == R.id.action_add_post){
+        else if(id == R.id.action_add_post){
            startActivity(new Intent(getActivity(),AddPostActivity.class));
+        }
+        else if(id == R.id.action_settings){
+
+            startActivity(new Intent(getActivity(),SettingsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

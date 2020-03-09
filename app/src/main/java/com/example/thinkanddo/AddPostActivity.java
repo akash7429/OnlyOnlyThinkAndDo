@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+<<<<<<< Updated upstream
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +17,12 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+=======
+>>>>>>> Stashed changes
 import android.os.Bundle;
-//import android.support.v7.widget.ActivityChooserModel;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +33,11 @@ import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -45,8 +54,24 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+<<<<<<< Updated upstream
+=======
+import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+//import android.support.v7.widget.ActivityChooserModel;
+>>>>>>> Stashed changes
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -545,7 +570,11 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo","noVideo");
                                 hashMap.put("pLikes","0");
+<<<<<<< Updated upstream
                                 hashMap.put("pComments", "0");
+=======
+                                hashMap.put("pComments","0");
+>>>>>>> Stashed changes
 
 
                                 //path to store post data
@@ -562,6 +591,14 @@ public class AddPostActivity extends AppCompatActivity {
                                         pVideoVv.setVideoURI(null);
                                         image_rui=null;
                                         video_rui=null;
+
+                                        // send notification
+
+                                        prepareNotification(""+timeStamp,
+                                                ""+name+" added new post",
+                                                ""+title+"\n"+description,
+                                                "PostNotification",
+                                                "POST");
 
 
                                     }
@@ -614,7 +651,11 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
+<<<<<<< Updated upstream
                                 hashMap.put("pComments", "0");
+=======
+                                hashMap.put("pComments","0");
+>>>>>>> Stashed changes
 
 
                                 //path to store post data
@@ -631,6 +672,15 @@ public class AddPostActivity extends AppCompatActivity {
                                         image_rui=null;
                                         pVideoVv.setVideoURI(null);
                                         video_rui=null;
+
+
+                                        // send notification
+
+                                        prepareNotification(""+timeStamp,
+                                                ""+name+" added new post",
+                                                ""+title+"\n"+description,
+                                                "PostNotification",
+                                                "POST");
 
 
                                     }
@@ -670,7 +720,11 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pTime",timeStamp);
             hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
+<<<<<<< Updated upstream
             hashMap.put("pComments", "0");
+=======
+            hashMap.put("pComments","0");
+>>>>>>> Stashed changes
 
 
             //path to store post data
@@ -688,6 +742,14 @@ public class AddPostActivity extends AppCompatActivity {
                     video_rui=null;
                     pVideoVv.setVideoURI(null);
 
+
+                    // send notification
+
+                    prepareNotification(""+timeStamp,
+                            ""+name+" added new post",
+                            ""+title+"\n"+description,
+                            "PostNotification",
+                            "POST");
                 }
             })
                     .addOnFailureListener(new OnFailureListener() {
@@ -705,7 +767,78 @@ public class AddPostActivity extends AppCompatActivity {
 
     }
 
+    /*We also need to make changes in chat notification i.e. send notificationType same as sent in post.
+    * with same spelling
+    * */
 
+
+    private void prepareNotification(String pId,String title,String description, String notificationType, String notificationTopic){
+        // prepare data for notification
+
+        String NOTIFICATION_TOPIC = "/topics/"+notificationTopic; // topic must match with what the receiver subscribed to
+        String NOTIFICATION_TITLE = title;
+        String NOTIFICATION_MESSAGE = description;
+        String NOTIFICATION_TYPE = notificationType; // There are two types of notification types chats and post, so to differentiate in FirebaseMessaging.java class
+
+        // prepare json what to send and where to send
+
+        JSONObject notificationJO = new JSONObject();
+        JSONObject notificationBodyJO = new JSONObject();
+
+        try {
+            //what to send.
+            notificationBodyJO.put("notificationType", NOTIFICATION_TYPE);
+            notificationBodyJO.put("sender", uid); //uid of current use/sender
+            notificationBodyJO.put("pId", pId); //post id
+            notificationBodyJO.put("pDescription",NOTIFICATION_MESSAGE);
+
+            // where to send
+            notificationJO.put("to",NOTIFICATION_TOPIC);
+            notificationJO.put("data",notificationBodyJO);// combine data to be sent
+
+        } catch (JSONException e) {
+            Toast.makeText(this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+
+        sendPostNotification(notificationJO);
+
+    }
+
+    private void sendPostNotification(JSONObject notificationJO) {
+
+        // send volley object request
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", notificationJO,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.d("FCM_RESPONSE", "onResponse: "+ response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error occured
+
+                        Toast.makeText(AddPostActivity.this,""+error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                // put required headers
+
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type","application/json");
+                headers.put("Authorization","key=AAAAMMIph68:APA91bFJrgbfCwd6gELs7d0ffLALkdvST16p3u4xEpQBQ0J0hmlCdDR6u5GQCu9V1hdL8CPsL5HiyH_pD9Zua7_ZKsFPOrLG-HqAvkbWv_-UIviIAIb7U6XsmLN4iJl9Acq6eo9Px757"); // paste your fcm key here after "key=".
+                return headers;
+            }
+        };
+
+        // enqueue the volley request
+        Volley.newRequestQueue(this).add(jsonObjectRequest);
+    }
 
 
     private void pickFromGallery() {

@@ -3,12 +3,15 @@ package com.example.thinkanddo;
 
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< Updated upstream
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
+=======
+>>>>>>> Stashed changes
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+<<<<<<< Updated upstream
 import com.example.thinkanddo.models.ModelUsers;
+=======
+>>>>>>> Stashed changes
 import com.example.thinkanddo.adapters.AdapterChatlist;
 import com.example.thinkanddo.models.ModelChat;
 import com.example.thinkanddo.models.ModelChatlist;
@@ -30,6 +36,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -177,6 +188,10 @@ public class ChatListFragment extends Fragment {
         if(id == R.id.action_logout){
             firebaseAuth.signOut();
             checkUserStatus();
+        }
+        else if(id == R.id.action_settings){
+
+            startActivity(new Intent(getActivity(),SettingsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
