@@ -83,7 +83,7 @@
 
 
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_posts"
                 android:layout_below="@id/linearLayout"
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
 
     </ScrollView>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:src="@drawable/ic_edit"
         android:layout_width="wrap_content"
@@ -102,6 +102,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="10dp"
-        android:layout_alignParentRight="true"></android.support.design.widget.FloatingActionButton>
+        android:layout_alignParentRight="true"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </RelativeLayout>
