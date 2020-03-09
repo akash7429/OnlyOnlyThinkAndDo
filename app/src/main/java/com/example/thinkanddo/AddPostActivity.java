@@ -545,6 +545,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo","noVideo");
                                 hashMap.put("pLikes","0");
+                                hashMap.put("pComments", "0");
 
 
                                 //path to store post data
@@ -613,6 +614,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
+                                hashMap.put("pComments", "0");
 
 
                                 //path to store post data
@@ -668,6 +670,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pTime",timeStamp);
             hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
+            hashMap.put("pComments", "0");
 
 
             //path to store post data
