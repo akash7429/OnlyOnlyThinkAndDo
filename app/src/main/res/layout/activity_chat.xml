@@ -66,6 +66,13 @@
         android:background="@color/colorWhite"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/attachBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:src="@drawable/ic_attach_black"/>
+
         <EditText
             android:id="@+id/messageEt"
             android:hint="Start Typing"
