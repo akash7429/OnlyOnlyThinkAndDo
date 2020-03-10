@@ -14,13 +14,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-<<<<<<< Updated upstream
-
-import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-=======
->>>>>>> Stashed changes
-
 import com.example.thinkanddo.ChatActivity;
 import com.example.thinkanddo.PostDetailActivity;
 import com.example.thinkanddo.R;
@@ -33,6 +26,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Random;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 public class FirebaseMessaging extends FirebaseMessagingService {

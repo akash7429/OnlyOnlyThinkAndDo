@@ -5,18 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
-import androidx.core.view.PointerIconCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-=======
-import android.os.Bundle;
->>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.Gravity;

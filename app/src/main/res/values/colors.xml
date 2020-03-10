@@ -6,5 +6,19 @@
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
 
+    <color name="colorIntro">#ffffff</color>
+
+
+    <!-- Colors for button style-->
+
+    <color name="gradient_start">#4c84ff</color>
+    <color name="gradient_end">#18a3fe</color>
+
+    <!-- Colors for tab and screen text-->
+
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title_color">#000000</color>
+    <color name="intro_description_color">#656565</color>
+
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ffffff</color>
 </resources>

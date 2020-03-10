@@ -5,10 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-<<<<<<< Updated upstream
-import androidx.fragment.app.Fragment;
-=======
->>>>>>> Stashed changes
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

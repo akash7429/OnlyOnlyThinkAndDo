@@ -1,11 +1,6 @@
 package com.example.thinkanddo.adapters;
 
 import android.content.Context;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-=======
->>>>>>> Stashed changes
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;

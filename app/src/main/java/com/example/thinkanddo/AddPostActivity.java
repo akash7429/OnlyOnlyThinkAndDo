@@ -8,17 +8,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-<<<<<<< Updated upstream
-import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-=======
->>>>>>> Stashed changes
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -59,8 +48,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
-<<<<<<< Updated upstream
-=======
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -71,7 +58,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 //import android.support.v7.widget.ActivityChooserModel;
->>>>>>> Stashed changes
+
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -570,11 +557,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo","noVideo");
                                 hashMap.put("pLikes","0");
-<<<<<<< Updated upstream
                                 hashMap.put("pComments", "0");
-=======
-                                hashMap.put("pComments","0");
->>>>>>> Stashed changes
 
 
                                 //path to store post data
@@ -651,11 +634,8 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
-<<<<<<< Updated upstream
                                 hashMap.put("pComments", "0");
-=======
-                                hashMap.put("pComments","0");
->>>>>>> Stashed changes
+
 
 
                                 //path to store post data
@@ -720,11 +700,8 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pTime",timeStamp);
             hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
-<<<<<<< Updated upstream
             hashMap.put("pComments", "0");
-=======
-            hashMap.put("pComments","0");
->>>>>>> Stashed changes
+
 
 
             //path to store post data

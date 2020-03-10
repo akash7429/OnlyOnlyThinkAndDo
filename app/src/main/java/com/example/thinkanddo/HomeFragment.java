@@ -1,23 +1,8 @@
 package com.example.thinkanddo;
 
-
-<<<<<<< Updated upstream
-import androidx.appcompat.widget.SearchView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-=======
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
->>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,9 +36,6 @@ import androidx.recyclerview.widget.RecyclerView;
 //import android.widget.SearchView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HomeFragment extends Fragment {
 
 
@@ -127,7 +109,9 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
 
     private void searchPosts(final String searchQuery){
 

@@ -2,12 +2,6 @@ package com.example.thinkanddo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-=======
->>>>>>> Stashed changes
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;

@@ -2,16 +2,7 @@ package com.example.thinkanddo;
 
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-=======
-import android.os.Bundle;
->>>>>>> Stashed changes
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -61,16 +52,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-<<<<<<< Updated upstream
-=======
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
->>>>>>> Stashed changes
+
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -517,16 +504,14 @@ public class ChatActivity extends AppCompatActivity {
            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
                for(DataSnapshot ds: dataSnapshot.getChildren()){
                    Token token=ds.getValue(Token.class);
-<<<<<<< Updated upstream
-                   Data data= new Data(myUid, name+": "+message,"New Message",hisUid, R.drawable.ic_default);  //R.drawable.ic_default_img;
-=======
+
                    Data data= new Data(""+myUid,
                            ""+ name+":"+message,
                            "New Message",
                            ""+hisUid,
                            "ChatNotification",
                            R.drawable.ic_default);  //R.drawable.ic_default_img;
->>>>>>> Stashed changes
+
                    Sender sender=new Sender(data,token.getToken());
                    try{
                        JSONObject senderJsonObj = new JSONObject(new Gson().toJson(sender));

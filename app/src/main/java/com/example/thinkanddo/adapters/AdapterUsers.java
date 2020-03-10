@@ -4,16 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-=======
->>>>>>> Stashed changes
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thinkanddo.ChatActivity;
 import com.example.thinkanddo.R;
@@ -34,6 +30,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 
 public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
 

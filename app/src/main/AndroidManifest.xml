@@ -14,14 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".IntroActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".PostDetailActivity" />
         <activity android:name=".TheirProfileActivity" />
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppThemeNo" />
-        <activity android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".AddPostActivity" />
         <activity android:name=".DashboardActivity">
             <intent-filter>
@@ -30,11 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            />
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <service
             android:name=".notifications.FirebaseService"
@@ -56,10 +59,6 @@
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.thinkanddo.fileprovider"
-<<<<<<< Updated upstream
-            android:name="androidx.core.content.FileProvider"
-=======
->>>>>>> Stashed changes
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

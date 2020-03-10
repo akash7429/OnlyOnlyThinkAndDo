@@ -6,12 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.RecyclerView;
-=======
->>>>>>> Stashed changes
 import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.LayoutInflater;

@@ -3,15 +3,6 @@ package com.example.thinkanddo;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< Updated upstream
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-=======
->>>>>>> Stashed changes
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,10 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< Updated upstream
-import androidx.appcompat.widget.SearchView;
-=======
->>>>>>> Stashed changes
 
 import com.example.thinkanddo.adapters.AdapterUsers;
 import com.example.thinkanddo.models.ModelUsers;

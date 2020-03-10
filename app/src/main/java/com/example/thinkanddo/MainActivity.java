@@ -1,10 +1,6 @@
 package com.example.thinkanddo;
 
 import android.content.Intent;
-<<<<<<< Updated upstream
-import androidx.appcompat.app.AppCompatActivity;
-=======
->>>>>>> Stashed changes
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
