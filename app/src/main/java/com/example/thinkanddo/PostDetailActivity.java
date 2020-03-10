@@ -57,7 +57,7 @@ public class PostDetailActivity extends AppCompatActivity {
     String myUid, hisUid, myEmail, myName, myDp, pImage,
     postId, pLikes, hisDp, hisName;
 
-    boolean mProcessComment = false;
+    boolean mProcessComment = true;
 
     boolean mProcessLike=false;
     ProgressDialog pd;
@@ -492,6 +492,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
 
     private void updateCommentCount() {
+       // mProcessComment = true;
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
