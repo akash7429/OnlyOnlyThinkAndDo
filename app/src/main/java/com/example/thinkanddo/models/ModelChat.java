@@ -2,19 +2,28 @@ package com.example.thinkanddo.models;
 
 public class ModelChat {
 
-    String message, receiver, sender, timestamp;
+    String message, receiver, sender, timestamp, type;
     boolean isSeen;
 
     public ModelChat() {
 
     }
 
-    public ModelChat(String message, String receiver, String sender, String timestamp, boolean isSeen) {
+    public ModelChat(String message, String receiver, String sender, String timestamp, String type, boolean isSeen) {
         this.message = message;
         this.receiver = receiver;
         this.sender = sender;
         this.timestamp = timestamp;
+        this.type = type;
         this.isSeen = isSeen;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getMessage() {

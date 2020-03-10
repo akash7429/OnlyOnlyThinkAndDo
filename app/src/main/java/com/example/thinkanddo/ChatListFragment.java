@@ -136,6 +136,7 @@ public class ChatListFragment extends Fragment {
                     if(chat.getReceiver().equals(currentUser.getUid())&& chat.getSender()
                             .equals(userId)||chat.getReceiver().equals(userId)&&
                     chat.getSender().equals(currentUser.getUid())){
+                        //insteas of displaying
                         theLastMessage=chat.getMessage();
                     }
                 }
