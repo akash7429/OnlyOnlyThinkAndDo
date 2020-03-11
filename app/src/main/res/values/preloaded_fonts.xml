@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aladin</item>
+        <item>@font/autour_one</item>
         <item>@font/montserrat</item>
     </array>
 </resources>

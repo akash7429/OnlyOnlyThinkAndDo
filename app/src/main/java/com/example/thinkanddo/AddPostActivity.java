@@ -3,21 +3,19 @@ package com.example.thinkanddo;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.support.v7.widget.ActivityChooserModel;
 import android.text.TextUtils;
@@ -49,7 +47,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -76,7 +73,7 @@ public class AddPostActivity extends AppCompatActivity {
     //views
 
     EditText titleEt, descriptionEt;
-    ImageView imageIv;
+    ImageView imageIv,pImageIvbtn,pVideoIv,pFilesIv;
     VideoView pVideoVv;
     Button  uploadBtn;
 
@@ -119,6 +116,9 @@ public class AddPostActivity extends AppCompatActivity {
         titleEt=findViewById(R.id.pTitleEt);
         descriptionEt=findViewById(R.id.pDescriptionEt);
         imageIv=findViewById(R.id.pImageIv);
+        pImageIvbtn=findViewById(R.id.pImageIvbtn);
+        pVideoIv=findViewById(R.id.pVideoIv);
+        pFilesIv=findViewById(R.id.pFilesIv);
         pVideoVv = findViewById(R.id.pVideoVv);
         uploadBtn=findViewById(R.id.pUploadBtn);
 
@@ -173,10 +173,42 @@ public class AddPostActivity extends AppCompatActivity {
 
 
         //get image from camera gallery
-        imageIv.setOnClickListener(new View.OnClickListener(){
+        pImageIvbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                showImagePickDialog();
+                if(!checkCameraPermission()){
+                    requestCameraPermission();
+                    requestStoragePermission();
+                }
+                else{
+                    pickFromImage();
+                }
+            }
+        });
+
+        //get image from camera gallery
+        pVideoIv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(!checkCameraPermission()){
+                    requestCameraPermission();
+                    requestStoragePermission();
+                }
+                else{
+                    pickFromVideo();
+                }
+            }
+        });
+
+        pFilesIv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(!checkStoragePermission()){
+                    requestStoragePermission();
+                }
+                else{
+                    pickFromGallery();
+                }
             }
         });
 
@@ -513,6 +545,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo","noVideo");
                                 hashMap.put("pLikes","0");
+                                hashMap.put("pComments", "0");
 
 
                                 //path to store post data
@@ -581,6 +614,7 @@ public class AddPostActivity extends AppCompatActivity {
                                 hashMap.put("pTime",timeStamp);
                                 hashMap.put("pVideo",downloadUri);
                                 hashMap.put("pLikes","0");
+                                hashMap.put("pComments", "0");
 
 
                                 //path to store post data
@@ -636,6 +670,7 @@ public class AddPostActivity extends AppCompatActivity {
             hashMap.put("pTime",timeStamp);
             hashMap.put("pVideo","noVideo");
             hashMap.put("pLikes","0");
+            hashMap.put("pComments", "0");
 
 
             //path to store post data
@@ -671,51 +706,7 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
 
-    private void showImagePickDialog() {
-        String[] options={"Image","Gallery","Video"};
 
-        //dialog
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setTitle("Choose Image From");
-
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(which==0){
-                    //camera clicked
-                    if(!checkCameraPermission()){
-                        requestCameraPermission();
-                        requestStoragePermission();
-                    }
-                    else{
-                        pickFromImage();
-                    }
-                }
-                if(which==1){
-                    // gallery clicked
-                    if(!checkStoragePermission()){
-                        requestStoragePermission();
-                    }
-                    else{
-                        pickFromGallery();
-                    }
-                }
-                if(which==2){
-                    // Video clicked
-                    if(!checkCameraPermission()){
-                        requestCameraPermission();
-                        requestStoragePermission();
-                    }
-                    else{
-                        pickFromVideo();
-                    }
-                }
-
-            }
-        });
-        //create show dialog
-        builder.create().show();
-    }
 
     private void pickFromGallery() {
 
@@ -880,6 +871,10 @@ public class AddPostActivity extends AppCompatActivity {
                 {
 
                     imageIv.setImageURI(image_rui);
+
+                    pVideoVv.setVisibility(View.GONE);
+                    imageIv.setVisibility(View.VISIBLE);
+
                 }
                 else if(video_rui.toString().contains("video"))
                 {
@@ -887,15 +882,20 @@ public class AddPostActivity extends AppCompatActivity {
                     VideoDisplay(video_rui);
 
 
+
                 }
             }
             else if(requestCode==IMAGE_PICK_CAMERA_CODE){
 
                 imageIv.setImageURI(image_rui);
+                pVideoVv.setVisibility(View.GONE);
+                imageIv.setVisibility(View.VISIBLE);
+
             }
             else if(requestCode==VIDEO_PICK_CAMERA_CODE){
 
                 VideoDisplay(video_rui);
+
             }
 
         }
@@ -914,6 +914,12 @@ public class AddPostActivity extends AppCompatActivity {
 
         pVideoVv.setVisibility(View.VISIBLE);
         imageIv.setVisibility(View.GONE);
+    }
+
+    private void invisbleBtn(ImageView v,ImageView y,ImageView z){
+        v.setVisibility(View.GONE);
+        y.setVisibility(View.GONE);
+        z.setVisibility(View.GONE);
     }
 }
 
