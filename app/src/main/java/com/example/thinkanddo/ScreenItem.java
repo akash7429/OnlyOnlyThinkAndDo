@@ -2,12 +2,12 @@ package com.example.thinkanddo;
 
 public class ScreenItem {
 
-    String title,decription;
+    String title, Description;
     int Screenimg;
 
-    public ScreenItem(String title, String decription, int screenimg) {
+    public ScreenItem(String title, String description, int screenimg) {
         this.title = title;
-        this.decription = decription;
+        this.Description = description;
         Screenimg = screenimg;
     }
 
@@ -19,12 +19,12 @@ public class ScreenItem {
         this.title = title;
     }
 
-    public String getDecription() {
-        return decription;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setDecription(String decription) {
-        this.decription = decription;
+    public void setDescription(String description) {
+        this.Description = description;
     }
 
     public int getScreenimg() {
