@@ -1,6 +1,8 @@
 package com.example.thinkanddo;
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +33,10 @@ public class IntroViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layoutScreen = inflater.inflate(R.layout.intro_layout, null);
+        final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View layoutScreen = inflater.inflate(R.layout.intro_layout, null);
 
-        ImageView imgSlide = layoutScreen.findViewById(R.id.intro_img);
+        final ImageView imgSlide = layoutScreen.findViewById(R.id.intro_img);
         TextView title = layoutScreen.findViewById(R.id.intro_title);
         TextView description = layoutScreen.findViewById(R.id.intro_description);
 
@@ -44,6 +46,16 @@ public class IntroViewPagerAdapter extends PagerAdapter {
 
         container.addView(layoutScreen);
 
+        imgSlide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Drawable d = imgSlide.getDrawable();
+
+                        if(d instanceof Animatable){
+                            ((Animatable) d).start();
+                        }
+            }
+        });
         return layoutScreen;
 
     }
