@@ -2,9 +2,6 @@ package com.example.thinkanddo.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +27,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
 

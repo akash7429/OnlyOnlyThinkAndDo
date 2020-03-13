@@ -2,7 +2,10 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aladin</item>
+        <item>@font/alegreya_bold</item>
         <item>@font/autour_one</item>
         <item>@font/montserrat</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_medium</item>
     </array>
 </resources>

@@ -11,7 +11,7 @@
     app:contentPadding="3dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -24,6 +24,7 @@
             />
 
         <LinearLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -44,6 +45,13 @@
                 android:textColor="#000"
                 />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/blockIv"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_unblocked_green"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
