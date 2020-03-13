@@ -29,6 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+        <ImageView
+            android:id="@+id/messageIv"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:padding="15dp"
+            android:src="@drawable/ic_image_black"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:background="@drawable/bg_receiver"
+            />
+
         <TextView
             android:id="@+id/timeTv"
             android:textColor="@color/colorBlack"
