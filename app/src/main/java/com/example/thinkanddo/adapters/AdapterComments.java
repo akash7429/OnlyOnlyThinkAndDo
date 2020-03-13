@@ -1,8 +1,6 @@
 package com.example.thinkanddo.adapters;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +15,9 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHolder>{
 

@@ -6,5 +6,31 @@
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
 
+    <color name="colorIntro">#ffffff</color>
+
+
+    <!-- Colors for button style-->
+
+    <color name="gradient_start_btn">#4c84ff</color>
+    <color name="gradient_end_btn">#18a3fe</color>
+
+    <color name="gradient_start_main_layout">#4c84ff</color>
+    <color name="gradient_end_main_layout">#18a3fe</color>
+
+    <color name="gradient_start_right_btn">#ec008c</color>
+    <color name="gradient_end_right_btn">#fc6767</color>
+
+    <color name="gradient_start_left_btn">#ec008c</color>
+    <color name="gradient_end_left_btn">#ec008c</color>
+
+    <color name="gradient_start_slide">#363795</color>
+    <color name="gradient_center_slide"></color>
+    <color name="gradient_end_slide">#005C97</color>
+    <!-- Colors for tab and screen text-->
+
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title_color">#000000</color>
+    <color name="intro_description_color">#656565</color>
+
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ffffff</color>
 </resources>

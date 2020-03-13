@@ -5,14 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
-import androidx.core.view.PointerIconCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -51,6 +44,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -495,6 +495,7 @@ public class PostDetailActivity extends AppCompatActivity {
        // mProcessComment = true;
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
+        final DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -503,6 +504,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     int newCommentVal = Integer.parseInt(comments) + 1;
                     ref.child("pComments").setValue(""+newCommentVal);
                     mProcessComment=false;
+
                 }
             }
 

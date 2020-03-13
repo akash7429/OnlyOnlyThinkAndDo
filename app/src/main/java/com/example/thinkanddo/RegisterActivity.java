@@ -2,9 +2,6 @@ package com.example.thinkanddo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -24,6 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class RegisterActivity extends AppCompatActivity {
     EditText mEmailEt, mPasswordEt;
     Button mRegisterBtn;
@@ -38,11 +38,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        ActionBar actionBar=getSupportActionBar();
+        /*ActionBar actionBar=getSupportActionBar();
         actionBar.setTitle("Create an account");
-
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);*/
 
         mEmailEt = findViewById(R.id.emailET);
         mPasswordEt = findViewById(R.id.passwordET);
