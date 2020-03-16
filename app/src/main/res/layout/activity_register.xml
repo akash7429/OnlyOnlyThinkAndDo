@@ -1,77 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/register_gradient"
     android:padding="20dp"
-    tools:context=".RegisterActivity"
-    android:background="@drawable/register">
+    tools:context=".RegisterActivity">
 
     <TextView
+        android:id="@+id/tvRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/aladin"
-        android:text="Register"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Sign Up"
         android:textAlignment="center"
+        android:textColor="#E1F1EF"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full Name"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="25dp"
+        android:padding="20dp"
+        android:textSize="18dp"
+        android:fontFamily="@font/roboto_medium"
+        android:background="@drawable/edittextdesign"
+        android:drawableStart="@drawable/fullname"
+        android:drawableLeft="@drawable/fullname"
+        android:drawableTint="@color/colorBlack"
+        android:drawablePadding="5dp"
+        android:defaultFocusHighlightEnabled="false"
+        android:inputType="textEmailAddress"
+        android:outlineSpotShadowColor="@color/colorWhite"
         android:textColor="#ffffff"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textColorHighlight="#FCF1E8E8"
+        android:textColorHint="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRegister"
+        />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/edittextdesign"
+        android:defaultFocusHighlightEnabled="false"
+        android:drawableStart="@drawable/email"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="5dp"
+        android:drawableTint="@color/colorBlack"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:outlineSpotShadowColor="@color/colorWhite"
+        android:padding="20dp"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#FCF1E8E8"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameEt" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/emailTIL">
-        <EditText
-            android:id="@+id/emailET"
-            android:inputType="textEmailAddress"
-            android:hint="Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_show_hide"
+        app:passwordToggleEnabled="true"
+        android:layout_marginTop="10dp"
+        app:passwordToggleTint="@color/colorBlack"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailET">
+    <EditText
+        android:id="@+id/passwordET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/passwordTIL"
-        android:layout_below="@id/emailTIL"
-        app:passwordToggleEnabled="true">
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:padding="20dp"
+        android:drawableTint="@color/colorBlack"
+        android:textSize="17dp"
+        android:background="@drawable/edittextdesign"
+        android:drawableStart="@drawable/password"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="5dp"
+        android:outlineSpotShadowColor="@color/colorWhite"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#FCF1E8E8"
+        android:textColorHint="@color/colorWhite"/>
 
-        <EditText
-            android:id="@+id/passwordET"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <Button
         android:id="@+id/register_btn"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordTIL"
-        android:layout_centerHorizontal="true"
-        android:background="#AF52D3"
-        android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-        android:drawablePadding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/register_button"
         android:text="Register"
-        android:textColor="@color/colorWhite" />
-
+        android:textSize="17dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_show_hide" />
 
     <TextView
         android:id="@+id/have_accountTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="Already have an account? Login"
         android:textAlignment="center"
-        android:layout_below="@+id/register_btn"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorBlack"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_btn" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

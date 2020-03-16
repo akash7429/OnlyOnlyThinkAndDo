@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
                 //start Register Activity
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
 
+
+                overridePendingTransition(R.anim.activity_move_in_left,R.anim.activity_move_out_right);
+
             }
         });
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                overridePendingTransition(R.anim.activity_move_in_right,R.anim.activity_move_out_left);
 
             }
         });

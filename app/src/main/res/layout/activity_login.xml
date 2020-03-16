@@ -1,115 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_gradient"
     android:padding="20dp"
-    tools:context=".LoginActivity"
-    android:background="@drawable/login">
+    tools:context=".LoginActivity">
+
 
     <TextView
+        android:id="@+id/tvLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/aladin"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/montserrat"
         android:text="Login"
         android:textAlignment="center"
         android:textColor="#E1F1EF"
         android:textSize="45sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/emailET"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+
+    <EditText
+        android:id="@+id/emailET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/emailTIL"
-        app:boxStrokeColor="#FFFBFB"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <EditText
-            android:id="@+id/emailET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:defaultFocusHighlightEnabled="false"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:outlineSpotShadowColor="@color/colorWhite"
-            android:textColor="#ffffff"
-            android:textColorHighlight="#FCF1E8E8"
-            android:textColorHint="@color/colorWhite" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/passwordTIL"
-        android:layout_below="@id/emailTIL"
-        app:passwordToggleEnabled="true"
-        app:boxStrokeColor="@color/colorWhite"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <EditText
-            android:id="@+id/passwordET"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:textColor="#ffffff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="107dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordTIL"
-        android:layout_alignParentStart="true"
-
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="159dp"
-        android:background="#58C250"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/edittextdesign"
+        android:defaultFocusHighlightEnabled="false"
+        android:drawableStart="@drawable/email"
+        android:drawableLeft="@drawable/email"
         android:drawablePadding="5dp"
-        android:text="Login"
-        android:textColor="@color/colorWhite" />
+        android:fontFamily="@font/roboto_medium"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:outlineSpotShadowColor="@color/colorWhite"
+        android:padding="20dp"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#FCF1E8E8"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_show_hide_login"
+        app:passwordToggleEnabled="true"
+        android:layout_marginTop="10dp"
+        app:hintEnabled="false"
+        app:passwordToggleTint="@color/colorIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailET">
+    <EditText
+        android:id="@+id/passwordET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:padding="20dp"
+        android:textSize="17dp"
+        android:background="@drawable/edittextdesign"
+        android:drawableStart="@drawable/password"
+        android:drawableTint="@color/colorIcon"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="5dp"
+        android:outlineSpotShadowColor="@color/colorWhite"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#FCF1E8E8"
+        android:textColorHint="@color/colorWhite"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailET" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/recoverPassTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_btn"
-        android:layout_marginTop="-86dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="Forgot Password? Recover"
         android:textAlignment="center"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_show_hide_login" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/googleLoginBtn"
-        android:layout_width="177dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recoverPassTv"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="109dp"
-        android:background="#26ACB1">
-
-    </com.google.android.gms.common.SignInButton>
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17dp"
+        android:background="@drawable/login_button"
+        android:drawablePadding="8dp"
+        android:text="Login"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recoverPassTv" />
 
     <TextView
         android:id="@+id/nothave_accountTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recoverPassTv"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="131dp"
-        android:layout_marginBottom="-7dp"
-        android:text="Not have an account? Register"
+        android:layout_marginTop="17dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Create Account Here"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tvOr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="OR"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/googleLoginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nothave_accountTv" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleLoginBtn"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOr">
+
+    </com.google.android.gms.common.SignInButton>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

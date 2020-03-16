@@ -2,9 +2,13 @@ package com.example.thinkanddo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,11 +30,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText mEmailEt, mPasswordEt;
+    EditText mEmailEt, mPasswordEt, mNameEt;
     Button mRegisterBtn;
     TextView mHaveAccountTv;
+    TextView register_title_tv;
 
+    TextInputLayout password_show_hide;
     ProgressDialog progressDialog;
+
+    Animation title_anim, edittext_anim, remaining_anim;
+    Drawable password;
 
     private FirebaseAuth mAuth;
 
@@ -43,23 +53,46 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);*/
 
+        password_show_hide = findViewById(R.id.password_show_hide);
+        register_title_tv = findViewById(R.id.tvRegister);
         mEmailEt = findViewById(R.id.emailET);
+        mNameEt = findViewById(R.id.nameEt);
         mPasswordEt = findViewById(R.id.passwordET);
         mRegisterBtn = findViewById(R.id.register_btn);
         mHaveAccountTv =findViewById(R.id.have_accountTv);
+        title_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.title_anim);
+        edittext_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.edittext_anim);
+        remaining_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.remaining_anim);
 
         mAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Registering User....");
 
+        // Setting register animation
+
+        register_title_tv.setAnimation(title_anim);
+        mEmailEt.setAnimation(edittext_anim);
+        mPasswordEt.setAnimation(edittext_anim);
+        password_show_hide.setAnimation(edittext_anim);
+        mNameEt.setAnimation(edittext_anim);
+        mRegisterBtn.setAnimation(remaining_anim);
+        mHaveAccountTv.setAnimation(remaining_anim);
+
+
+
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = mEmailEt.getText().toString().trim();
                 String password = mPasswordEt.getText().toString().trim();
+                String fullname = mNameEt.getText().toString().trim();
 
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                if(TextUtils.isEmpty(fullname)){
+                    mNameEt.setError("Please enter your name");
+                    mNameEt.setFocusable(true);
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     mEmailEt.setError("Invalid Email");
                     mEmailEt.setFocusable(true);
                 }
@@ -68,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
                     mPasswordEt.setFocusable(true);
                 }
                 else {
-                    registerUser(email, password);
+                    registerUser(fullname,email, password);
                 }
             }
         });
@@ -80,9 +113,11 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
-    private void registerUser(String email, String password) {
+    private void registerUser(final String fullname, String email, final String password) {
 
         progressDialog.show();
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -95,10 +130,13 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             String email = user.getEmail();
+
                             String uid = user.getUid();
 
                             HashMap<Object, String> hashMap =new HashMap<>();
                             hashMap.put("email", email);
+                            hashMap.put("name", fullname);
+                            hashMap.put("password", password);
                             hashMap.put("uid", uid);
                             hashMap.put("name", "");
                             hashMap.put("onlineStatus", "online");
@@ -135,10 +173,17 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+    public void finish(){
+
+        super.finish();
+        overridePendingTransition(R.anim.activity_move_in_right,R.anim.activity_move_out_left);
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+
         return super.onSupportNavigateUp();
+
     }
 }
