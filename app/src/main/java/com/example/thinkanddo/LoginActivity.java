@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -23,6 +25,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +37,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -42,11 +44,14 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 100;
     GoogleSignInClient mGoogleSignInClient;
 
+    TextView tvLoginTitle;
     EditText mEmailEt, mPasswordEt;
-    TextView notHAveAccountTv, mRecoverPassTv;
+    TextView notHAveAccountTv, mRecoverPassTv, ORTv;
     Button mLoginBtn;
     SignInButton mGoogleLoginBtn;
+    TextInputLayout password_show_hide_login;
 
+    Animation title_anim, edittext_anim, remaining_anim;
     private FirebaseAuth mAuth;
 
     ProgressDialog pd;
@@ -56,12 +61,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ActionBar actionBar=getSupportActionBar();
+       /* ActionBar actionBar=getSupportActionBar();
         actionBar.setTitle("Login");
-
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-
+*/
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -71,12 +75,32 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        password_show_hide_login = findViewById(R.id.password_show_hide_login);
         mEmailEt = findViewById(R.id.emailET);
         mPasswordEt = findViewById(R.id.passwordET);
+        tvLoginTitle = findViewById(R.id.tvLogin);
+        ORTv = findViewById(R.id.tvOr);
+        title_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.title_anim);
+        edittext_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.edittext_anim);
+        remaining_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.remaining_anim);
         notHAveAccountTv = findViewById(R.id.nothave_accountTv);
         mRecoverPassTv = findViewById(R.id.recoverPassTv);
         mLoginBtn = findViewById(R.id.login_btn);
         mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
+
+
+        // Animation of login
+        tvLoginTitle.setAnimation(title_anim);
+        mEmailEt.setAnimation(edittext_anim);
+        mPasswordEt.setAnimation(edittext_anim);
+        password_show_hide_login.setAnimation(edittext_anim);
+        mGoogleLoginBtn.setAnimation(remaining_anim);
+        mLoginBtn.setAnimation(remaining_anim);
+        mRecoverPassTv.setAnimation(remaining_anim);
+        notHAveAccountTv.setAnimation(remaining_anim);
+        ORTv.setAnimation(remaining_anim);
+
+
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,5 +320,11 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void finish(){
+
+        super.finish();
+        overridePendingTransition(R.anim.activity_move_in_left,R.anim.activity_move_out_right);
     }
 }
