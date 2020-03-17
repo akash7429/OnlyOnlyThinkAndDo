@@ -3,7 +3,6 @@ package com.example.thinkanddo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -151,7 +150,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 String pTitle=pTitleTv.getText().toString().trim();
                 String pDescription=pDescriptionTv.getText().toString().trim();
 
-                BitmapDrawable bitmapDrawable =(BitmapDrawable)pImageIv.getDrawable();
+        /*        BitmapDrawable bitmapDrawable =(BitmapDrawable)pImageIv.getDrawable();
                 if(bitmapDrawable==null){
                     //post without image
                     shareTextOnly(pTitle, pDescription);
@@ -162,7 +161,8 @@ public class PostDetailActivity extends AppCompatActivity {
                     Bitmap bitmap =bitmapDrawable.getBitmap();
                     shareImageAndText(pTitle,pDescription,bitmap);
                 }
-
+*/
+        Toast.makeText(getApplicationContext(),"Share",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -380,13 +380,13 @@ public class PostDetailActivity extends AppCompatActivity {
                      */
 
                     likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_liked,0,0,0);
-                    likeBtn.setText("Liked");
+                    likeBtn.setText("Inspired");
                 }
                 else{
                     // user has not liked this post
 
                     likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like_black,0,0,0);
-                    likeBtn.setText("Like");
+                    likeBtn.setText("Inspire");
                 }
             }
 
@@ -426,7 +426,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                         // not Liked, like it
                         postsRef.child(postId).child("pLikes").setValue(""+(Integer.parseInt(pLikes)+1));
-                        likesRef.child(postId).child(myUid).setValue("Liked"); // set any value
+                        likesRef.child(postId).child(myUid).setValue("Inspired"); // set any value
                         mProcessLike = false;
 
                     }
@@ -563,7 +563,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                     pTitleTv.setText(pTitle);
                     pDescriptionTv.setText(pDescr);
-                    pLikesTv.setText(pLikes+ "Likes");
+                    pLikesTv.setText(pLikes+ " Inspires");
                     pTimeTiv.setText(pTime);
                     pCommentsTv.setText(commentCount+" Comments");
 

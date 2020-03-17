@@ -114,7 +114,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         myHolder.pTimeTv.setText(pTime);
         myHolder.pTitleTv.setText(pTitle);
         myHolder.pDescriptionTv.setText(pDescription);
-        myHolder.pLikesTv.setText(pLikes+" Likes");
+        myHolder.pLikesTv.setText(pLikes+" Inspired");
         myHolder.pCommentsTv.setText(pComments+" Comments");
 
 
@@ -321,12 +321,12 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
                      */
 
                     myHolder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_liked, 0, 0, 0);
-                    myHolder.likeBtn.setText("Liked");
+                    myHolder.likeBtn.setText("Inspired");
                 } else {
                     // user has not liked this post
 
                     myHolder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like_black, 0, 0, 0);
-                    myHolder.likeBtn.setText("Like");
+                    myHolder.likeBtn.setText("Inspire");
                 }
             }
 

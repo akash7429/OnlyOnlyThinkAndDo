@@ -21,8 +21,8 @@
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/profileIv"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:src="@drawable/ic_default"
             android:scaleType="centerCrop"
             app:c_background_color="@color/colorPrimaryDark"/>

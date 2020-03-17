@@ -36,7 +36,7 @@ public class TheirProfileActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     ImageView avatarIv, coverIv;
-    TextView nameTv, emailTv , phoneTv;
+    TextView nameTv ;
     RecyclerView postsRecyclerView;
     List<ModelPost> postList;
     AdapterPost adapterPost;
@@ -55,8 +55,8 @@ public class TheirProfileActivity extends AppCompatActivity {
         coverIv = findViewById(R.id.coverIv);
         avatarIv = findViewById(R.id.avatarIv);
         nameTv = findViewById(R.id.nameTv);
-        emailTv = findViewById(R.id.emailTv);
-        phoneTv = findViewById(R.id.phoneTv);
+        //emailTv = findViewById(R.id.emailTv);
+      //  phoneTv = findViewById(R.id.phoneTv);
         postsRecyclerView= findViewById(R.id.recyclerview_posts);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -77,8 +77,8 @@ public class TheirProfileActivity extends AppCompatActivity {
                     String cover = ""+ds.child("cover").getValue();
 
                     nameTv.setText(name);
-                    emailTv.setText(email);
-                    phoneTv.setText(phone);
+                    //emailTv.setText(email);
+
 
                     try{
 
@@ -86,7 +86,7 @@ public class TheirProfileActivity extends AppCompatActivity {
 
                     }catch (Exception e){
 
-                        Picasso.get().load(R.drawable.ic_img_face).into(avatarIv);
+                        Picasso.get().load(R.drawable.ic_user_dp).into(avatarIv);
                     }
 
                     try{
