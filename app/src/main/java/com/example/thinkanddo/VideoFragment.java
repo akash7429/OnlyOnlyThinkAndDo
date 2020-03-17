@@ -1,5 +1,6 @@
 package com.example.thinkanddo;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,13 @@ public class VideoFragment extends Fragment {
 
     private static final int VIDEO_CAPTURE = 101;
     ImageView ivVideo;
+
+    String[] cameraPermissions;
+    String[] storagePermissions;
+    //permission constants
+    private static final int CAMERA_REQUEST_CODE=100;
+    private static final int STORAGE_REQUEST_CODE=200;
+
     public VideoFragment() {
         // Required empty public constructor
     }
@@ -44,6 +52,8 @@ public class VideoFragment extends Fragment {
             public void onClick(View v) {
 
 
+                cameraPermissions=new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                storagePermissions=new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
                 Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 startActivityForResult(intent, VIDEO_CAPTURE);
@@ -73,4 +83,5 @@ public class VideoFragment extends Fragment {
             }
         }
     }
+
 }

@@ -37,6 +37,7 @@
                     android:id="@+id/uNameTv"
                     android:layout_width="wrap_content"
                     android:text="Name"
+                    android:layout_marginStart="2.5dp"
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp"
                     android:layout_height="wrap_content"/>
@@ -46,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:text="33 min"
                     android:textColor="@color/colorBlack"
+                    android:layout_marginStart="2.5dp"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
@@ -67,7 +69,7 @@
             android:text="Title"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:autoLink="all"
             android:layout_height="wrap_content"/>
 
@@ -75,6 +77,7 @@
             android:id="@+id/pDescriptionTv"
             android:layout_width="match_parent"
             android:text="The description of post"
+            android:textSize="15dp"
             android:textColor="@color/colorBlack"
             android:layout_height="wrap_content"
             android:autoLink="all"/>
@@ -85,14 +88,14 @@
         <ImageView
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:src="@drawable/ic_face_black_img"
             android:visibility="visible"
             android:background="@color/colorWhite"/>
 
         <VideoView
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
             android:layout_gravity="bottom|center"
             android:padding="5dp"
             android:id="@+id/pVideoVv"
@@ -108,7 +111,8 @@
 
             <TextView
                 android:id="@+id/pLikesTv"
-                android:text="1.2k Likes"
+                android:text="1.2k Inspires"
+                android:textSize="16dp"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
@@ -118,6 +122,7 @@
                 android:id="@+id/pCommentsTv"
                 android:text="1.2k Comments"
                 android:layout_weight="1"
+                android:textSize="16dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -133,6 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="2dp"
             android:gravity="center">
 
             <Button
@@ -141,11 +147,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Inspire"
-                android:paddingStart="20dp"
+                android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:drawableLeft="@drawable/ic_like_black"
                 android:background="@color/colorWhite"
-
                 android:drawableStart="@drawable/ic_like_black"/>
             
             <Button
@@ -154,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Motivate"
-                android:paddingStart="20dp"
+                android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:drawableLeft="@drawable/ic_comment_black"
                 android:background="@color/colorWhite"
@@ -167,7 +172,7 @@
                 android:layout_weight="1"
                 android:text="Spread"
                 android:drawableLeft="@drawable/ic_share_black"
-                android:paddingStart="20dp"
+                android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:background="@color/colorWhite"
                 android:drawableStart="@drawable/ic_share_black"/>

@@ -9,12 +9,18 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         app:contentPadding="10dp">
 
     <androidx.appcompat.widget.SwitchCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_notifications_fullfill"
+        android:drawablePadding="5dp"
+        android:textSize="16dp"
         android:id="@+id/postSwitch"
+        app:thumbTint="@color/colorBlack"
+        app:trackTint="@color/colorIcon"
         android:text="Post Notification"/>
 
     </androidx.cardview.widget.CardView>

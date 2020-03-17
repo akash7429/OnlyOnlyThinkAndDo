@@ -55,6 +55,7 @@
                                 android:id="@+id/uNameTv"
                                 android:layout_width="wrap_content"
                                 android:text="Name"
+                                android:layout_marginStart="2.5dp"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="20sp"
                                 android:layout_height="wrap_content"/>
@@ -64,6 +65,7 @@
                                 android:layout_width="wrap_content"
                                 android:text="33 min"
                                 android:textColor="@color/colorBlack"
+                                android:layout_marginStart="2.5dp"
                                 android:layout_height="wrap_content"/>
 
                         </LinearLayout>
@@ -85,7 +87,7 @@
                         android:text="Title"
                         android:textStyle="bold"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp"
+                        android:textSize="17sp"
                         android:autoLink="all"
                         android:layout_height="wrap_content"/>
 
@@ -93,6 +95,7 @@
                         android:id="@+id/pDescriptionTv"
                         android:layout_width="match_parent"
                         android:text="The description of post"
+                        android:textSize="15sp"
                         android:textColor="@color/colorBlack"
                         android:layout_height="wrap_content"
                         android:autoLink="all"/>
@@ -100,7 +103,7 @@
                     <ImageView
                         android:id="@+id/pImageIv"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="220dp"
                         android:src="@drawable/ic_face_black_img"
                         android:background="@color/colorWhite"/>
 
@@ -112,6 +115,7 @@
                         <TextView
                             android:id="@+id/pLikesTv"
                             android:text="1.2k Likes"
+                            android:textSize="16dp"
                             android:textColor="@color/colorPrimary"
                             android:layout_width="wrap_content"
                             android:layout_weight="1"
@@ -122,6 +126,7 @@
                             android:text="1.2k Comments"
                             android:layout_weight="1"
                             android:textAlignment="textEnd"
+                            android:textSize="16dp"
                             android:textColor="@color/colorPrimary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -144,12 +149,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="LIKE"
-                            android:drawableLeft="@drawable/ic_like_black"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:drawablePadding="-25dp"
                             android:background="@color/colorWhite"
-                            android:drawablePadding="5dp"
-                            android:drawableStart="@drawable/ic_like_black"/>
-
+                            android:drawableStart="@drawable/ic_like_black"
+                            android:text="INSPIRE" />
 
 
                         <Button
@@ -157,11 +162,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="SHARE"
-                            android:drawableLeft="@drawable/ic_share_black"
-                            android:drawablePadding="5dp"
                             android:background="@color/colorWhite"
-                            android:drawableStart="@drawable/ic_share_black"/>
+                            android:drawableStart="@drawable/ic_share_black"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:drawablePadding="-25dp"
+                            android:text="SPREAD" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -169,9 +175,11 @@
 
             <TextView
                 android:text="Comments"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorBlack"
                 android:drawablePadding="5dp"
                 android:padding="2dp"
+                android:textSize="15dp"
                 android:drawableLeft="@drawable/ic_comment_black"
                 android:drawableStart="@drawable/ic_comment_black"
                 android:layout_width="match_parent"
@@ -179,6 +187,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
