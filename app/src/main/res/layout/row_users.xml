@@ -27,12 +27,15 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7.5dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/nameTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
                 android:text="Person Name"
                 android:textSize="18dp"
                 android:textColor="#000"
@@ -41,6 +44,7 @@
                 android:id="@+id/emailTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
                 android:text="Person Email"
                 android:textColor="#000"
                 />

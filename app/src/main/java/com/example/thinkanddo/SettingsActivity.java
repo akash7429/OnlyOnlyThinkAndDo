@@ -48,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         postSwitch = findViewById(R.id.postSwitch);
 
         logoutLL = findViewById(R.id.logout_ll);
+
         //init sp
         sp=getSharedPreferences("Notification_SP", MODE_PRIVATE);
         
@@ -90,6 +91,24 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+
+    private boolean restorePrefData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
+        Boolean isIntroActivityOpened = pref.getBoolean("isIntroOpened",false);
+        return isIntroActivityOpened;
+    }
+
+    private void savePrefsData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putBoolean("isIntroOpened",true);
+        editor.commit();
     }
 
     private void checkUserStatus(){

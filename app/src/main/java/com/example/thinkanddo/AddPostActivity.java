@@ -923,6 +923,9 @@ public class AddPostActivity extends AppCompatActivity {
             firebaseAuth.signOut();
             checkUserStatus();
         }
+        else if(id==R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
         // handle permission result

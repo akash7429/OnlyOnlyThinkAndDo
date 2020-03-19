@@ -23,21 +23,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".PostDetailActivity" />
+        <activity android:name=".SettingsActivity"
+            />
+        <activity android:name=".PostDetailActivity"
+            android:launchMode="singleTop"/>
 
 
-        <activity android:name=".TheirProfileActivity" />
+        <activity android:name=".TheirProfileActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".ChatActivity"
-            android:theme="@style/AppThemeNo" />
+            android:theme="@style/AppThemeNo"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".LoginActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".AddPostActivity" />
+        <activity android:name=".AddPostActivity"
+            android:launchMode="singleTop"/>
 
-        <activity android:name=".DashboardActivity">
+        <activity android:name=".DashboardActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
