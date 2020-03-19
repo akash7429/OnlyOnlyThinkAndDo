@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,12 +46,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,12 +68,12 @@ FirebaseAuth firebaseAuth;
 FirebaseUser user;
 FirebaseDatabase firebaseDatabase;
 DatabaseReference databaseReference;
-
+Button take_video_btn, step_alert_btn, describe_goal_btn, define_step_btn;
 StorageReference storageReference;
 String storagePath = "User_Profile_Cover_Imgs/";
 
-ImageView avatarIv, coverIv;
-TextView nameTv, emailTv , phoneTv;
+ImageView avatarIv, coverIv, add_imageIv, edit_name_Iv;
+TextView nameTv, emailTv , phoneTv,number_of_goal_finish_tv;
 FloatingActionButton fab;
 RecyclerView postsRecyclerView;
 
@@ -94,6 +94,8 @@ private static final int CAMERA_REQUEST_CODE = 100;
     String uid;
 
     Uri image_uri;
+
+
 
     String profileCoverPhoto;
 
@@ -117,13 +119,65 @@ private static final int CAMERA_REQUEST_CODE = 100;
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        coverIv = view.findViewById(R.id.coverIv);
+
+        edit_name_Iv = view.findViewById(R.id.update_name_iv);
+        number_of_goal_finish_tv = view.findViewById(R.id.number_of_goal_finish_tv);
+        define_step_btn = view.findViewById(R.id.define_step_btn);
+        describe_goal_btn = view.findViewById(R.id.describe_goal_btn);
+        step_alert_btn = view.findViewById(R.id.step_alert_btn);
+        take_video_btn= view.findViewById(R.id.take_video_btn);
+        add_imageIv = view.findViewById(R.id.addImageIv);
         avatarIv = view.findViewById(R.id.avatarIv);
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
-        phoneTv = view.findViewById(R.id.phoneTv);
-        fab= view.findViewById(R.id.fab);
+
+        //fab= view.findViewById(R.id.fab);
         postsRecyclerView= view.findViewById(R.id.recyclerview_posts);
+
+
+
+
+       /** avatarIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getContext(),TheirProfileActivity.class);
+                startActivity(intent);
+                intent.putExtra("uid",uid);
+            }
+        });*/
+
+       add_imageIv.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+
+               pd.setMessage("Updating Profile Picture");
+               profileCoverPhoto = "image";
+               showImagePicDialog();
+
+           }
+       });
+
+        take_video_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                take_video_btn.setBackground(getResources().getDrawable(R.drawable.white_background_btn));
+
+                startActivity(new Intent(getActivity(),AddPostActivity.class));
+
+                take_video_btn.setBackground(getResources().getDrawable(R.drawable.create_goal_btn_gradients));
+            }
+        });
+
+        edit_name_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pd.setMessage("Updating Name");
+                showNamePhoneUpdateDialog("name");
+            }
+        });
 
         pd= new ProgressDialog(getActivity());
 
@@ -140,8 +194,8 @@ private static final int CAMERA_REQUEST_CODE = 100;
                     String cover = ""+ds.child("cover").getValue();
 
                     nameTv.setText(name);
-                    emailTv.setText(email);
-                    phoneTv.setText(phone);
+                   // emailTv.setText(email);
+                   // phoneTv.setText(phone);
 
                     try{
 
@@ -152,13 +206,6 @@ private static final int CAMERA_REQUEST_CODE = 100;
                         Picasso.get().load(R.drawable.ic_img_face).into(avatarIv);
                     }
 
-                    try{
-
-                        Picasso.get().load(cover).into(coverIv);
-
-                    }catch (Exception e){
-
-                    }
                 }
             }
 
@@ -168,13 +215,6 @@ private static final int CAMERA_REQUEST_CODE = 100;
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                showEditProfileDialog();
-            }
-        });
 
         postList= new ArrayList<>();
 
@@ -275,7 +315,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
     }
 
     private void showEditProfileDialog() {
-        String options[] = {"Edit Profile Picture","Edit Cover Photo","Edit Name","Edit Phone"};
+        String options[] = {"Edit Profile Picture","Edit Name","Edit Phone"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose Action");
         builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -287,13 +327,9 @@ private static final int CAMERA_REQUEST_CODE = 100;
                     profileCoverPhoto = "image";
                     showImagePicDialog();
                 }else if(which == 1){
-                    pd.setMessage("Updating Cover Photo");
-                    profileCoverPhoto = "cover";
-                    showImagePicDialog();
-                }else if(which == 2){
                     pd.setMessage("Updating Name");
                     showNamePhoneUpdateDialog("name");
-                }else if(which == 3){
+                }else if(which == 2){
                     pd.setMessage("Updating Phone Number");
                     showNamePhoneUpdateDialog("phone");
                 }
@@ -486,48 +522,27 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.profile_menu, menu);
 
-        MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                if(!TextUtils.isEmpty(s)){
-                    searchMyPosts(s);
-                }else {
-                    loadMyPosts();
-                }
-                return false;
-            }
+        MenuItem item1 = menu.findItem(R.id.action_settings);
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                if(!TextUtils.isEmpty(s)){
-                    searchMyPosts(s);
-                }else {
-                    loadMyPosts();
-                }
-                return false;
-            }
-        });
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.action_logout){
+        switch(item.getItemId())
+        {
+
+            case R.id.action_logout:
             firebaseAuth.signOut();
             checkUserStatus();
-        }
-        else if(id == R.id.action_add_post){
-            startActivity(new Intent(getActivity(),AddPostActivity.class));
-        }
-        else if(id == R.id.action_settings){
+            break;
 
+            case R.id.action_settings:
             startActivity(new Intent(getActivity(),SettingsActivity.class));
+            break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -541,7 +556,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
         }else{
             startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().finish();
+            Objects.requireNonNull(getActivity()).finish();
         }
     }
 

@@ -2,11 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
-        android:title="Settings"/>
 
-    <item android:id="@+id/action_logout"
-        android:title="Logout"/>
+    <item android:id="@+id/more"
+    android:icon="@drawable/ic_more_vert_black"
+    android:orderInCategory="3"
+    app:showAsAction="always"
+    android:title="Settings">
+
+        <menu>
+        <item android:id="@+id/action_settings"
+            android:icon="@drawable/ic_settings_black"
+            android:orderInCategory="4"
+
+            app:showAsAction="never"
+            android:title=" Settings"/>
+
+
+        <item android:id="@+id/action_logout"
+            android:icon="@drawable/ic_logout"
+            android:orderInCategory="4"
+            app:showAsAction="never"
+            android:title=" Logout"/>
+
+        </menu>
+
+    </item>
+
 
     <item android:id="@+id/action_search"
         android:title="Search"
@@ -17,5 +38,7 @@
     <item android:id="@+id/action_add_post"
         android:title="Add Post"
         app:showAsAction="always"
+
         android:icon="@drawable/ic_add_white"/>
 </menu>
+
