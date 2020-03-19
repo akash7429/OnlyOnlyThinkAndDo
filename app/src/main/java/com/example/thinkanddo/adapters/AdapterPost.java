@@ -234,7 +234,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
             public void onClick(View v) {
                 /*Some post contain only text some contain texts so we will handle them both*/
                 BitmapDrawable bitmapDrawable =(BitmapDrawable)myHolder.pImageIv.getDrawable();
-                if(bitmapDrawable==null){
+                if(bitmapDrawable == null){
                     //post without image
                     shareTextOnly(pTitle, pDescription);
                 }
@@ -258,7 +258,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
     }
     private void shareTextOnly(String pTitle,String pDescription) {
         //concatenate title and description to share
-        String shareBody= pTitle+"\n"+pDescription;
+        String shareBody= pTitle +"\n"+ pDescription;
         //share intent
         Intent sIntent=new Intent(Intent.ACTION_SEND);
         sIntent.setType("text/plain");
@@ -269,7 +269,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
 
     private void shareImageAndText(String pTitle,String pDescription,Bitmap bitmap) {
         //concatenate title description to share
-        String shareBody= pTitle+"\n"+pDescription;
+        String shareBody = pTitle+"\n"+pDescription;
 
         //first we will save this image in cache, get the saved image in uri
         Uri uri= saveImageToShare(bitmap);

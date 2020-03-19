@@ -3,6 +3,7 @@ package com.example.thinkanddo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -150,7 +151,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 String pTitle=pTitleTv.getText().toString().trim();
                 String pDescription=pDescriptionTv.getText().toString().trim();
 
-        /*        BitmapDrawable bitmapDrawable =(BitmapDrawable)pImageIv.getDrawable();
+               BitmapDrawable bitmapDrawable =(BitmapDrawable)pImageIv.getDrawable();
                 if(bitmapDrawable==null){
                     //post without image
                     shareTextOnly(pTitle, pDescription);
@@ -161,7 +162,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     Bitmap bitmap =bitmapDrawable.getBitmap();
                     shareImageAndText(pTitle,pDescription,bitmap);
                 }
-*/
+
         Toast.makeText(getApplicationContext(),"Share",Toast.LENGTH_SHORT).show();
             }
         });
