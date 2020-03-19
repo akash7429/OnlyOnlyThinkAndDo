@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/colorWhite"/>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/logoapp2smaller"/>
+    </item>
+
+    <item android:top="60dp">
+        <bitmap
+            android:gravity="center"
+            android:tint="@android:color/white"
+            android:src="@drawable/think_and_do_logo"/>
+    </item>
+</layer-list>

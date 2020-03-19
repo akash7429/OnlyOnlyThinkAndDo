@@ -149,9 +149,9 @@
                 android:text="Inspire"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:drawableLeft="@drawable/ic_like_black"
+                android:drawableLeft="@drawable/like_unselected"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_like_black"/>
+                android:drawableStart="@drawable/like_unselected"/>
             
             <Button
                 android:id="@+id/commentBtn"

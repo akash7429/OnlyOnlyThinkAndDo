@@ -14,6 +14,9 @@
     <color name="gradient_start_btn">#4c84ff</color>
     <color name="gradient_end_btn">#18a3fe</color>
 
+    <color name="gradient_start_splash_screen">#e96443</color>
+    <color name="gradient_end_splash_screen">#904e95</color>
+
     <color name="gradient_start_main_layout">#4c84ff</color>
     <color name="gradient_end_main_layout">#18a3fe</color>
 
@@ -27,10 +30,18 @@
     <color name="gradient_center_login_btn">#4364F7</color>
     <color name="gradient_end_login_btn">#6dd5ed</color>
 
+    <color name="gradient_create_goal_start_btn">#00c6ff</color>
+    <color name="gradient_create_goal_center_btn"></color>
+    <color name="gradient_create_goal_end_btn">#0072ff</color>
+
     <color name="gradient_start_slide">#363795</color>
     <color name="gradient_center_slide"></color>
     <color name="gradient_end_slide">#005C97</color>
     <!-- Colors for tab and screen text-->
+
+    <color name="add_image_btn_color">#0091EA</color>
+
+
 
     <color name="tab_indicator_gray">#c0c0c0</color>
     <color name="intro_title_color">#000000</color>

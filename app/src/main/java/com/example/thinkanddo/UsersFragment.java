@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -154,7 +155,7 @@ public class UsersFragment extends Fragment {
 
         }else{
             startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().finish();
+            Objects.requireNonNull(getActivity()).finish();
         }
     }
 

@@ -153,7 +153,7 @@
                             android:paddingEnd="20dp"
                             android:drawablePadding="-25dp"
                             android:background="@color/colorWhite"
-                            android:drawableStart="@drawable/ic_like_black"
+                            android:drawableStart="@drawable/like_unselected"
                             android:text="INSPIRE" />
 
 
