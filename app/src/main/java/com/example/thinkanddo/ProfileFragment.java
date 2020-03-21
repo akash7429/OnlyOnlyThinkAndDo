@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,6 +52,8 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -68,12 +72,13 @@ FirebaseAuth firebaseAuth;
 FirebaseUser user;
 FirebaseDatabase firebaseDatabase;
 DatabaseReference databaseReference;
-Button take_video_btn, step_alert_btn, describe_goal_btn, define_step_btn;
+Button take_video_btn, my_goals_btn, describe_goal_btn, define_step_btn;
 StorageReference storageReference;
+CardView cardView_post;
 String storagePath = "User_Profile_Cover_Imgs/";
-
-ImageView avatarIv, coverIv, add_imageIv, edit_name_Iv;
-TextView nameTv, emailTv , phoneTv,number_of_goal_finish_tv;
+ConstraintLayout expandable_view;
+ImageView avatarIv, coverIv, add_imageIv, edit_name_Iv, arrow_iv;
+TextView nameTv, emailTv , phoneTv,number_of_goal_finish_tv, my_post_tv;
 FloatingActionButton fab;
 RecyclerView postsRecyclerView;
 
@@ -116,15 +121,17 @@ private static final int CAMERA_REQUEST_CODE = 100;
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = getInstance().getReference();
 
+        my_post_tv = view.findViewById(R.id.my_post_tv);
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-
+        cardView_post = view.findViewById(R.id.cardview_post);
+        arrow_iv = view.findViewById(R.id.iv_Expand);
+        expandable_view = view.findViewById(R.id.expandable_viewCl);
         edit_name_Iv = view.findViewById(R.id.update_name_iv);
         number_of_goal_finish_tv = view.findViewById(R.id.number_of_goal_finish_tv);
         define_step_btn = view.findViewById(R.id.define_step_btn);
         describe_goal_btn = view.findViewById(R.id.describe_goal_btn);
-        step_alert_btn = view.findViewById(R.id.step_alert_btn);
+        my_goals_btn = view.findViewById(R.id.my_goals_btn);
         take_video_btn= view.findViewById(R.id.take_video_btn);
         add_imageIv = view.findViewById(R.id.addImageIv);
         avatarIv = view.findViewById(R.id.avatarIv);
@@ -176,6 +183,46 @@ private static final int CAMERA_REQUEST_CODE = 100;
             public void onClick(View view) {
                 pd.setMessage("Updating Name");
                 showNamePhoneUpdateDialog("name");
+            }
+        });
+
+        my_post_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(expandable_view.getVisibility()== View.GONE){
+
+                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
+                    expandable_view.setVisibility(View.VISIBLE);
+                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
+                    expandable_view.setFocusable(true);
+                    expandable_view.setSaveEnabled(true);
+                }
+                else{
+
+                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
+                    expandable_view.setVisibility(View.GONE);
+                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
+                }
+            }
+        });
+
+        arrow_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(expandable_view.getVisibility()== View.GONE){
+
+                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
+                    expandable_view.setVisibility(View.VISIBLE);
+                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
+                    expandable_view.setFocusable(true);
+                    expandable_view.setSaveEnabled(true);
+                }
+                else{
+
+                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
+                    expandable_view.setVisibility(View.GONE);
+                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
+                }
             }
         });
 
