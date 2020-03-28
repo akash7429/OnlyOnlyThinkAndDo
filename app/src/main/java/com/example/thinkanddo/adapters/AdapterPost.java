@@ -234,6 +234,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
             public void onClick(View v) {
                 /*Some post contain only text some contain texts so we will handle them both*/
                 BitmapDrawable bitmapDrawable =(BitmapDrawable)myHolder.pImageIv.getDrawable();
+
                 if(bitmapDrawable == null){
                     //post without image
                     shareTextOnly(pTitle, pDescription);
@@ -246,6 +247,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
                 }
             }
         });
+
         myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,7 +260,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
     }
     private void shareTextOnly(String pTitle,String pDescription) {
         //concatenate title and description to share
-        String shareBody= pTitle +"\n"+ pDescription;
+        String shareBody= pTitle+"\n"+pDescription;
         //share intent
         Intent sIntent=new Intent(Intent.ACTION_SEND);
         sIntent.setType("text/plain");
@@ -279,7 +281,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         sIntent.putExtra(Intent.EXTRA_STREAM,uri);
         sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
         sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-        sIntent.setType("images/png");
+        sIntent.setType("image/png");
         context.startActivity(Intent.createChooser(sIntent,"Share Via"));
 
     }

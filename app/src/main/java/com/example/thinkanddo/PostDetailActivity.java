@@ -163,7 +163,6 @@ public class PostDetailActivity extends AppCompatActivity {
                     shareImageAndText(pTitle,pDescription,bitmap);
                 }
 
-        Toast.makeText(getApplicationContext(),"Share",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -190,7 +189,7 @@ public class PostDetailActivity extends AppCompatActivity {
         sIntent.putExtra(Intent.EXTRA_STREAM,uri);
         sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
         sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-        sIntent.setType("images/png");
+        sIntent.setType("image/png");
         startActivity(Intent.createChooser(sIntent,"Share Via"));
 
     }

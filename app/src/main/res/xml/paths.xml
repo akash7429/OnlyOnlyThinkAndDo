@@ -4,7 +4,7 @@
     <!-- here you can define multiple paths-->
 
     <cache-path
-        name="shared_path"
+        name="shared_images"
         path="images/"/>
 
 </paths>
