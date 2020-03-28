@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/uNameTv"
@@ -67,15 +68,20 @@
             android:id="@+id/pTitleTv"
             android:layout_width="match_parent"
             android:text="Title"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:fontFamily="@font/roboto"
             android:textColor="@color/colorBlack"
-            android:textSize="17sp"
+
             android:autoLink="all"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/pDescriptionTv"
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto"
+            android:layout_marginTop="3dp"
             android:text="The description of post"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
@@ -89,6 +95,7 @@
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
             android:layout_height="220dp"
+            android:layout_marginTop="3dp"
             android:src="@drawable/ic_face_black_img"
             android:visibility="visible"
             android:background="@color/colorWhite"/>
@@ -107,6 +114,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
             <TextView
@@ -147,17 +155,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Inspire"
+                android:fontFamily="@font/montserrat"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:drawableLeft="@drawable/ic_like_black"
+                android:drawableLeft="@drawable/like_unselected"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_like_black"/>
+                android:drawableStart="@drawable/like_unselected"/>
             
             <Button
                 android:id="@+id/commentBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
                 android:text="Motivate"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -170,6 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
                 android:text="Spread"
                 android:drawableLeft="@drawable/ic_share_black"
                 android:paddingStart="10dp"

@@ -2,6 +2,8 @@ package com.example.thinkanddo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -33,20 +35,22 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Profile");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
-        actionBar.setTitle("Home");
-        HomeFragment fragment1 = new HomeFragment();
+        actionBar.setTitle("Amplifate");
+        ProfileFragment fragment1 = new ProfileFragment();
         FragmentTransaction ft1 =getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.content, fragment1, "");
         ft1.commit();
 
         checkUserStatus();
+
+       final ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#0F9D58"));
 
 
 
@@ -67,19 +71,20 @@ public class DashboardActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()){
+
+                case R.id.nav_profile:
+                    actionBar.setTitle("Amplifate");
+                    ProfileFragment fragment2 = new ProfileFragment();
+                    FragmentTransaction ft2 =getSupportFragmentManager().beginTransaction();
+                    ft2.replace(R.id.content, fragment2, "");
+                    ft2.commit();
+                    return true;
                 case R.id.nav_home:
                     actionBar.setTitle("Home");
                     HomeFragment fragment1 = new HomeFragment();
                     FragmentTransaction ft1 =getSupportFragmentManager().beginTransaction();
                     ft1.replace(R.id.content, fragment1, "");
                     ft1.commit();
-                    return true;
-                case R.id.nav_profile:
-                    actionBar.setTitle("Profile");
-                    ProfileFragment fragment2 = new ProfileFragment();
-                    FragmentTransaction ft2 =getSupportFragmentManager().beginTransaction();
-                    ft2.replace(R.id.content, fragment2, "");
-                    ft2.commit();
                     return true;
                 case R.id.nav_users:
                     actionBar.setTitle("Users");

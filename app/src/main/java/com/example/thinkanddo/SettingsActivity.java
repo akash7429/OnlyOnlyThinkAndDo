@@ -1,12 +1,17 @@
 package com.example.thinkanddo;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,6 +22,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     SwitchCompat postSwitch;
 
+    LinearLayout logoutLL;
+    String uid;
+    FirebaseAuth firebaseAuth;
     // use shared preferences to save the state of Switch
     SharedPreferences sp;
     SharedPreferences.Editor editor; // to edit value of shared pref
@@ -30,12 +38,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Settings");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         postSwitch = findViewById(R.id.postSwitch);
+
+        logoutLL = findViewById(R.id.logout_ll);
 
         //init sp
         sp=getSharedPreferences("Notification_SP", MODE_PRIVATE);
@@ -68,6 +80,48 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        logoutLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                checkUserStatus();
+
+            }
+        });
+
+
+
+    }
+
+
+    private boolean restorePrefData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
+        Boolean isIntroActivityOpened = pref.getBoolean("isIntroOpened",false);
+        return isIntroActivityOpened;
+    }
+
+    private void savePrefsData() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putBoolean("isIntroOpened",true);
+        editor.commit();
+    }
+
+    private void checkUserStatus(){
+        FirebaseUser user =firebaseAuth.getCurrentUser();
+        if(user!=null){
+            //mprofileTv.setText(user.getEmail());
+            uid = user.getUid();
+
+        }else{
+            startActivity(new Intent(this, MainActivity.class));
+            Toast.makeText(this,"Logged Out Successfully",Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     public boolean onSupportNavigateUp(){

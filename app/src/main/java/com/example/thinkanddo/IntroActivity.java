@@ -46,7 +46,7 @@ public class IntroActivity extends AppCompatActivity {
         // Checking if user had already visited slides.
         if(restorePrefData()){
 
-            Intent mainActivity = new Intent(getApplicationContext(),MainActivity.class);
+            Intent mainActivity = new Intent(getApplicationContext(),DashboardActivity.class);
             startActivity(mainActivity);
             finish();
         }
@@ -63,7 +63,7 @@ public class IntroActivity extends AppCompatActivity {
 
 
         final List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Welcome \nto \nThink & Do","",R.drawable.googleg_standard_color_18));
+        mList.add(new ScreenItem("Welcome \nto \nAmplifate","",R.drawable.googleg_standard_color_18));
         mList.add(new ScreenItem("Connect with people","Think & Do is a great platform to interact with an enthusiastic community",R.drawable.ic_connect_people));
         mList.add(new ScreenItem("Create Goals","Make goals that you want to accomplish in present or future",R.drawable.ic_goal));
         mList.add(new ScreenItem("Post Your Achievements","Achieved your goal? Post a video and share your journey",R.drawable.ic_achieve_post));
@@ -82,6 +82,8 @@ public class IntroActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
+                savePrefsData();
+                finish();
             }
         });
 
@@ -111,6 +113,7 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
 

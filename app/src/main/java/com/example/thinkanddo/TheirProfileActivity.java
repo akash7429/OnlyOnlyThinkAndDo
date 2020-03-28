@@ -52,7 +52,7 @@ public class TheirProfileActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        coverIv = findViewById(R.id.coverIv);
+       // coverIv = findViewById(R.id.coverIv);
         avatarIv = findViewById(R.id.avatarIv);
         nameTv = findViewById(R.id.nameTv);
         //emailTv = findViewById(R.id.emailTv);

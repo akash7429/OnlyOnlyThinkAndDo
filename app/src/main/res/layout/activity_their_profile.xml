@@ -3,27 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorBlack"
     android:layout_height="match_parent"
     tools:context=".TheirProfileActivity">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/colorWhite"
+            android:background="@color/colorBlack"
             android:layout_height="wrap_content">
 
 
-            <ImageView
-                android:id="@+id/avatarIv"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/avatarCv"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="60dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_user_dp"
-                app:layout_constraintCircleRadius="20dp"
+                android:padding="5dp"
+                app:cardElevation="0dp"
+                android:background="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/avatarIv"
+                android:layout_width="match_parent"
+                android:background="@color/colorIcon"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_user_dp"
+                />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/nameTv"
@@ -32,12 +45,13 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Name"
-                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorWhite"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/avatarIv" />
+                app:layout_constraintTop_toBottomOf="@+id/avatarCv" />
 
             <LinearLayout
                 android:id="@+id/user_details_ll"
@@ -63,7 +77,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:text="10"
-                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -72,8 +87,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat"
                         android:text="Goals"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorWhite"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/avatarIv"
@@ -96,7 +112,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:text="200"
-                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -106,7 +123,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Friends"
-                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/goalTv"
@@ -129,7 +147,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:text="4"
-                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -139,7 +158,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Following"
-                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/emailTv"

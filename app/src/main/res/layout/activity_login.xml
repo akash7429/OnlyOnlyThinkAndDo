@@ -45,7 +45,6 @@
         android:background="@drawable/edittextdesign"
         android:defaultFocusHighlightEnabled="false"
         android:drawableStart="@drawable/email"
-        android:drawableLeft="@drawable/email"
         android:drawablePadding="5dp"
         android:fontFamily="@font/roboto_medium"
         android:hint="Email"

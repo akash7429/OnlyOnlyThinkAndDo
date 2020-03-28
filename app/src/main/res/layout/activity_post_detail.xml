@@ -85,9 +85,11 @@
                         android:id="@+id/pTitleTv"
                         android:layout_width="match_parent"
                         android:text="Title"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/roboto"
                         android:textColor="@color/colorBlack"
-                        android:textSize="17sp"
                         android:autoLink="all"
                         android:layout_height="wrap_content"/>
 
@@ -95,7 +97,9 @@
                         android:id="@+id/pDescriptionTv"
                         android:layout_width="match_parent"
                         android:text="The description of post"
+                        android:layout_marginTop="3dp"
                         android:textSize="15sp"
+                        android:fontFamily="@font/roboto"
                         android:textColor="@color/colorBlack"
                         android:layout_height="wrap_content"
                         android:autoLink="all"/>
@@ -104,12 +108,14 @@
                         android:id="@+id/pImageIv"
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
+                        android:layout_marginTop="3dp"
                         android:src="@drawable/ic_face_black_img"
                         android:background="@color/colorWhite"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -141,6 +147,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
                         android:orientation="horizontal"
                         android:gravity="center">
 
@@ -150,10 +157,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingStart="20dp"
+                            android:fontFamily="@font/montserrat"
                             android:paddingEnd="20dp"
                             android:drawablePadding="-25dp"
                             android:background="@color/colorWhite"
-                            android:drawableStart="@drawable/ic_like_black"
+                            android:drawableStart="@drawable/like_unselected"
                             android:text="INSPIRE" />
 
 
@@ -161,6 +169,7 @@
                             android:id="@+id/shareBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat"
                             android:layout_weight="1"
                             android:background="@color/colorWhite"
                             android:drawableStart="@drawable/ic_share_black"

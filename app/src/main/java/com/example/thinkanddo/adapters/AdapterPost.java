@@ -320,12 +320,12 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
                     Change text of like button from "like" to "liked".
                      */
 
-                    myHolder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_liked, 0, 0, 0);
+                    myHolder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_selected, 0, 0, 0);
                     myHolder.likeBtn.setText("Inspired");
                 } else {
                     // user has not liked this post
 
-                    myHolder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like_black, 0, 0, 0);
+                    myHolder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.like_unselected, 0, 0, 0);
                     myHolder.likeBtn.setText("Inspire");
                 }
             }
@@ -491,7 +491,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
 
         VideoView pVideovv;
         TextView uNameTv, pTimeTv, pTitleTv, pDescriptionTv, pLikesTv,pCommentsTv;
-        ImageButton moreBtn;
+        ImageButton moreBtn,ivAvatar;
         Button likeBtn, shareBtn, commentBtn;
         LinearLayout profileLayout;
 
