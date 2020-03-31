@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+    tools:context=".GoalDescriptionActivity"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <!--  Edit text inout post title -->
+        <EditText
+            android:id="@+id/p_goal_title_et"
+            android:background="@drawable/edittextdesign"
+            android:padding="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/enter_title"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/p_goal_description_et"
+            android:background="@drawable/edittextdesign"
+            android:hint="Enter description"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:singleLine="true"
+            android:inputType="textCapSentences|textMultiLine"
+            android:minHeight="120dp"
+            android:gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+
+        <!--  button publish Post to firebase  -->
+        <Button
+            android:id="@+id/pSaveBtn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="132dp"
+            android:padding="18dp"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="15sp"
+            android:background="@drawable/btn_gradient_style"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Save" />
+
+
+
+    </LinearLayout>
+

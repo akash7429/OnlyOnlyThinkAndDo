@@ -160,7 +160,6 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Describe your Goal"
-
                 android:fontFamily="@font/montserrat"
                 android:drawableStart="@drawable/ic_describe_goal_black"
                 android:padding="20dp"

@@ -9,12 +9,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".DemoActivity"></activity>
+        <activity android:name=".MyGoalFragment" />
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,35 +23,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SettingsActivity"
-            />
-        <activity android:name=".PostDetailActivity"
-            android:launchMode="singleTop"/>
-
-
-        <activity android:name=".TheirProfileActivity"
-            android:launchMode="singleTop"/>
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".TheirProfileActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ChatActivity"
-            android:theme="@style/AppThemeNo"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeNo" />
         <activity
             android:name=".LoginActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".AddPostActivity"
-            android:launchMode="singleTop"/>
-
-        <activity android:name=".DashboardActivity"
-            >
+        <activity
+            android:name=".AddPostActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RegisterActivity"
             android:launchMode="singleTop"
@@ -68,7 +63,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".notifications.FirebaseMessaging"
             android:enabled="true"

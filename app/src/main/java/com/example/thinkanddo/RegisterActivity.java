@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -127,9 +128,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             progressDialog.dismiss();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            final FirebaseUser user = mAuth.getCurrentUser();
 
-                            String email = user.getEmail();
+                            final String email = user.getEmail();
 
                             String uid = user.getUid();
 
@@ -154,8 +155,23 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                             Toast.makeText(RegisterActivity.this, "Registered...\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
-                            finish();
+
+
+
+                            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(RegisterActivity.this,"Verification email has been send"+user.getEmail(), Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                    Toast.makeText(RegisterActivity.this,"On Failure: Email not sent"+e.getMessage(),Toast.LENGTH_LONG).show();
+                                }
+                            });
 
                         } else {
                             // If sign in fails, display a message to the user.
