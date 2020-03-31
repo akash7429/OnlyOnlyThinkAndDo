@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mEmailEt.getText().toString().trim();
                 String password = mPasswordEt.getText().toString().trim();
-                String fullname = mNameEt.getText().toString().trim();
+                final String fullname = mNameEt.getText().toString().trim();
 
                 if(TextUtils.isEmpty(fullname)){
                     mNameEt.setError("Please enter your name");
@@ -133,13 +133,13 @@ public class RegisterActivity extends AppCompatActivity {
                             final String email = user.getEmail();
 
                             String uid = user.getUid();
+                           // String name = user.getDisplayName();
 
                             HashMap<Object, String> hashMap =new HashMap<>();
                             hashMap.put("email", email);
                             hashMap.put("name", fullname);
                             hashMap.put("password", password);
                             hashMap.put("uid", uid);
-                            hashMap.put("name", "");
                             hashMap.put("onlineStatus", "online");
                             hashMap.put("typingTo", "noOne");
                             hashMap.put("phone", "");
@@ -154,14 +154,14 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-                            Toast.makeText(RegisterActivity.this, "Registered...\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Registering..\n"+user.getEmail(), Toast.LENGTH_LONG).show();
 
 
 
                             user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(RegisterActivity.this,"Verification email has been send"+user.getEmail(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this,"Verification email has been send to: "+user.getEmail(), Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     finish();
                                 }

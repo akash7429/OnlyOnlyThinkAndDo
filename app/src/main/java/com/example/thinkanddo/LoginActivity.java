@@ -66,13 +66,14 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 */
-        // Configure Google Sign In
+
+// Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-
+        final GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         mAuth = FirebaseAuth.getInstance();
 
         password_show_hide_login = findViewById(R.id.password_show_hide_login);
@@ -140,6 +141,11 @@ public class LoginActivity extends AppCompatActivity {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
 
+                if (mGoogleApiClient.isConnected()) {
+                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+                    mGoogleApiClient.disconnect();
+                    mGoogleApiClient.connect();
+                }
             }
         });
 
@@ -213,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(String email, String password) {
+    private void loginUser(final String email, String password) {
 
         pd.setMessage("Logging In...");
         pd.show();
@@ -234,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                             else{
 
 
-                                Toast.makeText(LoginActivity.this, "Verification failed.",
+                                Toast.makeText(LoginActivity.this, "Please verify your email: "+email.toString(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -271,6 +277,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                assert account != null;
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -292,28 +299,27 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            if(task.getResult().getAdditionalUserInfo().isNewUser()){
-                                String email = user.getEmail();
-                                String uid = user.getUid();
 
+                            String email = user.getEmail();
+                            String uid = user.getUid();
+
+                            String name = user.getDisplayName();
 
                             HashMap<Object, String> hashMap =new HashMap<>();
                             hashMap.put("email", email);
                             hashMap.put("uid", uid);
-                            hashMap.put("name", "");
+                            hashMap.put("name",name);
                             hashMap.put("onlineStatus", "online");
                             hashMap.put("typingTo", "noOne");
                             hashMap.put("phone", "");
                             hashMap.put("image", "");
 
 
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                                DatabaseReference reference = database.getReference("Users");
+                            DatabaseReference reference = database.getReference("Users");
 
-                                reference.child(uid).setValue(hashMap);
-                            }
-
+                            reference.child(uid).setValue(hashMap);
 
                             Toast.makeText(LoginActivity.this,""+user.getEmail(), Toast.LENGTH_SHORT);
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
@@ -325,12 +331,7 @@ public class LoginActivity extends AppCompatActivity {
                            // updateUI(null);
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                });
     }
 
     public void finish(){
