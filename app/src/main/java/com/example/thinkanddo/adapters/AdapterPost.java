@@ -149,7 +149,8 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
 
             }
 
-        } else if (pImage.equals("noImage") && !pVideo.equals("noVideo")){
+        }
+        else if (pImage.equals("noImage") && !pVideo.equals("noVideo")){
 
             myHolder.pImageIv.setVisibility(View.GONE);
             myHolder.pVideovv.setVisibility(View.VISIBLE);
@@ -464,7 +465,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
                     ds.getRef().removeValue();  // remove values from firebase where pid matches
                 }
                 // deleted
-                Toast.makeText(context, "Deleted Succesfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
                 pd.dismiss();
             }
 

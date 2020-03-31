@@ -170,11 +170,9 @@ private static final int CAMERA_REQUEST_CODE = 100;
             @Override
             public void onClick(View view) {
 
-                take_video_btn.setBackground(getResources().getDrawable(R.drawable.white_background_btn));
-
                 startActivity(new Intent(getActivity(),AddPostActivity.class));
 
-                take_video_btn.setBackground(getResources().getDrawable(R.drawable.create_goal_btn_gradients));
+
             }
         });
 
@@ -226,6 +224,22 @@ private static final int CAMERA_REQUEST_CODE = 100;
             }
         });
 
+        describe_goal_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),GoalDescriptionActivity.class));
+
+            }
+        });
+
+        my_goals_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"My Goals",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(),MyGoalFragment.class));
+            }
+        });
+
         pd= new ProgressDialog(getActivity());
 
         Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
@@ -248,7 +262,8 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
                         Picasso.get().load(image).into(avatarIv);
 
-                    }catch (Exception e){
+                    }
+                    catch (Exception e){
 
                         Picasso.get().load(R.drawable.ic_img_face).into(avatarIv);
                     }

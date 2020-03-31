@@ -120,10 +120,6 @@ public class AddPostActivity extends AppCompatActivity {
         checkUserStatus();
 
 
-
-
-
-
         //init views
         titleEt=findViewById(R.id.pTitleEt);
         descriptionEt=findViewById(R.id.pDescriptionEt);
@@ -159,7 +155,7 @@ public class AddPostActivity extends AppCompatActivity {
         }
 
 
-        actionBar.setSubtitle(email);
+        actionBar.setSubtitle(name);
 
         //get some info of current user to include in post
         userDbRef= FirebaseDatabase.getInstance().getReference("Users");
@@ -904,8 +900,6 @@ public class AddPostActivity extends AppCompatActivity {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

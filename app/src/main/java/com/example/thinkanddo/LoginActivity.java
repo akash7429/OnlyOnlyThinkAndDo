@@ -225,9 +225,20 @@ public class LoginActivity extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            if(user!=null && user.isEmailVerified()) {
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
-                        } else {
+
+                            }
+                            else{
+
+
+                                Toast.makeText(LoginActivity.this, "Verification failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else {
 
                             pd.dismiss();
                             // If sign in fails, display a message to the user.
