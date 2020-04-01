@@ -3,6 +3,8 @@ package com.example.thinkanddo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -119,6 +121,13 @@ public class PostDetailActivity extends AppCompatActivity {
         actionBar.setSubtitle("SignedIn as: "+myEmail);
 
         loadComments();
+
+        profileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,19 +159,27 @@ public class PostDetailActivity extends AppCompatActivity {
                 String pTitle=pTitleTv.getText().toString().trim();
                 String pDescription=pDescriptionTv.getText().toString().trim();
 
-        /*        BitmapDrawable bitmapDrawable =(BitmapDrawable)pImageIv.getDrawable();
-                if(bitmapDrawable==null){
+                BitmapDrawable bitmapDrawable =(BitmapDrawable)pImageIv.getDrawable();
+                Drawable drawable = getResources().getDrawable(R.drawable.amplifatelogo);
+
+
+                final boolean b = bitmapDrawable.getIntrinsicWidth() == 5952;
+                final boolean c = drawable.getIntrinsicWidth() == 5952;
+
+
+                if(b==c){
                     //post without image
                     shareTextOnly(pTitle, pDescription);
+                    Toast.makeText(PostDetailActivity.this,"Text",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     //post with image
                     // convert image to bitmap
                     Bitmap bitmap =bitmapDrawable.getBitmap();
                     shareImageAndText(pTitle,pDescription,bitmap);
+                    Toast.makeText(PostDetailActivity.this,"Image Text",Toast.LENGTH_SHORT).show();
                 }
-*/
-        Toast.makeText(getApplicationContext(),"Share",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -189,7 +206,7 @@ public class PostDetailActivity extends AppCompatActivity {
         sIntent.putExtra(Intent.EXTRA_STREAM,uri);
         sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
         sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-        sIntent.setType("images/png");
+        sIntent.setType("image/png");
         startActivity(Intent.createChooser(sIntent,"Share Via"));
 
     }

@@ -93,7 +93,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
             myHolder.messageTv.setVisibility(View.GONE);
             myHolder.messageIv.setVisibility(View.VISIBLE);
 
-            Picasso.get().load(message).placeholder(R.drawable.ic_image_black).into(myHolder.messageIv);
+            Picasso.get().load(message).placeholder(R.drawable.chat_users).into(myHolder.messageIv);
 
         }
 

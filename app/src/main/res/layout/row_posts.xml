@@ -24,7 +24,7 @@
             <com.blogspot.atifsoftwares.circularimageview.CircularImageView
                 android:id="@+id/uPictureIv"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_face_black_img"
+                android:src="@drawable/chat_users"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
 
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="3dp"
-            android:src="@drawable/ic_face_black_img"
+            android:src="@drawable/amplifatelogo"
             android:visibility="visible"
             android:background="@color/colorWhite"/>
 

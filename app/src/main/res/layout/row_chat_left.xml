@@ -16,7 +16,7 @@
         android:layout_height="50dp"
         android:id="@+id/profileIv"
         app:c_border_color="@null"
-        android:src="@drawable/ic_default"/>
+        android:src="@drawable/chat_users"/>
 
     <TextView
         android:id="@+id/messageTv"

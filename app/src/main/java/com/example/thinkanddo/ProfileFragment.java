@@ -12,8 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,8 +54,6 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static android.app.Activity.RESULT_OK;
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
@@ -68,23 +64,23 @@ import static com.google.firebase.storage.FirebaseStorage.getInstance;
  */
 //Changes for github
 public class ProfileFragment extends Fragment {
-FirebaseAuth firebaseAuth;
-FirebaseUser user;
-FirebaseDatabase firebaseDatabase;
-DatabaseReference databaseReference;
-Button take_video_btn, my_goals_btn, describe_goal_btn, define_step_btn;
-StorageReference storageReference;
-CardView cardView_post;
-String storagePath = "User_Profile_Cover_Imgs/";
-ConstraintLayout expandable_view;
-ImageView avatarIv, coverIv, add_imageIv, edit_name_Iv, arrow_iv;
-TextView nameTv, emailTv , phoneTv,number_of_goal_finish_tv, my_post_tv;
-FloatingActionButton fab;
-RecyclerView postsRecyclerView;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    Button take_video_btn, my_goals_btn, describe_goal_btn, define_step_btn;
+    StorageReference storageReference;
+    CardView cardView_post;
+    String storagePath = "User_Profile_Cover_Imgs/";
+    ConstraintLayout expandable_view;
+    ImageView avatarIv, coverIv, add_imageIv, edit_name_Iv, arrow_iv;
+    TextView nameTv, emailTv , phoneTv,number_of_goal_finish_tv, my_post_tv;
+    FloatingActionButton fab;
+    //RecyclerView postsRecyclerView;
 
-ProgressDialog pd;
+    ProgressDialog pd;
 
-private static final int CAMERA_REQUEST_CODE = 100;
+    private static final int CAMERA_REQUEST_CODE = 100;
     private static final int STORAGE_REQUEST_CODE = 200;
 
     private static final int IMAGE_PICK_GALLARY_CODE = 300;
@@ -120,13 +116,11 @@ private static final int CAMERA_REQUEST_CODE = 100;
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = getInstance().getReference();
-
-        my_post_tv = view.findViewById(R.id.my_post_tv);
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        cardView_post = view.findViewById(R.id.cardview_post);
-        arrow_iv = view.findViewById(R.id.iv_Expand);
-        expandable_view = view.findViewById(R.id.expandable_viewCl);
+
+
+
         edit_name_Iv = view.findViewById(R.id.update_name_iv);
         number_of_goal_finish_tv = view.findViewById(R.id.number_of_goal_finish_tv);
         define_step_btn = view.findViewById(R.id.define_step_btn);
@@ -139,7 +133,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
         emailTv = view.findViewById(R.id.emailTv);
 
         //fab= view.findViewById(R.id.fab);
-        postsRecyclerView= view.findViewById(R.id.recyclerview_posts);
+        //postsRecyclerView= view.findViewById(R.id.recyclerview_posts);
 
 
 
@@ -184,45 +178,6 @@ private static final int CAMERA_REQUEST_CODE = 100;
             }
         });
 
-        my_post_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(expandable_view.getVisibility()== View.GONE){
-
-                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
-                    expandable_view.setVisibility(View.VISIBLE);
-                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
-                    expandable_view.setFocusable(true);
-                    expandable_view.setSaveEnabled(true);
-                }
-                else{
-
-                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
-                    expandable_view.setVisibility(View.GONE);
-                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
-                }
-            }
-        });
-
-        arrow_iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(expandable_view.getVisibility()== View.GONE){
-
-                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
-                    expandable_view.setVisibility(View.VISIBLE);
-                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
-                    expandable_view.setFocusable(true);
-                    expandable_view.setSaveEnabled(true);
-                }
-                else{
-
-                    TransitionManager.beginDelayedTransition(cardView_post,new AutoTransition());
-                    expandable_view.setVisibility(View.GONE);
-                    arrow_iv.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
-                }
-            }
-        });
 
         describe_goal_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,7 +220,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
                     }
                     catch (Exception e){
 
-                        Picasso.get().load(R.drawable.ic_img_face).into(avatarIv);
+                        Picasso.get().load(R.drawable.chat_users).into(avatarIv);
                     }
 
                 }
@@ -281,16 +236,16 @@ private static final int CAMERA_REQUEST_CODE = 100;
         postList= new ArrayList<>();
 
         checkUserStatus();
-        loadMyPosts();
+        //loadMyPosts();
 
         return view;
     }
 
-    private void loadMyPosts() {
+    /**private void loadMyPosts() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
-        postsRecyclerView.setLayoutManager(layoutManager);
+        //postsRecyclerView.setLayoutManager(layoutManager);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
         Query query= ref.orderByChild("uid").equalTo(uid);
@@ -307,7 +262,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
                     adapterPost = new AdapterPost(getActivity(),postList);
 
-                    postsRecyclerView.setAdapter(adapterPost);
+                    //postsRecyclerView.setAdapter(adapterPost);
                 }
             }
 
@@ -317,12 +272,12 @@ private static final int CAMERA_REQUEST_CODE = 100;
                 Toast.makeText(getActivity(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    private void searchMyPosts(final String searchQuery) {
+    }*/
+    /**  private void searchMyPosts(final String searchQuery) {
         LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
-        postsRecyclerView.setLayoutManager(layoutManager);
+        //postsRecyclerView.setLayoutManager(layoutManager);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
         Query query= ref.orderByChild("uid").equalTo(uid);
@@ -342,7 +297,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
 
                     adapterPost = new AdapterPost(getActivity(),postList);
 
-                    postsRecyclerView.setAdapter(adapterPost);
+                    //postsRecyclerView.setAdapter(adapterPost);
                 }
             }
 
@@ -352,7 +307,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
                 Toast.makeText(getActivity(),""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     private boolean checkStoragePermission(){
         boolean result = ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -376,7 +331,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
         requestPermissions(cameraPermission,CAMERA_REQUEST_CODE);
     }
 
-    private void showEditProfileDialog() {
+   /** private void showEditProfileDialog() {
         String options[] = {"Edit Profile Picture","Edit Name","Edit Phone"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose Action");
@@ -398,7 +353,7 @@ private static final int CAMERA_REQUEST_CODE = 100;
             }
         });
         builder.create().show();
-    }
+    }*/
 
     private void showNamePhoneUpdateDialog(final String key) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

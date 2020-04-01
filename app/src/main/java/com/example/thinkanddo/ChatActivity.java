@@ -209,11 +209,11 @@ public class ChatActivity extends AppCompatActivity {
                     nameTv.setText(name);
                     try{
 
-                        Picasso.get().load(hisImage).placeholder(R.drawable.ic_default).into(profileIv);
+                        Picasso.get().load(hisImage).placeholder(R.drawable.chat_users).into(profileIv);
                     }
                     catch(Exception e){
 
-                        Picasso.get().load(R.drawable.ic_default).into(profileIv);
+                        Picasso.get().load(R.drawable.chat_users).into(profileIv);
                     }
                 }
 
@@ -758,7 +758,7 @@ public class ChatActivity extends AppCompatActivity {
                            "New Message",
                            ""+hisUid,
                            "ChatNotification",
-                           R.drawable.ic_default);  //R.drawable.ic_default_img;
+                           R.drawable.ic_users_black);  //R.drawable.ic_default_img;
 
                    Sender sender=new Sender(data,token.getToken());
                    try{
@@ -958,7 +958,6 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
-
         menu.findItem(R.id.action_search).setVisible(false);
         menu.findItem(R.id.action_add_post).setVisible(false);
         return super.onCreateOptionsMenu(menu);
@@ -968,9 +967,14 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if(id == R.id.action_logout){
             firebaseAuth.signOut();
             checkUserStatus();
+        }
+        else if(id == R.id.action_settings){
+
+            startActivity(new Intent(ChatActivity.this,SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -59,7 +59,7 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
         myHolder.timeTv.setText(pTime);
 
         try{
-            Picasso.get().load(image).placeholder(R.drawable.ic_default).into(myHolder.avatarIv);
+            Picasso.get().load(image).placeholder(R.drawable.chat_users).into(myHolder.avatarIv);
         }catch (Exception e){
 
         }
