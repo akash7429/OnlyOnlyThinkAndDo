@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -120,7 +121,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
 
         // set user dp
         try {
-            Picasso.get().load(uDp).placeholder(R.drawable.ic_face_black_img).into(myHolder.uPictureIv);
+            Picasso.get().load(uDp).placeholder(R.drawable.chat_users).into(myHolder.uPictureIv);
 
         } catch (Exception ex) {
 
@@ -233,20 +234,34 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         myHolder.shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /*Some post contain only text some contain texts so we will handle them both*/
                 BitmapDrawable bitmapDrawable =(BitmapDrawable)myHolder.pImageIv.getDrawable();
-                if(bitmapDrawable==null){
+
+                Drawable drawable = context.getResources().getDrawable(R.drawable.amplifatelogo);
+
+
+                final boolean b = bitmapDrawable.getIntrinsicWidth() == 5952;
+                final boolean c = drawable.getIntrinsicWidth() == 5952;
+
+
+                if(b==c){
+                    Toast.makeText(context, " Text Only", Toast.LENGTH_LONG).show();
                     //post without image
                     shareTextOnly(pTitle, pDescription);
+
                 }
-                else{
+                else {
                     //post with image
                     // convert image to bitmap
                     Bitmap bitmap =bitmapDrawable.getBitmap();
                     shareImageAndText(pTitle,pDescription,bitmap);
+
+                    Toast.makeText(context, " Image Text", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,10 +276,12 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         //concatenate title and description to share
         String shareBody= pTitle+"\n"+pDescription;
         //share intent
-        Intent sIntent=new Intent(Intent.ACTION_SEND);
+        Intent sIntent=new Intent(android.content.Intent.ACTION_SEND);
+        sIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareBody);
+        sIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject Here");
         sIntent.setType("text/plain");
-        sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here"); // in case you share via email
-        sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);//text to share
+         // in case you share via email
+        //text to share
         context.startActivity(Intent.createChooser(sIntent,"Share Via")); // message to show in share dialogue
     }
 
@@ -280,7 +297,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
         sIntent.putExtra(Intent.EXTRA_STREAM,uri);
         sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
         sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
-        sIntent.setType("images/png");
+        sIntent.setType("image/png");
         context.startActivity(Intent.createChooser(sIntent,"Share Via"));
 
     }

@@ -59,13 +59,13 @@ public class AdapterChatlist extends RecyclerView.Adapter<AdapterChatlist.MyHold
             myHolder.lastMessageTv.setText(lastMessage);
         }
         try{
-            Picasso.get().load(usersImage).placeholder(R.drawable.ic_default).into(myHolder.profileIv);
+            Picasso.get().load(usersImage).placeholder(R.drawable.chat_users).into(myHolder.profileIv);
         }
         catch (Exception e){
-            Picasso.get().load(R.drawable.ic_default).into(myHolder.profileIv);
+            Picasso.get().load(R.drawable.chat_users).into(myHolder.profileIv);
 
         }
-        if (usersList.get(i).getOnlineStatus().equals("Online")){
+        if (usersList.get(i).getOnlineStatus().equals("online")){
             //online
            myHolder.onlineStatusIv.setImageResource(R.drawable.circle_online);
         }

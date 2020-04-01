@@ -9,22 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <!-- ImageView: User Profile Image -->
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/profileIv"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_default"/>
+            android:src="@drawable/chat_users"/>
 
         <!-- ImageView: Online/Offline Status -->
-        <ImageView
-            android:id="@+id/onlineStatusIv"
-            android:layout_width="25dp"
-            android:layout_height="25dp"/>
 
         <!-- TextView User Name -->
+        <ImageView
+            android:id="@+id/onlineStatusIv"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignRight="@id/profileIv" />
+
         <TextView
             android:id="@+id/nameTv"
             android:layout_width="match_parent"

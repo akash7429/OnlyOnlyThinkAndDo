@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,9 +38,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TheirProfileActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
-    ImageView avatarIv, coverIv;
-    TextView nameTv ;
+    ImageView avatarIv, coverIv,arrow_iv;
+    TextView nameTv,my_post_tv ;
+    TextView no_post_tv;
     RecyclerView postsRecyclerView;
+    ConstraintLayout expandable_view;
+    CardView cardView_post;
     List<ModelPost> postList;
     AdapterPost adapterPost;
     String uid;
@@ -55,6 +61,9 @@ public class TheirProfileActivity extends AppCompatActivity {
        // coverIv = findViewById(R.id.coverIv);
         avatarIv = findViewById(R.id.avatarIv);
         nameTv = findViewById(R.id.nameTv);
+        no_post_tv=findViewById(R.id.no_post_tv);
+
+        my_post_tv = findViewById(R.id.my_post_tv);
         //emailTv = findViewById(R.id.emailTv);
       //  phoneTv = findViewById(R.id.phoneTv);
         postsRecyclerView= findViewById(R.id.recyclerview_posts);
@@ -108,6 +117,8 @@ public class TheirProfileActivity extends AppCompatActivity {
 
         checkUserStatus();
         loadHisPost();
+
+
 
     }
     private void searchHisPosts(final String searchQuery){
@@ -168,6 +179,15 @@ public class TheirProfileActivity extends AppCompatActivity {
                     adapterPost = new AdapterPost(TheirProfileActivity.this,postList);
 
                     postsRecyclerView.setAdapter(adapterPost);
+                }
+
+                if(postList.size()==0){
+
+
+                    no_post_tv.setVisibility(View.VISIBLE);
+                }
+                else{
+                    no_post_tv.setVisibility(View.GONE);
                 }
             }
 

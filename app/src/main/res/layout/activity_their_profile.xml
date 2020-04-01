@@ -53,132 +53,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/avatarCv" />
 
-            <LinearLayout
-                android:id="@+id/user_details_ll"
-                android:layout_width="320dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
+
+            <TextView
+                android:id="@+id/my_post_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:layout_marginTop="38dp"
+                android:text="MY POSTS"
+                android:textSize="16sp"
+                android:textColor="#00B8D4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameTv">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
-                        android:text="10"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/goalTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/montserrat"
-                        android:text="Goals"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/avatarIv"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
-                        android:text="200"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/FriendsTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Friends"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/goalTv"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
-                        android:text="4"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/FollowingTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Following"
-                        android:fontFamily="@font/montserrat"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/emailTv"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/nameTv"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_posts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_details_ll" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/my_post_tv"
+            />
+
+            <TextView
+                android:id="@+id/no_post_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:text="No Post Added \nNothing to Display"
+                android:textColor="@color/gradient_end_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerview_posts"/>
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

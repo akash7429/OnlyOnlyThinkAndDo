@@ -17,7 +17,7 @@
             android:id="@+id/profileIv"
             android:visibility="gone"
             app:c_border_color="@null"
-            android:src="@drawable/ic_default"/>
+            android:src="@drawable/chat_users"/>
 
 
         <TextView

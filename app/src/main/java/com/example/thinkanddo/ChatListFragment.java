@@ -168,6 +168,7 @@ public class ChatListFragment extends Fragment {
         //inflating menu_main.
         inflater.inflate(R.menu.menu_main, menu);
 
+
         //hide addpost icon from this fragment
         menu.findItem(R.id.action_add_post).setVisible(false);
         //searchview
@@ -179,7 +180,9 @@ public class ChatListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if(id == R.id.action_logout){
+
             firebaseAuth.signOut();
             checkUserStatus();
         }

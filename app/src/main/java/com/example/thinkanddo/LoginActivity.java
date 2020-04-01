@@ -141,11 +141,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
 
-                if (mGoogleApiClient.isConnected()) {
-                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                    mGoogleApiClient.disconnect();
-                    mGoogleApiClient.connect();
-                }
             }
         });
 
@@ -302,7 +297,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             String email = user.getEmail();
                             String uid = user.getUid();
-
                             String name = user.getDisplayName();
 
                             HashMap<Object, String> hashMap =new HashMap<>();
