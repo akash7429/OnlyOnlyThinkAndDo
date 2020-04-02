@@ -10,15 +10,19 @@
         android:layout_height="wrap_content">
 
         <!-- ImageView: User Profile Image -->
-        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-            android:id="@+id/profileIv"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/chat_users"/>
 
         <!-- ImageView: Online/Offline Status -->
 
         <!-- TextView User Name -->
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/profileIv"
+            android:layout_marginTop="6dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+
+            android:src="@drawable/chat_users" />
+
         <ImageView
             android:id="@+id/onlineStatusIv"
             android:layout_width="10dp"
@@ -30,9 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="His Name"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="7.5dp"
+            android:layout_marginStart="5dp"
             android:textColor="@color/colorBlack"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:layout_toEndOf="@+id/profileIv"
             android:layout_toRightOf="@+id/profileIv"/>
 
@@ -42,9 +47,10 @@
             android:id="@+id/lastMessageTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Last Message"
-            android:layout_marginStart="4dp"
-            android:maxLines="2"
+            android:text="Chat Display"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="5dp"
+            android:textSize="15sp"
             android:textColor="@color/colorBlack"
             android:layout_toEndOf="@+id/profileIv"
             android:layout_toRightOf="@+id/profileIv"

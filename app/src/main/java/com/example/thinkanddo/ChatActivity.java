@@ -238,9 +238,13 @@ public class ChatActivity extends AppCompatActivity {
 
                     Toast.makeText(ChatActivity.this,"Cannot send empty mess..",Toast.LENGTH_LONG).show();
                 }
-                else{
+                else if(!isBlocked){
 
                     sendMessage(message);
+                }
+                else{
+
+                    Toast.makeText(ChatActivity.this,"Cannot send messages to blocked users",Toast.LENGTH_LONG).show();
                 }
                 //reset edittext after sending message
                 messageEt.setText("");
@@ -587,6 +591,7 @@ public class ChatActivity extends AppCompatActivity {
                 if(notify){
                     sentNotification(hisUid,user.getName(), message);
                 }
+
                 notify=false;
             }
 
@@ -852,7 +857,7 @@ public class ChatActivity extends AppCompatActivity {
         checkOnlineStatus("online");
         super.onResume();
     }
-    
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

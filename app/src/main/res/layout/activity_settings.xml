@@ -22,7 +22,8 @@
         android:drawablePadding="5dp"
         android:textSize="16dp"
         android:id="@+id/postSwitch"
-        app:thumbTint="@color/colorBlack"
+        android:foregroundTint="@color/gradient_end_btn"
+
         app:trackTint="@color/colorIcon"
         android:text="Post Notification"/>
 

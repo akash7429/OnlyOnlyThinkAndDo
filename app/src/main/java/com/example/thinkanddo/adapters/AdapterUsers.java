@@ -143,7 +143,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
             if blocked then just display a message e.g you are blocked by user, can't send message
         * */
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(hisUID).child("BlockedUsers").orderByChild("uid").equalTo(myUid)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -155,10 +155,13 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
                                 return;
                             }
                         }
+
                         // not blocked , start activity
                         Intent intent = new Intent(context, ChatActivity.class);
                         intent.putExtra("hisUid",hisUID);
                         context.startActivity(intent);
+
+                        Toast.makeText(context, "Yey Unblocked By User\nStart Chat",Toast.LENGTH_LONG).show();
                     }
 
                     @Override

@@ -83,9 +83,11 @@ public class PostDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_detail);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Post Detail");
+
+        actionBar.setTitle("Comment Detail");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         Intent intent = getIntent();
         postId =intent.getStringExtra("postId");
@@ -118,7 +120,7 @@ public class PostDetailActivity extends AppCompatActivity {
         setLikes();
 
 
-        actionBar.setSubtitle("SignedIn as: "+myEmail);
+        actionBar.setSubtitle("Signed In as: "+myEmail);
 
         loadComments();
 
@@ -170,14 +172,14 @@ public class PostDetailActivity extends AppCompatActivity {
                 if(b==c){
                     //post without image
                     shareTextOnly(pTitle, pDescription);
-                    Toast.makeText(PostDetailActivity.this,"Text",Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     //post with image
                     // convert image to bitmap
                     Bitmap bitmap =bitmapDrawable.getBitmap();
                     shareImageAndText(pTitle,pDescription,bitmap);
-                    Toast.makeText(PostDetailActivity.this,"Image Text",Toast.LENGTH_SHORT).show();
+
                 }
 
             }

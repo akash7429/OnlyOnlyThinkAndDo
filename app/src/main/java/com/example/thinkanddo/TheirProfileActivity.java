@@ -39,7 +39,7 @@ public class TheirProfileActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     ImageView avatarIv, coverIv,arrow_iv;
-    TextView nameTv,my_post_tv ;
+    TextView nameTv,my_post_tv,num_of_posts ;
     TextView no_post_tv;
     RecyclerView postsRecyclerView;
     ConstraintLayout expandable_view;
@@ -63,7 +63,8 @@ public class TheirProfileActivity extends AppCompatActivity {
         nameTv = findViewById(R.id.nameTv);
         no_post_tv=findViewById(R.id.no_post_tv);
 
-        my_post_tv = findViewById(R.id.my_post_tv);
+        num_of_posts = findViewById(R.id.number_of_posts_tv);
+
         //emailTv = findViewById(R.id.emailTv);
       //  phoneTv = findViewById(R.id.phoneTv);
         postsRecyclerView= findViewById(R.id.recyclerview_posts);
@@ -114,6 +115,7 @@ public class TheirProfileActivity extends AppCompatActivity {
             }
         });
         postList= new ArrayList<>();
+
 
         checkUserStatus();
         loadHisPost();
@@ -179,8 +181,10 @@ public class TheirProfileActivity extends AppCompatActivity {
                     adapterPost = new AdapterPost(TheirProfileActivity.this,postList);
 
                     postsRecyclerView.setAdapter(adapterPost);
+
                 }
 
+                num_of_posts.setText(String.valueOf(postList.size()));
                 if(postList.size()==0){
 
 
@@ -250,7 +254,12 @@ public class TheirProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_logout){
+        if(id == R.id.action_settings){
+
+            startActivity(new Intent(TheirProfileActivity.this,SettingsActivity.class));
+        }
+
+        else if(id == R.id.action_logout){
             firebaseAuth.signOut();
             checkUserStatus();
         }

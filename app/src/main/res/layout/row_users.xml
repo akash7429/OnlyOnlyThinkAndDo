@@ -18,10 +18,10 @@
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/avatarIv"
-            android:layout_width="50dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="55dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/chat_users"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             />
 
         <LinearLayout
@@ -38,11 +38,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:text="Person Name"
-                android:textSize="18dp"
+                android:textSize="19dp"
                 android:textColor="#000"
                 />
             <TextView
                 android:id="@+id/emailTv"
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
@@ -54,8 +55,9 @@
         <ImageView
             android:id="@+id/blockIv"
             android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="15dp"
             android:src="@drawable/ic_unblocked_green"/>
 
     </LinearLayout>
