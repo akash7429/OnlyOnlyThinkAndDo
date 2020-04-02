@@ -246,7 +246,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
 
 
                 if(b==c){
-                    Toast.makeText(context, " Text Only", Toast.LENGTH_LONG).show();
+
                     //post without image
                     shareTextOnly(pTitle, pDescription);
 
@@ -257,7 +257,6 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
                     Bitmap bitmap =bitmapDrawable.getBitmap();
                     shareImageAndText(pTitle,pDescription,bitmap);
 
-                    Toast.makeText(context, " Image Text", Toast.LENGTH_SHORT).show();
                 }
             }
         });

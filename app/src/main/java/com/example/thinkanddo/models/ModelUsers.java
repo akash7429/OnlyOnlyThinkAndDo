@@ -6,7 +6,7 @@ public class ModelUsers {
 
     String name, email, search, phone, image, cover,uid, onlineStatus, typingTo; // adding to more fields
 
-    boolean isBlocked = true;
+    boolean isBlocked = false;
 
     public ModelUsers(){
 
