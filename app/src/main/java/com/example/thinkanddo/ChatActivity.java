@@ -754,11 +754,10 @@ public class ChatActivity extends AppCompatActivity {
                    Token token=ds.getValue(Token.class);
 
                    Data data= new Data(""+myUid,
-                           ""+ name+":"+message,
-                           "New Message",
+                           name+": "+message,
                            ""+hisUid,
                            "ChatNotification",
-                           R.drawable.ic_users_black);  //R.drawable.ic_default_img;
+                           R.mipmap.ic_launcher_logo);  //R.drawable.ic_default_img;
 
                    Sender sender=new Sender(data,token.getToken());
                    try{
@@ -853,6 +852,7 @@ public class ChatActivity extends AppCompatActivity {
         checkOnlineStatus("online");
         super.onResume();
     }
+    
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
