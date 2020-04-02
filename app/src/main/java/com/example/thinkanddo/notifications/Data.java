@@ -8,10 +8,10 @@ public class Data {
 
     }
 
-    public Data(String user, String body, String title, String sent, String notificationType, Integer icon) {
+    public Data(String user, String body, String sent, String notificationType, Integer icon) {
         this.user = user;
         this.body = body;
-        this.title = title;
+
         this.sent = sent;
         this.notificationType = notificationType;
         this.icon = icon;

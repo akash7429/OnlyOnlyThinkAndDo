@@ -575,7 +575,7 @@ public class AddPostActivity extends AppCompatActivity {
 
                                         prepareNotification(""+timeStamp,
                                                 ""+name+" added new post",
-                                                ""+title+"\n"+description,
+                                                ""+title,
                                                 "PostNotification",
                                                 "POST");
 
@@ -763,6 +763,7 @@ public class AddPostActivity extends AppCompatActivity {
             notificationBodyJO.put("notificationType", NOTIFICATION_TYPE);
             notificationBodyJO.put("sender", uid); //uid of current use/sender
             notificationBodyJO.put("pId", pId); //post id
+            notificationBodyJO.put("pTitle", NOTIFICATION_TITLE);
             notificationBodyJO.put("pDescription",NOTIFICATION_MESSAGE);
 
             // where to send
@@ -881,6 +882,8 @@ public class AddPostActivity extends AppCompatActivity {
         super.onResume();
         checkUserStatus();
     }
+
+
 
     private void checkUserStatus(){
         FirebaseUser user =firebaseAuth.getCurrentUser();

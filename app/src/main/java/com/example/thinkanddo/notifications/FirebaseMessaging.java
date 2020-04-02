@@ -110,12 +110,12 @@ public class FirebaseMessaging extends FirebaseMessagingService {
 
         // LargeIcon
 
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_android_black);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_logo);
 
         //sound for notification
         Uri notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,""+ADMIN_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_android_black)
+                .setSmallIcon(R.mipmap.ic_launcher_logo)
                 .setLargeIcon(largeIcon)
                 .setContentTitle(pTitle)
                 .setContentText(pDescription)
@@ -163,7 +163,6 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         NotificationCompat.Builder builder= new NotificationCompat.Builder(this)
                 .setSmallIcon(Integer.parseInt(icon))
                 .setContentText(body)
-                .setContentTitle(title)
                 .setAutoCancel(true)
                 .setSound(defSoundUri)
                 .setContentIntent(pIntent);
