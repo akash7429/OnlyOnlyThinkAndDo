@@ -19,13 +19,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_arrow_back_white"/>
+
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/profileIv"
             android:layout_width="45dp"
             android:layout_marginTop="5dp"
             android:layout_height="45dp"
             android:visibility="visible"
-            android:src="@drawable/chat_users"
+            android:src="@drawable/user_black_action_bar"
             app:c_background_color="@color/colorWhite"/>
 
         <LinearLayout
@@ -33,7 +40,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="7dp"
             android:layout_marginLeft="20dp"
             android:gravity="center">
 
@@ -51,7 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="online"
-                android:textSize="12sp"
+                android:textSize="10sp"
+                android:maxLines="1"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"/>
 

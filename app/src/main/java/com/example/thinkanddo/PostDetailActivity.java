@@ -18,9 +18,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.thinkanddo.adapters.AdapterComments;
 import com.example.thinkanddo.models.ModelComment;
@@ -56,7 +58,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PostDetailActivity extends AppCompatActivity {
 
     String myUid, hisUid, myEmail, myName, myDp, pImage,
-    postId, pLikes, hisDp, hisName;
+    postId, pLikes, pVideo, hisDp, hisName;
 
     boolean mProcessComment = true;
 
@@ -64,6 +66,8 @@ public class PostDetailActivity extends AppCompatActivity {
     ProgressDialog pd;
 
     ImageView uPictureIv, pImageIv;
+
+    VideoView pVideovv;
     TextView uNameTv, pTimeTiv, pTitleTv, pDescriptionTv, pLikesTv,pCommentsTv;
     ImageButton moreBtn;
     Button likeBtn, shareBtn;
@@ -96,6 +100,7 @@ public class PostDetailActivity extends AppCompatActivity {
         pImageIv = findViewById(R.id.pImageIv);
         uNameTv = findViewById(R.id.uNameTv);
         pTimeTiv = findViewById(R.id.pTimeTv);
+        pVideovv = findViewById(R.id.pVideoVv);
         pTitleTv = findViewById(R.id.pTitleTv);
         pDescriptionTv =findViewById(R.id.pDescriptionTv);
         pLikesTv = findViewById(R.id.pLikesTv);
@@ -554,9 +559,9 @@ public class PostDetailActivity extends AppCompatActivity {
                     myDp = ""+ds.child("image").getValue();
 
                     try{
-                        Picasso.get().load(myDp).placeholder(R.drawable.ic_default).into(cAvatarIv);
+                        Picasso.get().load(myDp).placeholder(R.drawable.chat_users).into(cAvatarIv);
                     }catch (Exception e){
-                        Picasso.get().load(R.drawable.ic_default).into(cAvatarIv);
+                        Picasso.get().load(R.drawable.chat_users).into(cAvatarIv);
                     }
                 }
             }
@@ -578,6 +583,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     String pTitle = ""+ds.child("pTitle").getValue();
                     String pDescr = ""+ds.child("pDescr").getValue();
                     pLikes = ""+ds.child("pLikes").getValue();
+                    pVideo=""+ds.child("pVideo").getValue();
                     String pTimeStamp = ""+ds.child("pTime").getValue();
                     pImage = ""+ds.child("pImage").getValue();
                     hisDp = ""+ds.child("uDp").getValue();
@@ -588,7 +594,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                     Calendar calender = Calendar.getInstance(Locale.getDefault());
                     calender.setTimeInMillis(Long.parseLong(pTimeStamp));
-                    String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa", calender).toString();
+                    String pTime = DateFormat.format("dd MMM, yyyy  hh:mm aa", calender).toString();
 
                     pTitleTv.setText(pTitle);
                     pDescriptionTv.setText(pDescr);
@@ -598,38 +604,50 @@ public class PostDetailActivity extends AppCompatActivity {
 
                     uNameTv.setText(hisName);
 
-                    if(pImage.equals("noImage")){
 
-                        // hide imageview
+                        if (pImage.equals("noImage") && pVideo.equals("noVideo")) {
 
-                        pImageIv.setVisibility(View.GONE);
-                    }
-                    else{
-                        // show imageview
+                            // hide imageview
 
-                        pImageIv.setVisibility(View.VISIBLE);
+                            pImageIv.setVisibility(View.GONE);
+                            pVideovv.setVisibility(View.GONE);
+                        }
+                        else if (!pImage.equals("noImage") && pVideo.equals("noVideo")) {
+                            // show imageview
 
-                        try
-                        {
-                            Picasso.get().load(pImage).into(pImageIv);
+                            pImageIv.setVisibility(View.VISIBLE);
+                            pVideovv.setVisibility(View.GONE);
+                            try {
+                                Picasso.get().load(pImage).into(pImageIv);
+
+                            } catch (Exception ex) {
+
+                            }
 
                         }
-                        catch (Exception ex){
+                        else if (pImage.equals("noImage") && !pVideo.equals("noVideo")){
 
-
+                            pImageIv.setVisibility(View.GONE);
+                            pVideovv.setVisibility(View.VISIBLE);
+                            pVideovv.setVideoURI(Uri.parse(pVideo));
+                            pVideovv.start();
+                            MediaController mediaController = new MediaController(PostDetailActivity.this);
+                            pVideovv.setMediaController(mediaController);
+                            mediaController.setAnchorView(pVideovv);
                         }
+
 
                     }
 
                     // set User name in comment part
                     try{
-                        Picasso.get().load(hisDp).placeholder(R.drawable.ic_default).into(uPictureIv);
+                        Picasso.get().load(hisDp).placeholder(R.drawable.chat_users).into(uPictureIv);
                     }catch (Exception e){
-                        Picasso.get().load(R.drawable.ic_default).into(uPictureIv);
+                        Picasso.get().load(R.drawable.chat_users).into(uPictureIv);
 
                     }
                 }
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

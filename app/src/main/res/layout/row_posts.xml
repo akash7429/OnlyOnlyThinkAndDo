@@ -48,6 +48,7 @@
                     android:id="@+id/pTimeTv"
                     android:layout_width="wrap_content"
                     android:text="33 min"
+                    android:layout_marginTop="3dp"
                     android:textColor="@color/colorBlack"
                     android:layout_marginStart="2.5dp"
                     android:layout_height="wrap_content"/>
