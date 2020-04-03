@@ -41,8 +41,11 @@ public class DashboardActivity extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
+        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
         actionBar.setTitle("Amplifate");
-        ProfileFragment fragment1 = new ProfileFragment();
+        HomeFragment fragment1 = new HomeFragment();
+
         FragmentTransaction ft1 =getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.content, fragment1, "");
         ft1.commit();
@@ -73,14 +76,14 @@ public class DashboardActivity extends AppCompatActivity {
             switch (menuItem.getItemId()){
 
                 case R.id.nav_profile:
-                    actionBar.setTitle("Amplifate");
+                    actionBar.setTitle("Profile");
                     ProfileFragment fragment2 = new ProfileFragment();
                     FragmentTransaction ft2 =getSupportFragmentManager().beginTransaction();
                     ft2.replace(R.id.content, fragment2, "");
                     ft2.commit();
                     return true;
                 case R.id.nav_home:
-                    actionBar.setTitle("Home");
+                    actionBar.setTitle("Amplifate");
                     HomeFragment fragment1 = new HomeFragment();
                     FragmentTransaction ft1 =getSupportFragmentManager().beginTransaction();
                     ft1.replace(R.id.content, fragment1, "");

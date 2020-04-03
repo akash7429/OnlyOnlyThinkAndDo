@@ -29,8 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,8 +40,7 @@ public class TheirProfileActivity extends AppCompatActivity {
     TextView nameTv,my_post_tv,num_of_posts ;
     TextView no_post_tv;
     RecyclerView postsRecyclerView;
-    ConstraintLayout expandable_view;
-    CardView cardView_post;
+
     List<ModelPost> postList;
     AdapterPost adapterPost;
     String uid;
@@ -53,10 +50,12 @@ public class TheirProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_their_profile);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Profile");
+        firebaseAuth = FirebaseAuth.getInstance();
+        final ActionBar actionBar = getSupportActionBar();
+
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
        // coverIv = findViewById(R.id.coverIv);
         avatarIv = findViewById(R.id.avatarIv);
@@ -69,7 +68,7 @@ public class TheirProfileActivity extends AppCompatActivity {
       //  phoneTv = findViewById(R.id.phoneTv);
         postsRecyclerView= findViewById(R.id.recyclerview_posts);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("uId");
@@ -89,6 +88,7 @@ public class TheirProfileActivity extends AppCompatActivity {
                     nameTv.setText(name);
                     //emailTv.setText(email);
 
+                    actionBar.setTitle(name);
 
                     try{
 
