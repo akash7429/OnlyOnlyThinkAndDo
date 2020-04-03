@@ -19,21 +19,30 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_arrow_back_white"/>
+            <FrameLayout
+                android:id="@+id/back_btn"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:foreground="?android:attr/selectableItemBackground" >
 
-        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-            android:id="@+id/profileIv"
-            android:layout_width="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_height="45dp"
-            android:visibility="visible"
-            android:src="@drawable/user_black_action_bar"
-            app:c_background_color="@color/colorWhite"/>
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_arrow_back_white"/>
+
+                <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+                    android:id="@+id/profileIv"
+                    android:layout_width="45dp"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_height="45dp"
+                    android:visibility="visible"
+                    android:src="@drawable/user_black_action_bar" />
+            </FrameLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -58,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="online"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:maxLines="1"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"/>

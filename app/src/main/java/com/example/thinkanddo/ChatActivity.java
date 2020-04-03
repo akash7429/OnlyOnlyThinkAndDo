@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -83,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageButton sendBtn, attachBtn;
     ImageView profileIv,blockIv;
+    FrameLayout back_btn;
 
     TextView nameTv, userStatusTv;
     EditText messageEt;
@@ -139,6 +141,7 @@ public class ChatActivity extends AppCompatActivity {
         attachBtn=findViewById(R.id.attachBtn);
         blockIv = findViewById(R.id.blockIv);
 
+        back_btn = findViewById(R.id.back_btn);
         profileIv = findViewById(R.id.profileIv);
         nameTv = findViewById(R.id.nameTv);
         userStatusTv = findViewById(R.id.userStatusTv);
@@ -214,7 +217,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                     catch(Exception e){
 
-                        Picasso.get().load(R.drawable.chat_users).into(profileIv);
+
                     }
                 }
 
@@ -223,6 +226,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
