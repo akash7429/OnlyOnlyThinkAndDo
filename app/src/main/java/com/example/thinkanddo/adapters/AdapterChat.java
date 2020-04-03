@@ -79,7 +79,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
 
         cal.setTimeInMillis(Long.parseLong(timeStamp));
 
-        String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa",cal).toString();
+        String dateTime = DateFormat.format("dd MMM yy\n hh:mm aa",cal).toString();
 
         if(type.equals("text")){
             //text message
@@ -93,7 +93,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
             myHolder.messageTv.setVisibility(View.GONE);
             myHolder.messageIv.setVisibility(View.VISIBLE);
 
-            Picasso.get().load(message).placeholder(R.drawable.chat_users).into(myHolder.messageIv);
+            Picasso.get().load(message).placeholder(R.drawable.user_black_action_bar).into(myHolder.messageIv);
 
         }
 

@@ -20,7 +20,6 @@
             android:layout_marginTop="6dp"
             android:layout_width="55dp"
             android:layout_height="55dp"
-
             android:src="@drawable/chat_users" />
 
         <ImageView
