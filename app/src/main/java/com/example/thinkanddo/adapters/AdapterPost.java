@@ -26,6 +26,7 @@ import android.widget.VideoView;
 
 import com.example.thinkanddo.AddPostActivity;
 import com.example.thinkanddo.PostDetailActivity;
+import com.example.thinkanddo.PostLikedByActivity;
 import com.example.thinkanddo.R;
 import com.example.thinkanddo.TheirProfileActivity;
 import com.example.thinkanddo.models.ModelPost;
@@ -64,7 +65,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
     private DatabaseReference postsRef;
     private DatabaseReference videoRef;
 
-    Boolean mProcessLike = false;
+    Boolean mProcessLike;
 
     public AdapterPost(Context context, List<ModelPost> postList) {
         this.context = context;
@@ -172,7 +173,6 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
             public void onClick(View v) {
 
                 showMoreOptions(myHolder.moreBtn, uId, myUid, pId, pImage);
-                Toast.makeText(context, "More", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -270,6 +270,15 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
             }
         });
 
+        myHolder.pLikesTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PostLikedByActivity.class);
+                intent.putExtra("postId",pId);
+                context.startActivity(intent);
+            }
+        });
+
     }
     private void shareTextOnly(String pTitle,String pDescription) {
         //concatenate title and description to share
@@ -353,6 +362,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyHolder> {
             }
         });
     }
+
 
     private void showMoreOptions(ImageButton moreBtn, String uid, String myUid, final String pId, final String pImage) {
 

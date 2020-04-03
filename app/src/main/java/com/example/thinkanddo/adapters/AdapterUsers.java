@@ -39,6 +39,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
     FirebaseAuth firebaseAuth;
     String myUid;
 
+    Boolean ISBLocked=true;
     Context context;
     List<ModelUsers> userList;
 
@@ -107,12 +108,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
                         }
                         if(which == 1){
 
-                              /*Click user to start chatting
-                  Start activity by putting UID of receiver
-                  we will use the uid to identify the user we are gonna chat
-                 */
-
-                              imBlockedORNot(hisUID);
+                                imNotBlocked(hisUID);
                         }
                     }
                 });
@@ -129,7 +125,6 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
 
                     unBlockUser(hisUID);
                 }
-
                 else{
                     blockUser(hisUID);
                 }
@@ -137,11 +132,11 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
         });
     }
 
-    private void imBlockedORNot(final String hisUID){
+   /** private void imBlockedORNot(final String hisUID){
         /* first check if sender is blocked by reciver or not
             if uid of sender exists in "BlockedUsers" of receiver then sender is blocked
             if blocked then just display a message e.g you are blocked by user, can't send message
-        * */
+        *
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(hisUID).child("BlockedUsers").orderByChild("uid").equalTo(myUid)
@@ -152,16 +147,12 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
                             if(ds.exists()){
                                 Toast.makeText(context, "You are blocked by user, can't send message",Toast.LENGTH_SHORT).show();
                                 //backed, dont proceed further
+
                                 return;
                             }
+
+
                         }
-
-                        // not blocked , start activity
-                        Intent intent = new Intent(context, ChatActivity.class);
-                        intent.putExtra("hisUid",hisUID);
-                        context.startActivity(intent);
-
-                        Toast.makeText(context, "Yey Unblocked By User\nStart Chat",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -169,6 +160,36 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
 
                     }
                 });
+
+    }*/
+    private void imNotBlocked(final String hisUID){
+        /* first check if sender is blocked by reciver or not
+            if uid of sender exists in "BlockedUsers" of receiver then sender is blocked
+            if blocked then just display a message e.g you are blocked by user, can't send message
+        * */
+
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(hisUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (!snapshot.hasChild("BlockedUsers")) {
+
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    intent.putExtra("hisUid",hisUID);
+                    context.startActivity(intent);
+                    //Toast.makeText(context, "Go not exist",Toast.LENGTH_SHORT).show();
+                    // it exists!
+                }else{
+                    // does not exist
+                    Toast.makeText(context, "You are blocked by user",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
     private void CheckIsBlocked(String hisUID, final MyHolder myHolder, final int i) {

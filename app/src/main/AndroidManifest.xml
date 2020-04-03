@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DemoActivity"></activity>
+        <activity android:name=".PostLikedByActivity"></activity>
+        <activity android:name=".DemoActivity" />
         <activity android:name=".MyGoalFragment" />
         <activity android:name=".IntroActivity">
             <intent-filter>
@@ -70,10 +71,7 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-
-        <!-- Here you can define file provider -->
+        </service> <!-- Here you can define file provider -->
         <!-- Set the android: exported attribute to false -->
         <provider
             android:name="androidx.core.content.FileProvider"
