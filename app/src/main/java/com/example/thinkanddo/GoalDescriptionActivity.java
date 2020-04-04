@@ -15,8 +15,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -41,7 +45,7 @@ public class GoalDescriptionActivity extends AppCompatActivity {
     // info of post to be edited
     String editTitle, editDescription;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_describe_goal);
 
@@ -59,6 +63,26 @@ public class GoalDescriptionActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         checkUserStatus();
+
+        userDbRef= FirebaseDatabase.getInstance().getReference("Users");
+
+        Query query=userDbRef.orderByChild("email").equalTo(email);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    name=""+ds.child("name").getValue();
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         titleEt=findViewById(R.id.p_goal_title_et);
@@ -78,6 +102,7 @@ public class GoalDescriptionActivity extends AppCompatActivity {
 
             actionBar.setTitle("Update your goal");
             saveBtn.setText("Update");
+            loadGoalData(editGoalId);
 
         }
         else{
@@ -122,14 +147,51 @@ public class GoalDescriptionActivity extends AppCompatActivity {
         });
     }
 
+    private void loadGoalData(String editGoalId) {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Goal_Description");
+
+        // get detail of post using id of post
+        Query fquery = reference.orderByChild("gId").equalTo(editGoalId);
+
+        fquery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+
+                    // get data
+                    editTitle = ""+ds.child("gTitle").getValue();
+                    editDescription = ""+ds.child("gDescr").getValue();
+
+
+                    // set Data
+
+                    titleEt.setText(editTitle);
+                    descriptionEt.setText(editDescription);
+
+
+                    // set image
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void beginUpdate(String title, String description, String editGoalId) {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         // put post info
+        final String timeStamp= String.valueOf(System.currentTimeMillis());
         hashMap.put("uid", uid);
         hashMap.put("uName", name);
         hashMap.put("uEmail", email);
-        hashMap.put("uDp", dp);
+        hashMap.put("gTime",timeStamp);
         hashMap.put("gTitle",title);
         hashMap.put("gDescr",description);
 
@@ -142,6 +204,8 @@ public class GoalDescriptionActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         pd.dismiss();
                         Toast.makeText(GoalDescriptionActivity.this,"Updated...",Toast.LENGTH_LONG).show();
+                        titleEt.setText("");
+                        descriptionEt.setText("");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -160,18 +224,15 @@ public class GoalDescriptionActivity extends AppCompatActivity {
         String filePathAndName="Goal Description/" + "goalDes_" + timeStamp;
 
 
-
             //post without image
             HashMap<Object, String> hashMap=new HashMap<>();
             hashMap.put("uid",uid);
             hashMap.put("uName",name);
             hashMap.put("uEmail",email);
-            hashMap.put("uDp",dp);
-            hashMap.put("gdId",timeStamp);
+            hashMap.put("gId",timeStamp);
             hashMap.put("gTitle",title);
             hashMap.put("gDescr",description);
             hashMap.put("gTime",timeStamp);
-
 
 
             //path to store post data
@@ -233,9 +294,10 @@ public class GoalDescriptionActivity extends AppCompatActivity {
             //mprofileTv.setText(user.getEmail());
             email=user.getEmail();
             uid=user.getUid();
+            name=user.getDisplayName();
 
         }else{
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(GoalDescriptionActivity.this,MainActivity.class));
             finish();
         }
     }

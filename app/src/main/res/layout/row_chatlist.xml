@@ -2,12 +2,21 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="0.5dp"
+    android:background="@color/colorWhite"
+    android:layout_marginBottom="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:contentPadding="3dp">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingStart="1dp"
+        android:paddingBottom="1dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        >
 
         <!-- ImageView: User Profile Image -->
 
@@ -34,6 +43,7 @@
             android:layout_height="wrap_content"
             android:text="His Name"
             android:layout_marginTop="7.5dp"
+            android:fontFamily="@font/roboto"
             android:layout_marginStart="5dp"
             android:textColor="@color/colorBlack"
             android:textSize="19sp"
@@ -47,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Chat Display"
+            android:fontFamily="@font/montserrat"
             android:layout_marginTop="8dp"
             android:layout_marginStart="5dp"
             android:textSize="15sp"

@@ -14,9 +14,16 @@
         android:roundIcon="@mipmap/ic_logo_4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PostLikedByActivity"></activity>
-        <activity android:name=".DemoActivity" />
-        <activity android:name=".MyGoalFragment" />
+        <activity android:name=".MyGoalsActivity"></activity>
+        <activity
+            android:name=".PostLikedByActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".DemoActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".MyGoalFragment"
+            android:launchMode="singleTop" />
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +48,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".AddPostActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".GoalDescriptionActivity"
             android:launchMode="singleTop" />
         <activity android:name=".DashboardActivity">
             <intent-filter>

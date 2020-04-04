@@ -104,9 +104,9 @@ public class DashboardActivity extends AppCompatActivity {
                     ft4.replace(R.id.content, fragment4, "");
                     ft4.commit();
                     return true;
-                case R.id.nav_video:
-                    actionBar.setTitle("Video");
-                    VideoFragment fragment5 = new VideoFragment();
+                case R.id.nav_goals:
+                    actionBar.setTitle("Goals");
+                    MyGoalFragment fragment5 = new MyGoalFragment();
                     FragmentTransaction ft5 =getSupportFragmentManager().beginTransaction();
                     ft5.replace(R.id.content, fragment5, "");
                     ft5.commit();

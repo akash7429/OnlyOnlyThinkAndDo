@@ -47,8 +47,8 @@ public class MyGoalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view= inflater.inflate(R.layout.activity_my_goal_fragment, container, false);
-       try{
+        final View view= inflater.inflate(R.layout.activity_all_goal_fragment, container, false);
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -69,16 +69,13 @@ public class MyGoalFragment extends Fragment {
         goalDescriptionList = new ArrayList<>();
         loadGoals();
 
-    }catch(Exception ex){
-           Toast.makeText(getActivity(), ""+ex.getMessage(), Toast.LENGTH_LONG).show();
 
-       }
         return view;
     }
 
     private void loadGoals() {
 
-            // path of all posts
+            // path of all goals
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goal_Description");
 
@@ -115,7 +112,7 @@ public class MyGoalFragment extends Fragment {
     private void searchGoals(final String searchQuery){
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goal_Description");
 
         // get all data from this ref.
 
