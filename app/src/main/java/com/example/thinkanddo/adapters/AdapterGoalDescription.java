@@ -46,7 +46,7 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
 
     private DatabaseReference Goal_Description;
 
-    Boolean mProcessLike = false;
+    //Boolean mProcessLike = false;
 
     public AdapterGoalDescription(Context context, List<ModelGoalDescription> modelGoalDescriptionList) {
         this.context = context;
@@ -77,8 +77,6 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
         String uEmail = modelGoalDescriptionList.get(i).getuEmail();
         String uName = modelGoalDescriptionList.get(i).getuName();
         String uDp = modelGoalDescriptionList.get(i).getuDp();
-
-
         final String gId = modelGoalDescriptionList.get(i).getgId();
         final String gTitle = modelGoalDescriptionList.get(i).getgTitle();
         final String gDescription = modelGoalDescriptionList.get(i).getgDescr();
@@ -90,7 +88,7 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
 
         Calendar calender = Calendar.getInstance(Locale.getDefault());
         calender.setTimeInMillis(Long.parseLong(gTimeStamp));
-        String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa", calender).toString();
+        String pTime = DateFormat.format("dd MMM yyyy\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\thh:mm aa", calender).toString();
 
         // set data
 
@@ -131,6 +129,7 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
             popupMenu.getMenu().add(Menu.NONE, 1, 0, "Edit");
         }
 
+        popupMenu.getMenu().add(Menu.NONE, 2, 0, "View Detail");
         //popupMenu.getMenu().add(Menu.NONE, 2, 0, "View Detail");
 
         // item click listener
@@ -205,7 +204,6 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
             gTitleTv = itemView.findViewById(R.id.goal_title_Tv);
             gDescriptionTv = itemView.findViewById(R.id.goal_description_Tv);
             moreBtn = itemView.findViewById(R.id.moreBtn);
-
             profileLayout = itemView.findViewById(R.id.profileLayout);
         }
     }

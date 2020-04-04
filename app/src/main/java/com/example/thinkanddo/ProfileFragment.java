@@ -190,8 +190,8 @@ public class ProfileFragment extends Fragment {
         my_goals_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"My Goals",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getActivity(),MyGoalFragment.class));
+
+                startActivity(new Intent(getActivity(),MyGoalsActivity.class));
             }
         });
 
