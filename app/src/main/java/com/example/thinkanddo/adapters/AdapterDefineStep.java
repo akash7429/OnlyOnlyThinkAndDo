@@ -2,7 +2,6 @@ package com.example.thinkanddo.adapters;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -17,11 +16,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.thinkanddo.FinishedGoalActivity;
-import com.example.thinkanddo.GoalDescriptionActivity;
 import com.example.thinkanddo.R;
-import com.example.thinkanddo.TheirProfileActivity;
-import com.example.thinkanddo.models.ModelGoalDescription;
+import com.example.thinkanddo.models.ModelDefineStep;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,35 +36,34 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDescription.MyHolder> {
+public class AdapterDefineStep extends RecyclerView.Adapter<AdapterDefineStep.MyHolder> {
 
 
     Context context;
-    List<ModelGoalDescription> modelGoalDescriptionList;
+    List<ModelDefineStep> modelDefineStepList;
 
     String myUid;
     Uri uri;
 
-    private DatabaseReference Goal_Description;
+    private DatabaseReference Goal_Define_Step;
 
     //Boolean mProcessLike = false;
 
-    public AdapterGoalDescription(Context context, List<ModelGoalDescription> modelGoalDescriptionList) {
+    public AdapterDefineStep(Context context, List<ModelDefineStep> modelDefineStepList) {
         this.context = context;
-        this.modelGoalDescriptionList = modelGoalDescriptionList;
+        this.modelDefineStepList = modelDefineStepList;
 
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Goal_Description = FirebaseDatabase.getInstance().getReference().child("Goal_Description");
+        Goal_Define_Step = FirebaseDatabase.getInstance().getReference().child("Goal_Define_Step");
 
     }
-
 
 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.row_goals_list, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_define_step, parent, false);
         return new MyHolder(view);
 
     }
@@ -78,29 +73,31 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
 
         //get data
 
-        final String uId = modelGoalDescriptionList.get(i).getUid();
-        final String uEmail = modelGoalDescriptionList.get(i).getuEmail();
-        final String uName = modelGoalDescriptionList.get(i).getuName();
-        String uDp = modelGoalDescriptionList.get(i).getuDp();
-        final String gId = modelGoalDescriptionList.get(i).getgId();
-        final String gTitle = modelGoalDescriptionList.get(i).getgTitle();
-        final String gDescription = modelGoalDescriptionList.get(i).getgDescr();
-        String gTimeStamp = modelGoalDescriptionList.get(i).getgTime();
-
+        final String uId = modelDefineStepList.get(i).getUid();
+        final String uEmail = modelDefineStepList.get(i).getuEmail();
+        final String uName = modelDefineStepList.get(i).getuName();
+        String uDp = modelDefineStepList.get(i).getuDp();
+        final String gId = modelDefineStepList.get(i).getgId();
+        final String gTitle = modelDefineStepList.get(i).getgTitle();
+        final String gDescription = modelDefineStepList.get(i).getgDescr();
+        String gTimeStamp = modelDefineStepList.get(i).getgTime();
+        final String dsId = modelDefineStepList.get(i).getDsId();
+        final String dsTitle = modelDefineStepList.get(i).getDsTitle();
+        String dsTime = modelDefineStepList.get(i).getDsTime();
 
 
         // convert timestamp to dd/mm/yyyy hh:mm: am/pm
 
         Calendar calender = Calendar.getInstance(Locale.getDefault());
-        calender.setTimeInMillis(Long.parseLong(gTimeStamp));
+        calender.setTimeInMillis(Long.parseLong(dsTime));
         String pTime = DateFormat.format("dd MMM yyyy\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\thh:mm aa", calender).toString();
 
         // set data
 
 
-        myHolder.gTimeTv.setText(pTime);
-        myHolder.gTitleTv.setText(gTitle);
-        myHolder.gDescriptionTv.setText(gDescription);
+        myHolder.dsTimeTv.setText(pTime);
+        myHolder.dsTitleTv.setText(dsTitle);
+
 
         // set post image
         // if there is no image i.e. pImage.equals("noImage" )then hide imageview
@@ -109,28 +106,33 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
             @Override
             public void onClick(View v) {
 
-                showMoreOptions(myHolder.moreBtn, uId, myUid, gId, gTitle,gDescription,uName,uEmail);
+                showMoreOptions(myHolder.moreBtn,dsId,dsTitle, uId, myUid, gId, gTitle, gDescription, uName, uEmail);
                 //Toast.makeText(context, "More", Toast.LENGTH_SHORT).show();
             }
         });
 
-        myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
+     /*   myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, TheirProfileActivity.class);
+                Intent intent = new Intent(context, DefineStepActivity.class);
                 intent.putExtra("uId", uId);
+                intent.putExtra("gId",gId);
+                intent.putExtra("gTitle", gTitle);
+                intent.putExtra("gDescr", gDescription);
+                intent.putExtra("uName", uName);
+                intent.putExtra("uEmail", uEmail);
                 context.startActivity(intent);
             }
-        });
+        });*/
 
     }
 
     @Override
     public int getItemCount() {
-        return modelGoalDescriptionList.size();
+        return modelDefineStepList.size();
     }
 
-    private void showMoreOptions(ImageButton moreBtn, final String uid, String myUid, final String gId, final String gTitle, final String gDescription, final String uName, final String uEmail) {
+    private void showMoreOptions(ImageButton moreBtn, final String dsId,final String dsTitle,final String uid, String myUid, final String gId, final String gTitle, final String gDescription, final String uName, final String uEmail) {
 
         // Creating popup menu currently having option Delete
 
@@ -139,12 +141,12 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
         // show delete option in only post of currently signed in user.
         if (uid.equals(myUid)) {
             //add items in menu
-            popupMenu.getMenu().add(Menu.NONE, 2, 0, "Finish");
+           // popupMenu.getMenu().add(Menu.NONE, 2, 0, "Finish");
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "Delete");
-            popupMenu.getMenu().add(Menu.NONE, 1, 0, "Edit");
+          //  popupMenu.getMenu().add(Menu.NONE, 1, 0, "Edit");
         }
 
-        popupMenu.getMenu().add(Menu.NONE, 3, 0, "View Detail");
+       // popupMenu.getMenu().add(Menu.NONE, 3, 0, "View Detail");
         //popupMenu.getMenu().add(Menu.NONE, 2, 0, "View Detail");
 
         // item click listener
@@ -154,32 +156,7 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
                 int id = item.getItemId();
                 if (id == 0) {
                     // delete is clicked
-                    beginDelete(gId, gTitle);
-                } else if (id == 1) {
-                    // edit is clicked
-                    // start AddPostActivity with key "editpost" and the id of the post clicked
-
-                    Intent intent = new Intent(context, GoalDescriptionActivity.class);
-                    intent.putExtra("key", "editGoal");
-                    intent.putExtra("editGoalDescriptionId", gId);
-                    context.startActivity(intent);
-                }
-                else if(id == 2){
-
-                    Intent intent = new Intent(context, FinishedGoalActivity.class);
-                    intent.putExtra("finishGoalId", gId);
-                    intent.putExtra("GoalTitle",gTitle);
-                    intent.putExtra("GoalDescr",gDescription);
-                    intent.putExtra("UserName",uName);
-                    intent.putExtra("Useremail",uEmail);
-                    intent.putExtra("Uid",uid);
-
-                    context.startActivity(intent);
-                    uploadData(gTitle,gDescription,gId,uid,uName,uEmail);
-                    beginDelete(gId, gTitle);
-                    //popupMenu.getMenu().removeItem(2);
-
-
+                    beginDelete(dsId, dsTitle);
                 }
 
                 return false;
@@ -191,34 +168,34 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
 
     }
 
-    private void uploadData(final String title, final String description,final String gid,final String uid,final String name,final String email) {
+    private void uploadData(final String title, final String description, final String gid, final String uid, final String name, final String email) {
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Finishing...");
         pd.show();
 
-        final String timeStamp= String.valueOf(System.currentTimeMillis());
+        final String timeStamp = String.valueOf(System.currentTimeMillis());
         //String filePathAndName="Goal Description/" + "goalDes_" + timeStamp;
 
         //post without image
-        HashMap<Object, String> hashMap=new HashMap<>();
-        hashMap.put("uid",uid);
-        hashMap.put("uName",name);
-        hashMap.put("uEmail",email);
-        hashMap.put("gId",gid);
-        hashMap.put("gTitle",title);
-        hashMap.put("gDescr",description);
-        hashMap.put("gTime",timeStamp);
+        HashMap<Object, String> hashMap = new HashMap<>();
+        hashMap.put("uid", uid);
+        hashMap.put("uName", name);
+        hashMap.put("uEmail", email);
+        hashMap.put("gId", gid);
+        hashMap.put("gTitle", title);
+        hashMap.put("gDescr", description);
+        hashMap.put("gTime", timeStamp);
 
 
         //path to store post data
-        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Goal_Finished");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goal_Finished");
         //
         ref.child(timeStamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
                 pd.dismiss();
-                Toast.makeText(context,"Goal Achieved",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Goal Achieved", Toast.LENGTH_SHORT).show();
 
             }
         })
@@ -227,17 +204,17 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
                     public void onFailure(@NonNull Exception e) {
 
                         pd.dismiss();
-                        Toast.makeText(context,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void beginDelete(String gId, String gTitle) {
+    private void beginDelete(String dsId, String dsTitle) {
 
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Deleting... ");
         // image deleted, now delete database
-        Query fQuery = FirebaseDatabase.getInstance().getReference("Goal_Description").orderByChild("gId").equalTo(gId);
+        Query fQuery = FirebaseDatabase.getInstance().getReference("Goal_Define_Step").orderByChild("dsId").equalTo(dsId);
         fQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -263,7 +240,7 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
     class MyHolder extends RecyclerView.ViewHolder {
 
 
-        TextView  gTimeTv, gTitleTv, gDescriptionTv;
+        TextView dsTimeTv, dsTitleTv;
 
         ImageButton moreBtn;
         LinearLayout profileLayout;
@@ -272,12 +249,11 @@ public class AdapterGoalDescription extends RecyclerView.Adapter<AdapterGoalDesc
             super(itemView);
 
 
+            dsTimeTv = itemView.findViewById(R.id.define_step_time_Tv);
+            dsTitleTv = itemView.findViewById(R.id.define_step_title_Tv);
 
-            gTimeTv = itemView.findViewById(R.id.gTimeTv);
-            gTitleTv = itemView.findViewById(R.id.goal_title_Tv);
-            gDescriptionTv = itemView.findViewById(R.id.goal_description_Tv);
             moreBtn = itemView.findViewById(R.id.moreBtn);
-            profileLayout = itemView.findViewById(R.id.goal_profileLayout);
+
         }
     }
 }

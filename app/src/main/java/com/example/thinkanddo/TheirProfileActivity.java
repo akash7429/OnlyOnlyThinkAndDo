@@ -7,10 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thinkanddo.adapters.AdapterGoalDescription;
 import com.example.thinkanddo.adapters.AdapterPost;
+import com.example.thinkanddo.models.ModelGoalDescription;
 import com.example.thinkanddo.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,11 +41,15 @@ public class TheirProfileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     ImageView avatarIv, coverIv,arrow_iv;
     TextView nameTv,my_post_tv,num_of_posts ;
-    TextView no_post_tv;
-    RecyclerView postsRecyclerView;
+    TextView no_post_tv, num_of_goals;
+    RecyclerView postsRecyclerView,goalsRecyclerView;
 
+    LinearLayout goals_accom_ll, posts_accom_ll;
     List<ModelPost> postList;
     AdapterPost adapterPost;
+
+    List<ModelGoalDescription> goalDescriptionList;
+    AdapterGoalDescription adapterGoalDescription;
     String uid;
 
     @Override
@@ -61,17 +68,23 @@ public class TheirProfileActivity extends AppCompatActivity {
         avatarIv = findViewById(R.id.avatarIv);
         nameTv = findViewById(R.id.nameTv);
         no_post_tv=findViewById(R.id.no_post_tv);
+        posts_accom_ll=findViewById(R.id.post_accomplish_ll);
+        goals_accom_ll=findViewById(R.id.goals_their_accomplish_ll);
 
+        num_of_goals =findViewById(R.id.number_of_goals_tv);
         num_of_posts = findViewById(R.id.number_of_posts_tv);
 
         //emailTv = findViewById(R.id.emailTv);
       //  phoneTv = findViewById(R.id.phoneTv);
         postsRecyclerView= findViewById(R.id.recyclerview_posts);
+        goalsRecyclerView = findViewById(R.id.recyclerview_goals);
+
 
 
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("uId");
+
 
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("uid").equalTo(uid);
         query.addValueEventListener(new ValueEventListener() {
@@ -87,7 +100,6 @@ public class TheirProfileActivity extends AppCompatActivity {
 
                     nameTv.setText(name);
                     //emailTv.setText(email);
-
                     actionBar.setTitle(name);
 
                     try{
@@ -114,11 +126,30 @@ public class TheirProfileActivity extends AppCompatActivity {
 
             }
         });
-        postList= new ArrayList<>();
 
+
+        postList= new ArrayList<>();
+        goalDescriptionList= new ArrayList<>();
 
         checkUserStatus();
+        loadGoals();
         loadHisPost();
+
+       posts_accom_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loadHisPost();
+            }
+        });
+
+        goals_accom_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loadGoals();
+            }
+        });
 
 
 
@@ -164,6 +195,8 @@ public class TheirProfileActivity extends AppCompatActivity {
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
         postsRecyclerView.setLayoutManager(layoutManager);
+        postsRecyclerView.setVisibility(View.VISIBLE);
+        goalsRecyclerView.setVisibility(View.GONE);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
         Query query= ref.orderByChild("uid").equalTo(uid);
@@ -187,8 +220,8 @@ public class TheirProfileActivity extends AppCompatActivity {
                 num_of_posts.setText(String.valueOf(postList.size()));
                 if(postList.size()==0){
 
-
                     no_post_tv.setVisibility(View.VISIBLE);
+                    no_post_tv.setText("No posts Added");
                 }
                 else{
                     no_post_tv.setVisibility(View.GONE);
@@ -202,6 +235,109 @@ public class TheirProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loadGoals() {
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(TheirProfileActivity.this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        goalsRecyclerView.setHasFixedSize(true);
+        goalsRecyclerView.setLayoutManager(layoutManager);
+        goalsRecyclerView.setVisibility(View.VISIBLE);
+        postsRecyclerView.setVisibility(View.GONE);
+
+        // path of al
+        // l goals
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goal_Description");
+
+        Query query= ref.orderByChild("uid").equalTo(uid);
+        // get all data from this ref.
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                goalDescriptionList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    ModelGoalDescription modelGoal = ds.getValue(ModelGoalDescription.class);
+
+                    goalDescriptionList.add(modelGoal);
+
+                    //adapter
+
+                    adapterGoalDescription = new AdapterGoalDescription(TheirProfileActivity.this, goalDescriptionList);
+                    // set adapter to recyclerview
+                    goalsRecyclerView.setAdapter(adapterGoalDescription);
+                }
+
+                num_of_goals.setText(String.valueOf(goalDescriptionList.size()));
+                if(goalDescriptionList.size()==0){
+
+
+                    no_post_tv.setVisibility(View.VISIBLE);
+                    no_post_tv.setText("No goals added");
+                }
+                else{
+                    no_post_tv.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(TheirProfileActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void searchGoals(final String searchQuery){
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(TheirProfileActivity.this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        goalsRecyclerView.setHasFixedSize(true);
+        goalsRecyclerView.setLayoutManager(layoutManager);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goal_Description");
+
+        // get all data from this ref.
+        Query query= ref.orderByChild("uid").equalTo(uid);
+        // get all data from this ref.
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                goalDescriptionList.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+                    ModelGoalDescription modelGoal = ds.getValue(ModelGoalDescription.class);
+
+                    if(modelGoal.getgTitle().toLowerCase().contains(searchQuery.toLowerCase())||
+                            modelGoal.getgDescr().toLowerCase().contains(searchQuery.toLowerCase())) {
+
+                        goalDescriptionList.add(modelGoal);
+                    }
+
+
+                    //adapter
+
+                    adapterGoalDescription= new AdapterGoalDescription(TheirProfileActivity.this, goalDescriptionList);
+                    // set adapter to recyclerview
+                    goalsRecyclerView.setAdapter(adapterGoalDescription);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(TheirProfileActivity.this,""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
     private void checkUserStatus(){
         FirebaseUser user =firebaseAuth.getCurrentUser();
@@ -232,8 +368,10 @@ public class TheirProfileActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 if(!TextUtils.isEmpty(s)){
                     searchHisPosts(s);
+                    searchGoals(s);
                 }else {
                     loadHisPost();
+                    loadGoals();
                 }
                 return false;
             }
@@ -242,8 +380,10 @@ public class TheirProfileActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 if(!TextUtils.isEmpty(s)){
                     searchHisPosts(s);
+                    searchGoals(s);
                 }else {
                     loadHisPost();
+                    loadGoals();
                 }
                 return false;
             }

@@ -25,8 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.thinkanddo.adapters.AdapterPost;
-import com.example.thinkanddo.models.ModelPost;
+import com.example.thinkanddo.adapters.AdapterGoalFinish;
+import com.example.thinkanddo.models.ModelGoalFinish;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    Button take_video_btn, my_goals_btn, describe_goal_btn, define_step_btn;
+    Button take_video_btn, my_goals_btn, describe_goal_btn, my_goals_btn_official,my_achievement_btn;
     StorageReference storageReference;
     CardView cardView_post;
     String storagePath = "User_Profile_Cover_Imgs/";
@@ -90,8 +90,8 @@ public class ProfileFragment extends Fragment {
     String cameraPermission[];
     String storagePermission[];
 
-    List<ModelPost> postList;
-    AdapterPost adapterPost;
+    List<ModelGoalFinish> goalDescriptionList;
+    AdapterGoalFinish adapterGoalDescription;
     String uid;
 
     Uri image_uri;
@@ -121,9 +121,10 @@ public class ProfileFragment extends Fragment {
 
 
 
+        my_achievement_btn = view.findViewById(R.id.my_achievement_btn);
         edit_name_Iv = view.findViewById(R.id.update_name_iv);
         number_of_goal_finish_tv = view.findViewById(R.id.number_of_goal_finish_tv);
-        define_step_btn = view.findViewById(R.id.define_step_btn);
+        my_goals_btn_official = view.findViewById(R.id.my_goals_btn_official);
         describe_goal_btn = view.findViewById(R.id.describe_goal_btn);
         my_goals_btn = view.findViewById(R.id.my_goals_btn);
         take_video_btn= view.findViewById(R.id.take_video_btn);
@@ -191,7 +192,28 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getActivity(),MyGoalsActivity.class));
+                startActivity(new Intent(getActivity(), DefineMyGoalsActivity.class));
+            }
+        });
+
+        my_goals_btn_official.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),MyGoalsActivityOfficial.class));
+            }
+        });
+
+        my_achievement_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),FinishedGoalActivity.class));
+            }
+        });
+
+        number_of_goal_finish_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),FinishedGoalActivity.class));
             }
         });
 
@@ -233,13 +255,46 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        postList= new ArrayList<>();
+        goalDescriptionList= new ArrayList<>();
 
         checkUserStatus();
         //loadMyPosts();
+        loadFinishGoal();
 
         return view;
     }
+
+
+    private void loadFinishGoal() {
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        uid=user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Goal_Finished");
+
+        Query query= ref.orderByChild("uid").equalTo(uid);
+        // get all data from this ref.
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                goalDescriptionList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    ModelGoalFinish modelGoal = ds.getValue(ModelGoalFinish.class);
+
+                    goalDescriptionList.add(modelGoal);
+
+                }
+                number_of_goal_finish_tv.setText(String.valueOf(goalDescriptionList.size()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getContext(), "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     /**private void loadMyPosts() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity());

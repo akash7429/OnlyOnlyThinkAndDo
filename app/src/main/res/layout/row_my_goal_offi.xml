@@ -24,7 +24,7 @@
 
 
         <LinearLayout
-            android:id="@+id/goal_profileLayout"
+            android:id="@+id/goal_profileLayouto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/goal_title_Tv"
+                android:id="@+id/goal_title_Tvo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
@@ -46,7 +46,7 @@
                 android:textSize="21sp" />
 
             <TextView
-                android:id="@+id/goal_description_Tv"
+                android:id="@+id/goal_description_Tvo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
@@ -58,7 +58,7 @@
                 android:textColor="@color/colorBlack" />
 
             <TextView
-                android:id="@+id/gTimeTv"
+                android:id="@+id/gTimeTvo"
                 android:layout_width="match_parent"
                 android:text="33 min"
                 android:fontFamily="@font/roboto"
