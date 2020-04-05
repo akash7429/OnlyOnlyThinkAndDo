@@ -24,7 +24,7 @@
 
 
         <LinearLayout
-            android:id="@+id/goal_profileLayout"
+            android:id="@+id/define_step_lLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/goal_title_Tv"
+                android:id="@+id/define_step_title_Tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
@@ -45,20 +45,9 @@
                 android:textColor="#000000"
                 android:textSize="21sp" />
 
-            <TextView
-                android:id="@+id/goal_description_Tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:fontFamily="@font/roboto"
-                android:textAlignment="gravity"
-                android:layout_marginBottom="3dp"
-                android:textSize="17dp"
-                android:text="Description"
-                android:textColor="@color/colorBlack" />
 
             <TextView
-                android:id="@+id/gTimeTv"
+                android:id="@+id/define_step_time_Tv"
                 android:layout_width="match_parent"
                 android:text="33 min"
                 android:fontFamily="@font/roboto"

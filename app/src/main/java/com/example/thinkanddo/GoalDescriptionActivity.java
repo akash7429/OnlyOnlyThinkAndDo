@@ -49,8 +49,6 @@ public class GoalDescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_describe_goal);
 
-
-
         actionBar = getSupportActionBar();
 
         actionBar.setTitle("Add New Goal");

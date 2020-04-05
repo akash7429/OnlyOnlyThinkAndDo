@@ -10,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/colorBlack"
+            android:background="#151414"
             android:layout_height="wrap_content">
 
 
@@ -53,61 +53,124 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/avatarCv" />
 
+            <LinearLayout
+                android:id="@+id/post_goal_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameTv"
+                >
 
             <LinearLayout
                 android:id="@+id/post_accomplish_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameTv">
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:background="#151414"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:layout_weight="1"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                >
 
                 <TextView
                     android:id="@+id/number_of_posts_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="9"
                     android:text="50"
-                    android:layout_marginEnd="2dp"
-                    android:textAlignment="viewEnd"
+                    android:paddingTop="10dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@color/colorWhite"
-                    android:textSize="19sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias=".8"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameTv"
+                    android:textSize="20sp"
                     />
 
                 <TextView
-                    android:id="@+id/goalAccomplishTv"
+                    android:id="@+id/postAccomplishTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Posts Uploaded"
-                    android:textAlignment="viewStart"
-                    android:layout_marginStart="2dp"
+                    android:text="Posts"
+                    android:textAlignment="center"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@color/colorWhite"
                     android:textSize="19sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameTv"
                     />
 
+            </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/goals_their_accomplish_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="#151414"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/number_of_goals_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="50"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="19sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/goalAccomplishTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Goals"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/montserrat"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="19sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nameTv"
+                        />
+
+                </LinearLayout>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_posts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/post_accomplish_ll"
+                app:layout_constraintTop_toBottomOf="@id/post_goal_ll"
             />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_goals"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/post_goal_ll"
+                />
 
             <TextView
                 android:id="@+id/no_post_tv"

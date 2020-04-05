@@ -14,7 +14,17 @@
         android:roundIcon="@mipmap/ic_logo_4"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyGoalsActivity"></activity>
+        <activity android:name=".FinishedGoalActivity"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".MyGoalsActivityOfficial"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".DefineStepActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".DefineMyGoalsActivity"
+            android:launchMode="singleTop"/>
+
         <activity
             android:name=".PostLikedByActivity"
             android:launchMode="singleTop" />
@@ -24,6 +34,7 @@
         <activity
             android:name=".MyGoalFragment"
             android:launchMode="singleTop" />
+
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" />
+
+        <activity android:name=".SettingsActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".PostDetailActivity"
             android:launchMode="singleTop" />

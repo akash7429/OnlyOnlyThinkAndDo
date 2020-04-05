@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.thinkanddo.adapters.AdapterGoalDescription;
+import com.example.thinkanddo.adapters.AdapterDefineMyGoals;
 import com.example.thinkanddo.models.ModelGoalDescription;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +32,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyGoalsActivity extends AppCompatActivity {
+public class DefineMyGoalsActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     DatabaseReference userDbRef;
@@ -45,7 +45,7 @@ public class MyGoalsActivity extends AppCompatActivity {
     ProgressDialog pd;
 
     List<ModelGoalDescription> goalDescriptionList;
-    AdapterGoalDescription adapterGoalDescription;
+    AdapterDefineMyGoals adapterGoalDescription;
     String uID;
 
     // info of post to be edited
@@ -59,7 +59,7 @@ public class MyGoalsActivity extends AppCompatActivity {
 
         actionBar = getSupportActionBar();
 
-        actionBar.setTitle("My Goals");
+        actionBar.setTitle("Select a goal");
         //enable back button in action bar
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -73,16 +73,12 @@ public class MyGoalsActivity extends AppCompatActivity {
         loadGoals();
 
 
-
-
-
-
     }
 
     private void loadGoals() {
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MyGoalsActivity.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DefineMyGoalsActivity.this);
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
         recyclerView.setHasFixedSize(true);
@@ -107,7 +103,7 @@ public class MyGoalsActivity extends AppCompatActivity {
 
                     //adapter
 
-                    adapterGoalDescription = new AdapterGoalDescription(MyGoalsActivity.this, goalDescriptionList);
+                    adapterGoalDescription = new AdapterDefineMyGoals(DefineMyGoalsActivity.this, goalDescriptionList);
                     // set adapter to recyclerview
                     recyclerView.setAdapter(adapterGoalDescription);
                 }
@@ -116,14 +112,14 @@ public class MyGoalsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                Toast.makeText(MyGoalsActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DefineMyGoalsActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void searchGoals(final String searchQuery){
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MyGoalsActivity.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DefineMyGoalsActivity.this);
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
         recyclerView.setHasFixedSize(true);
@@ -152,7 +148,7 @@ public class MyGoalsActivity extends AppCompatActivity {
 
                     //adapter
 
-                    adapterGoalDescription= new AdapterGoalDescription(MyGoalsActivity.this, goalDescriptionList);
+                    adapterGoalDescription= new AdapterDefineMyGoals(DefineMyGoalsActivity.this, goalDescriptionList);
                     // set adapter to recyclerview
                     recyclerView.setAdapter(adapterGoalDescription);
                 }
@@ -161,7 +157,7 @@ public class MyGoalsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                Toast.makeText(MyGoalsActivity.this,""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(DefineMyGoalsActivity.this,""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -230,7 +226,7 @@ public class MyGoalsActivity extends AppCompatActivity {
             uID = user.getUid();
 
         }else{
-            startActivity(new Intent(MyGoalsActivity.this,MainActivity.class));
+            startActivity(new Intent(DefineMyGoalsActivity.this,MainActivity.class));
             finish();
         }
     }

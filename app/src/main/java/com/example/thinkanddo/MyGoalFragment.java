@@ -202,7 +202,7 @@ public class MyGoalFragment extends Fragment {
 
         }
         else if(id == R.id.action_add_post){
-            startActivity(new Intent(getActivity(),AddPostActivity.class));
+            startActivity(new Intent(getActivity(),GoalDescriptionActivity.class));
         }
         else if(id == R.id.action_settings){
 
