@@ -774,7 +774,7 @@ public class ChatActivity extends AppCompatActivity {
                            name+": "+message,
                            ""+hisUid,
                            "ChatNotification",
-                           R.mipmap.ic_launcher_logo);  //R.drawable.ic_default_img;
+                           R.mipmap.ic_logo_3);  //R.drawable.ic_default_img;
 
                    Sender sender=new Sender(data,token.getToken());
                    try{
@@ -926,25 +926,6 @@ public class ChatActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                // video_rui=data.getData();
-
-               // if(image_rui.toString().contains("image"))
-                {
-
-                   // imageIv.setImageURI(image_rui);
-
-                 //   pVideoVv.setVisibility(View.GONE);
-                    //imageIv.setVisibility(View.VISIBLE);
-
-                }
-               /* else if(video_rui.toString().contains("video"))
-                {
-
-                    VideoDisplay(video_rui);
-
-
-
-                } */
             }
             else if(requestCode==IMAGE_PICK_CAMERA_CODE){
 
@@ -953,20 +934,8 @@ public class ChatActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                // imageIv.setImageURI(image_rui);
-               // pVideoVv.setVisibility(View.GONE);
-               // imageIv.setVisibility(View.VISIBLE);
-
             }
-          /*  else if(requestCode==VIDEO_PICK_CAMERA_CODE){
-
-                VideoDisplay(video_rui);
-
-            } */
-
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 

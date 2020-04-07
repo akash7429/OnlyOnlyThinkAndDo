@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.HashMap;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +57,7 @@ public class DashboardActivity extends AppCompatActivity {
 
        final ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#0F9D58"));
+
 
 
 
@@ -105,7 +108,7 @@ public class DashboardActivity extends AppCompatActivity {
                     ft4.commit();
                     return true;
                 case R.id.nav_goals:
-                    actionBar.setTitle("Goals");
+                    actionBar.setTitle("All Goals");
                     MyGoalFragment fragment5 = new MyGoalFragment();
                     FragmentTransaction ft5 =getSupportFragmentManager().beginTransaction();
                     ft5.replace(R.id.content, fragment5, "");
@@ -159,6 +162,12 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         checkUserStatus();
+
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(mUID);
+        HashMap<String, Object> hashMap =new HashMap<>();
+        hashMap.put("email_verify","true");
+        dbRef.updateChildren(hashMap);
+
         super.onStart();
     }
 

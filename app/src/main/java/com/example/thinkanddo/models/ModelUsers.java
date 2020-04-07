@@ -4,7 +4,7 @@ public class ModelUsers {
 
     // use same name as in firebase database
 
-    String name, email, search, phone, image, cover,uid, onlineStatus, typingTo; // adding to more fields
+    String name, email, search, phone, image, cover,uid, onlineStatus, typingTo, email_verify; // adding to more fields
 
     boolean isBlocked = false;
 
@@ -12,7 +12,7 @@ public class ModelUsers {
 
     }
 
-    public ModelUsers(String name, String email, String search, String phone, String image, String cover, String uid, String onlineStatus, String typingTo, boolean isBlocked) {
+    public ModelUsers(String name, String email, String search, String phone, String image, String cover, String uid, String onlineStatus, String typingTo, String email_verify, boolean isBlocked) {
         this.name = name;
         this.email = email;
         this.search = search;
@@ -22,7 +22,16 @@ public class ModelUsers {
         this.uid = uid;
         this.onlineStatus = onlineStatus;
         this.typingTo = typingTo;
+        this.email_verify = email_verify;
         this.isBlocked = isBlocked;
+    }
+
+    public String getEmail_verify() {
+        return email_verify;
+    }
+
+    public void setEmail_verify(String email_verify) {
+        this.email_verify = email_verify;
     }
 
     public boolean isBlocked() {

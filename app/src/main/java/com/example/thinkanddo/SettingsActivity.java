@@ -22,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     SwitchCompat postSwitch;
 
-    LinearLayout logoutLL;
+    LinearLayout logoutLL,privacy_ll;
     String uid;
     FirebaseAuth firebaseAuth;
     // use shared preferences to save the state of Switch
@@ -48,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         postSwitch = findViewById(R.id.postSwitch);
 
+        privacy_ll=findViewById(R.id.privacy_ll);
         logoutLL = findViewById(R.id.logout_ll);
 
         //init sp
@@ -79,6 +80,13 @@ public class SettingsActivity extends AppCompatActivity {
                 else{
                     unsubscribePostNotification();
                 }
+            }
+        });
+
+        privacy_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingsActivity.this,PrivacyPolicyActivity.class));
             }
         });
 

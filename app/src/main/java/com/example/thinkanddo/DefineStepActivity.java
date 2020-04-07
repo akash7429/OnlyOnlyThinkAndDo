@@ -121,7 +121,7 @@ public class DefineStepActivity extends AppCompatActivity {
 
     private void loadDefineStep() {
 
-        Toast.makeText(this,"I am in",Toast.LENGTH_LONG).show();
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(DefineStepActivity.this);
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(false);

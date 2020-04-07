@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".FinishedGoalActivity"
             android:launchMode="singleTop"/>
-
+<activity android:name=".PrivacyPolicyActivity"/>
         <activity android:name=".MyGoalsActivityOfficial"
             android:launchMode="singleTop"/>
 

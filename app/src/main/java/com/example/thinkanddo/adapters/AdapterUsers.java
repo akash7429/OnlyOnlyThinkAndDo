@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.example.thinkanddo.models.ModelUsers;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
 
     // For getting current user uId
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     String myUid;
 
     Boolean ISBLocked=true;
@@ -49,6 +52,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
         this.userList = userList;
 
         firebaseAuth= FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         myUid = firebaseAuth.getUid();
     }
 
@@ -67,15 +71,19 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
     public void onBindViewHolder(@NonNull MyHolder myHolder, final int i) {
 
         final String hisUID = userList.get(i).getUid();
-
         // fetching data.
         final String userImage = userList.get(i).getImage();
         String userName = userList.get(i).getName();
         final String userEmail = userList.get(i).getEmail();
+        final String email_verify = userList.get(i).getEmail_verify();
 
-        // set data.
-        myHolder.mnameTv.setText(userName);
-        myHolder.mEmailTv.setText(userEmail);
+        if(email_verify.equals("true")) {
+            // set data.
+            myHolder.mnameTv.setText(userName);
+            myHolder.mEmailTv.setText(userEmail);
+        }
+
+
         try{
             Picasso.get().load(userImage).placeholder(R.drawable.chat_users).into(myHolder.mAvatarIv);
         }
@@ -289,6 +297,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
 
         ImageView mAvatarIv,blockIv;
         TextView mnameTv, mEmailTv;
+        LinearLayout layout;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -297,6 +306,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
             mAvatarIv = itemView.findViewById(R.id.avatarIv);
             mnameTv = itemView.findViewById(R.id.nameTv);
             mEmailTv = itemView.findViewById(R.id.emailTv);
+            layout = itemView.findViewById(R.id.users_ll);
         }
     }
 

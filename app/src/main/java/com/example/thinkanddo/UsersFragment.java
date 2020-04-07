@@ -85,15 +85,13 @@ public class UsersFragment extends Fragment {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     ModelUsers modelUsers = ds.getValue(ModelUsers.class);
 
-                    if(!modelUsers.getUid().equals(fUser.getUid())){
+                    if(!modelUsers.getUid().equals(fUser.getUid()) && modelUsers.getEmail_verify().equals("true")){
 
                         usersList.add(modelUsers);
-
                     }
-                    //adapter
+
                     adapterUsers = new AdapterUsers(getActivity(), usersList);
                     // set adapter to recyclerview
-
                     recyclerView.setAdapter(adapterUsers);
                 }
             }

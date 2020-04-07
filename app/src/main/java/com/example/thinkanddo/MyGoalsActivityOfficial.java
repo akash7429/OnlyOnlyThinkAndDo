@@ -71,8 +71,6 @@ public class MyGoalsActivityOfficial extends AppCompatActivity {
         goalDescriptionList = new ArrayList<>();
         checkUserStatus();
         loadGoals();
-
-
     }
 
     private void loadGoals() {
