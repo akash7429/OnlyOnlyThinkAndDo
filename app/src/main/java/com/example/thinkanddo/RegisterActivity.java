@@ -3,6 +3,7 @@ package com.example.thinkanddo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -133,7 +134,10 @@ public class RegisterActivity extends AppCompatActivity {
                             final String email = user.getEmail();
 
                             String uid = user.getUid();
-                           // String name = user.getDisplayName();
+                            Uri image = user.getPhotoUrl();
+                            String imageString= image.toString();
+
+                            // String name = user.getDisplayName();
 
                             HashMap<Object, String> hashMap =new HashMap<>();
                             hashMap.put("email", email);
@@ -143,8 +147,10 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("onlineStatus", "online");
                             hashMap.put("typingTo", "noOne");
                             hashMap.put("phone", "");
-                            hashMap.put("image", "");
-                            hashMap.put("cover","");
+                            hashMap.put("uDp","");
+                            hashMap.put("image", imageString);
+                            hashMap.put("email_verify","false");
+
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
 

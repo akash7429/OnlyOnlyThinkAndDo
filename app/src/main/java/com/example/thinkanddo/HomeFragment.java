@@ -128,7 +128,9 @@ public class HomeFragment extends Fragment {
 
                     ModelPost modelPost = ds.getValue(ModelPost.class);
 
-                    if(modelPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())|| modelPost.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())) {
+                    if(modelPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())||
+                            modelPost.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())||
+                            modelPost.getuName().toLowerCase().contains(searchQuery.toLowerCase())) {
 
                         postList.add(modelPost);
                     }
@@ -151,6 +153,7 @@ public class HomeFragment extends Fragment {
 
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -162,6 +165,7 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
 
         // searchview to serach posts
+
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 

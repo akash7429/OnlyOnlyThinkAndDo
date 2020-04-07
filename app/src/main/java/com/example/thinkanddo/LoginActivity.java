@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Patterns;
@@ -231,10 +232,10 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
 
+
+
                             }
                             else{
-
-
                                 Toast.makeText(LoginActivity.this, "Please verify your email: "+email.toString(),
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -298,15 +299,19 @@ public class LoginActivity extends AppCompatActivity {
                             String email = user.getEmail();
                             String uid = user.getUid();
                             String name = user.getDisplayName();
+                            Uri image = user.getPhotoUrl();
+                            String imageString= image.toString();
 
                             HashMap<Object, String> hashMap =new HashMap<>();
                             hashMap.put("email", email);
                             hashMap.put("uid", uid);
                             hashMap.put("name",name);
+                            hashMap.put("uDp","");
+                            hashMap.put("email_verify","true");
                             hashMap.put("onlineStatus", "online");
                             hashMap.put("typingTo", "noOne");
                             hashMap.put("phone", "");
-                            hashMap.put("image", "");
+                            hashMap.put("image", imageString);
 
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();

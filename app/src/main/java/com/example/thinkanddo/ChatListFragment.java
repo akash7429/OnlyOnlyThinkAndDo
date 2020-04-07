@@ -135,7 +135,7 @@ public class ChatListFragment extends Fragment {
                     if(chat.getReceiver().equals(currentUser.getUid())&& chat.getSender()
                             .equals(userId)||chat.getReceiver().equals(userId)&&
                     chat.getSender().equals(currentUser.getUid())){
-                        if(chat.getType().equals("images")){
+                        if(chat.getType().equals("image")){
                             theLastMessage="Sent a Photo";
                         }
                         else{
@@ -166,31 +166,19 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //inflating menu_main.
-        inflater.inflate(R.menu.menu_main, menu);
-
-
-        //hide addpost icon from this fragment
-        menu.findItem(R.id.action_add_post).setVisible(false);
-        //searchview
+        inflater.inflate(R.menu.profile_menu, menu);
+        MenuItem item1 = menu.findItem(R.id.action_settings);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.action_logout){
-
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
-        else if(id == R.id.action_settings){
+        if(id == R.id.action_settings){
 
             startActivity(new Intent(getActivity(),SettingsActivity.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -198,9 +186,8 @@ public class ChatListFragment extends Fragment {
         FirebaseUser user =firebaseAuth.getCurrentUser();
 
         if(user!=null){
-            //mprofileTv.setText(user.getEmail());
-
-        }else{
+        }
+        else{
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }

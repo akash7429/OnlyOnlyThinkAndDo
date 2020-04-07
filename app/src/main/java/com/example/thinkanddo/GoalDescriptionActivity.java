@@ -107,7 +107,7 @@ public class GoalDescriptionActivity extends AppCompatActivity {
 
             //add
 
-            actionBar.setTitle("New Goal");
+            actionBar.setTitle("Add New Goal");
             saveBtn.setText("Save");
         }
 

@@ -567,7 +567,9 @@ public class AddPostActivity extends AppCompatActivity {
                                         titleEt.setText("");
                                         descriptionEt.setText("");
                                         imageIv.setImageURI(null);
+                                        imageIv.setVisibility(View.GONE);
                                         pVideoVv.setVideoURI(null);
+                                        pVideoVv.setVisibility(View.GONE);
                                         image_rui=null;
                                         video_rui=null;
 
@@ -645,8 +647,10 @@ public class AddPostActivity extends AppCompatActivity {
                                         titleEt.setText("");
                                         descriptionEt.setText("");
                                         imageIv.setImageURI(null);
+                                        imageIv.setVisibility(View.GONE);
                                         image_rui=null;
                                         pVideoVv.setVideoURI(null);
+                                        pVideoVv.setVisibility(View.GONE);
                                         video_rui=null;
 
 

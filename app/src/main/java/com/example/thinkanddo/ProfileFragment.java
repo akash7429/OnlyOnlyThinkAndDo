@@ -749,6 +749,8 @@ public class ProfileFragment extends Fragment {
                 });
     }
 
+
+
     private void pickFromCamera() {
 
         ContentValues values = new ContentValues();
