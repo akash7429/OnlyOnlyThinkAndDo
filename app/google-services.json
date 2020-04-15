@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "209415931823-gkrpmd4m76hdpdfvnam5i9piga21f7hs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thinkanddo",
+            "certificate_hash": "4ca660c28c4de8f81debe83d4da13b5277df2e7f"
+          }
+        },
+        {
           "client_id": "209415931823-nqba5e0bk416g08iv3rsrmerafjt7md0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -36,6 +44,43 @@
           "android_info": {
             "package_name": "com.example.thinkanddo",
             "certificate_hash": "52e3b8ddfc1b5a594bdbfae81548879508d53c2a"
+          }
+        },
+        {
+          "client_id": "209415931823-4e5maf7q310tgod95bf0c04j9dl6movg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdO6WlW5Gnrh4mfg6Cnu_7Wmp1ridOZC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209415931823-4e5maf7q310tgod95bf0c04j9dl6movg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209415931823:android:6b21f17f1e3b4ee26bd15a",
+        "android_client_info": {
+          "package_name": "com.group.amplifate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209415931823-ihn556r4q74d18k61m580ive00gpr13t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group.amplifate",
+            "certificate_hash": "4ca660c28c4de8f81debe83d4da13b5277df2e7f"
           }
         },
         {

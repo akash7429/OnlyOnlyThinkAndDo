@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.thinkanddo">
+    package="com.group.amplifate">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -98,7 +98,7 @@
         <!-- Set the android: exported attribute to false -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.thinkanddo.fileprovider"
+            android:authorities="com.group.amplifate.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
