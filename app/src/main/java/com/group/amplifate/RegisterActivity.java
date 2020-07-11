@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("typingTo", "noOne");
                             hashMap.put("phone", "");
                             hashMap.put("uDp","");
-                            hashMap.put("image", "");
+                            hashMap.put("image","");
                             hashMap.put("email_verify","false");
 
 

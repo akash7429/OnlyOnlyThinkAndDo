@@ -81,14 +81,14 @@ public class LoginActivity extends AppCompatActivity {
         mEmailEt = findViewById(R.id.emailET);
         mPasswordEt = findViewById(R.id.passwordET);
         tvLoginTitle = findViewById(R.id.tvLogin);
-        ORTv = findViewById(R.id.tvOr);
+        //ORTv = findViewById(R.id.tvOr);
         title_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.title_anim);
         edittext_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.edittext_anim);
         remaining_anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.remaining_anim);
         notHAveAccountTv = findViewById(R.id.nothave_accountTv);
         mRecoverPassTv = findViewById(R.id.recoverPassTv);
         mLoginBtn = findViewById(R.id.login_btn);
-        mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
+        //mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
 
 
         // Animation of login
@@ -96,11 +96,11 @@ public class LoginActivity extends AppCompatActivity {
         mEmailEt.setAnimation(edittext_anim);
         mPasswordEt.setAnimation(edittext_anim);
         password_show_hide_login.setAnimation(edittext_anim);
-        mGoogleLoginBtn.setAnimation(remaining_anim);
+        //mGoogleLoginBtn.setAnimation(remaining_anim);
         mLoginBtn.setAnimation(remaining_anim);
         mRecoverPassTv.setAnimation(remaining_anim);
         notHAveAccountTv.setAnimation(remaining_anim);
-        ORTv.setAnimation(remaining_anim);
+        //ORTv.setAnimation(remaining_anim);
 
 
 
@@ -136,14 +136,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mGoogleLoginBtn.setOnClickListener(new View.OnClickListener() {
+    /*    mGoogleLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
 
             }
-        });
+        });*/
 
         pd =new ProgressDialog(this);
     }
@@ -264,7 +264,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  /**  public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -331,7 +331,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
+    }**/
 
     public void finish(){
 
