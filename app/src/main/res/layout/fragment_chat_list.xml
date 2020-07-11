@@ -14,4 +14,18 @@
         tools:listitem="@layout/row_chatlist"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+    <TextView
+        android:id="@+id/chat_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="26dp"
+        android:visibility="gone"
+        android:text="Nothing to Display"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat"
+
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
+
 </FrameLayout>
